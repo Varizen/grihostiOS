@@ -1,0 +1,20 @@
+{
+  "name": "grihosti.xyz",
+  "version": "1.0.0",
+  "description": "GrihostiOS — Institutional operating system for property, tenancy, and agricultural land in Bangladesh",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "grihosti",
+    "grihostios",
+    "varizen",
+    "bangladesh",
+    "tenancy",
+    "property-management"
+  ],
+  "author": "Varizen Inc.",
+  "license": "UNLICENSED",
+  "private": true
+}

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GrihostiOS — Your Land, Your Control | আপনার জমি, আপনার নিয়ন্ত্রণ</title>
+  <meta name="description" content="Institutional operating system for property, tenancy, agricultural land, and productive estate operations.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gh-deep-green: #1B4D3E;
+      --gh-deep-green-dark: #123329;
+      --gh-aqua: #4ECDC4;
+      --gh-rice-gold: #D4AF37;
+      --gh-earth-brown: #8B6914;
+      --gh-sky-blue: #87CEEB;
+      --gh-paper: #F8F6F0;
+      --gh-void: #0A0F0D;
+      --gh-card-bg: #FFFFFF;
+      --gh-text-main: #1D2A24;
+      --gh-text-muted: #5C6E65;
+      --gh-border: #E2E8E4;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--gh-paper);
+      color: var(--gh-text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .bn {
+      font-family: 'Hind Siliguri', 'Shiliguri', sans-serif;
+    }
+
+    header {
+      background: var(--gh-deep-green-dark);
+      border-bottom: 2px solid var(--gh-rice-gold);
+      padding: 1.25rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      background: var(--gh-deep-green);
+      border: 2px solid var(--gh-aqua);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--gh-aqua);
+      font-size: 1.25rem;
+    }
+
+    .brand-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-title span {
+      color: var(--gh-aqua);
+    }
+
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(78, 205, 196, 0.15);
+      border: 1px solid var(--gh-aqua);
+      color: var(--gh-aqua);
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .hero {
+      background: linear-gradient(180deg, var(--gh-deep-green-dark) 0%, var(--gh-deep-green) 100%);
+      color: #ffffff;
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 .highlight {
+      color: var(--gh-aqua);
+    }
+
+    .hero-subtitle-bn {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--gh-rice-gold);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: rgba(255, 255, 255, 0.85);
+      max-width: 720px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .modules-section {
+      max-width: 1200px;
+      margin: -2rem auto 4rem;
+      padding: 0 1.5rem;
+    }
+
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--gh-card-bg);
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      border: 1px solid var(--gh-border);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      border-color: var(--gh-aqua);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: rgba(27, 77, 62, 0.08);
+      color: var(--gh-deep-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--gh-deep-green-dark);
+    }
+
+    .card h4.bn {
+      font-size: 1rem;
+      color: var(--gh-earth-brown);
+      margin-bottom: 0.75rem;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: var(--gh-text-muted);
+    }
+
+    .fresh-launch-notice {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: #FFFFFF;
+      border: 1px dashed var(--gh-rice-gold);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .fresh-launch-notice h2 {
+      color: var(--gh-deep-green-dark);
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .fresh-launch-notice p {
+      color: var(--gh-text-muted);
+      font-size: 1rem;
+    }
+
+    footer {
+      background: var(--gh-void);
+      color: #9BA8A1;
+      padding: 3rem 2rem 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: 5rem;
+    }
+
+    footer p {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--gh-aqua);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="/" class="brand">
+        <div class="brand-logo">G</div>
+        <div class="brand-title">Grihosti<span>OS</span></div>
+      </a>
+      <div class="badge-status">
+        ● Fresh Deployment Ready
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-subtitle-bn bn">আপনার জমি, আপনার নিয়ন্ত্রণ</div>
+      <h1>Institutional Operating System for <span class="highlight">Home, Land & Production</span></h1>
+      <p>Clean institutional engine for governed tenancy, legally compliant agreements, immutable receipts, and agricultural operations in Bangladesh.</p>
+    </div>
+  </section>
+
+  <main class="modules-section">
+    <div class="grid-cards">
+      <div class="card">
+        <div class="card-icon">📜</div>
+        <h3>Governed Tenancy</h3>
+        <h4 class="bn">ডিজিটাল ভাড়াচুক্তি ও যাচাই</h4>
+        <p>Bilingual, legally binding tenancy agreements compliant with the Premises Rent Control Act, 1991 and Information Technology standards.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">💳</div>
+        <h3>Immutable Receipts</h3>
+        <h4 class="bn">অপরিবর্তনীয় রসিদ ও হিসাব</h4>
+        <p>Automated payment ledger with QR verification, bKash/Nagad settlement, and tamper-proof electronic receipts.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🌾</div>
+        <h3>Agricultural Land</h3>
+        <h4 class="bn">কৃষি ও বর্গা ব্যবস্থাপনা</h4>
+        <p>Sharecropper (বর্গা) contracts, seasonal harvest accounting, and parcel-level yield verification.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🐟</div>
+        <h3>Fisheries & Estates</h3>
+        <h4 class="bn">মৎস্য ও খামার কার্যক্রম</h4>
+        <p>Pond leasing, operational input audits, auction records, and harvest settlement governance.</p>
+      </div>
+    </div>
+
+    <div class="fresh-launch-notice">
+      <h2>Clean Architecture Initialized</h2>
+      <p>Domain: <strong>grihosti.xyz</strong> | Project: <strong>Varizen/grihostiOS</strong></p>
+      <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #7B8B82;">All previous legacy uploads have been purged. The workspace is configured for fresh production deployment.</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 GrihostiOS. Engineered by Varizen Inc.</p>
+    <p class="bn">গৃহস্থি — প্রযুক্তি ও বিশ্বাসের মেলবন্ধন</p>
+    <div class="footer-links">
+      <a href="https://github.com/Varizen/grihostiOS" target="_blank" rel="noopener">GitHub Repository</a>
+      <a href="https://varizen.co" target="_blank" rel="noopener">Varizen Inc.</a>
+    </div>
+  </footer>
+
+</body>
+</html>
