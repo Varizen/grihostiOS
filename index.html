@@ -1,317 +1,283 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GrihostiOS — Your Land, Your Control | আপনার জমি, আপনার নিয়ন্ত্রণ</title>
-  <meta name="description" content="Institutional operating system for property, tenancy, agricultural land, and productive estate operations.">
+  <title>grihostiOS — আপনার সম্পদ, আপনার ভবিষ্যৎ | Your Land, Your Control</title>
+  <meta name="description" content="grihostiOS — Home • Land • Production. A governed operating system for property, land and productive estates in Bangladesh.">
+  <meta property="og:title" content="grihostiOS — Home • Land • Production">
+  <meta property="og:description" content="আপনার জমি, আপনার নিয়ন্ত্রণ — Your Land, Your Control">
+  <meta property="og:image" content="https://grihosti.xyz/assets/logo-on-light.png">
+  <link rel="icon" href="assets/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --gh-deep-green: #1B4D3E;
-      --gh-deep-green-dark: #123329;
-      --gh-aqua: #4ECDC4;
-      --gh-rice-gold: #D4AF37;
-      --gh-earth-brown: #8B6914;
-      --gh-sky-blue: #87CEEB;
-      --gh-paper: #F8F6F0;
-      --gh-void: #0A0F0D;
-      --gh-card-bg: #FFFFFF;
-      --gh-text-main: #1D2A24;
-      --gh-text-muted: #5C6E65;
-      --gh-border: #E2E8E4;
+      /* grihostiOS — Option 5 "Plum & Green" */
+      --gh-plum: #3B1E3F;
+      --gh-plum-deep: #2C1430;
+      --gh-mauve: #8B5CF6;
+      --gh-green: #22C55E;
+      --gh-green-deep: #15803D;
+      --gh-mint: #E9F7EF;
+      --gh-slate: #374151;
+      --gh-muted: #6B7280;
+      --gh-surface: #F7F9FA;
+      --gh-line: #DDE3E8;
+      --gh-white: #FFFFFF;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: var(--gh-paper);
-      color: var(--gh-text-main);
+      font-family: 'Inter', 'Hind Siliguri', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: var(--gh-surface);
+      color: var(--gh-slate);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
+    .bn { font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; }
 
-    .bn {
-      font-family: 'Hind Siliguri', 'Shiliguri', sans-serif;
-    }
+    a { color: inherit; }
 
+    /* header */
     header {
-      background: var(--gh-deep-green-dark);
-      border-bottom: 2px solid var(--gh-rice-gold);
-      padding: 1.25rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      background: var(--gh-plum);
+      position: sticky; top: 0; z-index: 10;
+      box-shadow: 0 1px 0 rgba(255,255,255,.06);
     }
-
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .brand img { height: 40px; display: block; }
+    .nav-links { display: flex; gap: 22px; align-items: center; }
+    .nav-links a { color: #E8DCEB; text-decoration: none; font-size: 15px; font-weight: 500; }
+    .nav-links a:hover { color: var(--gh-green); }
+    .btn {
+      display: inline-block; text-decoration: none; font-weight: 700; font-size: 15px;
+      padding: 12px 22px; border-radius: 999px; transition: background .2s, transform .1s;
     }
+    .btn:active { transform: translateY(1px); }
+    .btn-primary { background: var(--gh-green); color: #0B2016; }
+    .btn-primary:hover { background: #1DB754; }
+    .btn-ghost { border: 1.5px solid var(--gh-green); color: var(--gh-green); }
+    .btn-ghost:hover { background: rgba(34,197,94,.12); }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-      color: #fff;
-    }
-
-    .brand-logo {
-      width: 40px;
-      height: 40px;
-      background: var(--gh-deep-green);
-      border: 2px solid var(--gh-aqua);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      color: var(--gh-aqua);
-      font-size: 1.25rem;
-    }
-
-    .brand-title {
-      font-size: 1.35rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    .brand-title span {
-      color: var(--gh-aqua);
-    }
-
-    .badge-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: rgba(78, 205, 196, 0.15);
-      border: 1px solid var(--gh-aqua);
-      color: var(--gh-aqua);
-      padding: 0.25rem 0.75rem;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 600;
-    }
-
+    /* hero */
     .hero {
-      background: linear-gradient(180deg, var(--gh-deep-green-dark) 0%, var(--gh-deep-green) 100%);
-      color: #ffffff;
-      padding: 5rem 2rem 4rem;
-      text-align: center;
+      background:
+        linear-gradient(160deg, var(--gh-plum) 0%, var(--gh-plum-deep) 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: ""; position: absolute; right: -120px; top: -140px;
+      width: 520px; height: 520px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(139,92,246,.35), transparent 70%);
+    }
+    .hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; padding-top: 88px; padding-bottom: 96px; position: relative; z-index: 1; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+      color: var(--gh-green); margin-bottom: 18px;
+    }
+    .eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--gh-green); }
+    h1 { font-size: 52px; line-height: 1.08; font-weight: 800; letter-spacing: -.02em; }
+    h1 .accent { color: var(--gh-green); }
+    .tagline { font-size: 20px; color: #E8DCEB; margin-top: 18px; max-width: 540px; }
+    .tagline-bn { font-size: 22px; color: #fff; margin-top: 10px; }
+    .cta { display: flex; gap: 14px; margin-top: 34px; flex-wrap: wrap; }
+    .hero-card {
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+      border-radius: 20px; padding: 36px; display: flex; flex-direction: column; align-items: center; gap: 22px;
+    }
+    .hero-card img { width: 100%; max-width: 380px; }
+    .pillars { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+    .pillars span {
+      font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 999px;
+      background: rgba(34,197,94,.14); color: #BFF5D3;
     }
 
-    .hero-content {
-      max-width: 860px;
-      margin: 0 auto;
-    }
+    /* sections */
+    section { padding: 88px 0; }
+    .section-head { text-align: center; max-width: 680px; margin: 0 auto 52px; }
+    .kicker { font-size: 13px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--gh-green-deep); }
+    h2 { font-size: 36px; line-height: 1.2; font-weight: 800; color: var(--gh-plum); margin-top: 10px; letter-spacing: -.01em; }
+    .lead { color: var(--gh-muted); margin-top: 12px; font-size: 17px; }
 
-    .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.25rem);
-      font-weight: 700;
-      line-height: 1.15;
-      margin-bottom: 1rem;
-      letter-spacing: -0.02em;
-    }
-
-    .hero h1 .highlight {
-      color: var(--gh-aqua);
-    }
-
-    .hero-subtitle-bn {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--gh-rice-gold);
-      margin-bottom: 1.25rem;
-    }
-
-    .hero p {
-      font-size: 1.15rem;
-      color: rgba(255, 255, 255, 0.85);
-      max-width: 720px;
-      margin: 0 auto 2.5rem;
-    }
-
-    .modules-section {
-      max-width: 1200px;
-      margin: -2rem auto 4rem;
-      padding: 0 1.5rem;
-    }
-
-    .grid-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-    }
-
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
     .card {
-      background: var(--gh-card-bg);
-      border-radius: 12px;
-      padding: 2rem 1.5rem;
-      border: 1px solid var(--gh-border);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      background: var(--gh-white); border: 1px solid var(--gh-line); border-radius: 16px;
+      padding: 26px 24px; transition: transform .15s, box-shadow .15s, border-color .15s;
     }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-      border-color: var(--gh-aqua);
+    .card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(59,30,63,.10); border-color: #CFC4D6; }
+    .icon {
+      width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center;
+      background: var(--gh-mint); color: var(--gh-green-deep); font-size: 22px; margin-bottom: 16px;
     }
+    .card h3 { font-size: 18px; font-weight: 700; color: var(--gh-plum); }
+    .card .bn-title { font-size: 17px; font-weight: 700; color: var(--gh-plum); margin-top: 2px; }
+    .card p { font-size: 15px; color: var(--gh-muted); margin-top: 10px; }
 
-    .card-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 10px;
-      background: rgba(27, 77, 62, 0.08);
-      color: var(--gh-deep-green);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 1.25rem;
+    .band { background: var(--gh-plum); color: #fff; }
+    .band h2 { color: #fff; }
+    .band .kicker { color: var(--gh-green); }
+    .band .lead { color: #D9CBDD; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .step { border: 1px solid rgba(255,255,255,.14); border-radius: 16px; padding: 28px; background: rgba(255,255,255,.03); }
+    .step .n {
+      width: 36px; height: 36px; border-radius: 50%; background: var(--gh-green); color: #0B2016;
+      display: grid; place-items: center; font-weight: 800; margin-bottom: 14px;
     }
+    .step h3 { font-size: 19px; color: #fff; }
+    .step p { color: #D9CBDD; font-size: 15px; margin-top: 8px; }
 
-    .card h3 {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-      color: var(--gh-deep-green-dark);
+    .cta-final { text-align: center; }
+    .cta-final .wrap { max-width: 760px; }
+    .cta-final .btn-primary { font-size: 17px; padding: 15px 30px; }
+    .cta-final p { color: var(--gh-muted); margin-top: 18px; font-size: 15px; }
+
+    footer { background: var(--gh-plum-deep); color: #CBB9CF; padding: 40px 0; font-size: 14px; }
+    footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+    footer a { color: var(--gh-green); text-decoration: none; }
+    footer .bn { color: #fff; font-size: 15px; }
+
+    @media (max-width: 960px) {
+      .hero .wrap { grid-template-columns: 1fr; padding-top: 56px; padding-bottom: 64px; }
+      h1 { font-size: 40px; }
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .steps { grid-template-columns: 1fr; }
+      .nav-links a:not(.btn) { display: none; }
     }
-
-    .card h4.bn {
-      font-size: 1rem;
-      color: var(--gh-earth-brown);
-      margin-bottom: 0.75rem;
-    }
-
-    .card p {
-      font-size: 0.95rem;
-      color: var(--gh-text-muted);
-    }
-
-    .fresh-launch-notice {
-      max-width: 900px;
-      margin: 2rem auto;
-      background: #FFFFFF;
-      border: 1px dashed var(--gh-rice-gold);
-      border-radius: 12px;
-      padding: 2rem;
-      text-align: center;
-    }
-
-    .fresh-launch-notice h2 {
-      color: var(--gh-deep-green-dark);
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .fresh-launch-notice p {
-      color: var(--gh-text-muted);
-      font-size: 1rem;
-    }
-
-    footer {
-      background: var(--gh-void);
-      color: #9BA8A1;
-      padding: 3rem 2rem 2rem;
-      text-align: center;
-      font-size: 0.9rem;
-      margin-top: 5rem;
-    }
-
-    footer p {
-      margin-bottom: 0.5rem;
-    }
-
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-top: 1rem;
-    }
-
-    .footer-links a {
-      color: var(--gh-aqua);
-      text-decoration: none;
+    @media (max-width: 560px) {
+      .grid { grid-template-columns: 1fr; }
+      h1 { font-size: 34px; }
+      h2 { font-size: 28px; }
+      section { padding: 64px 0; }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="nav-container">
-      <a href="/" class="brand">
-        <div class="brand-logo">G</div>
-        <div class="brand-title">Grihosti<span>OS</span></div>
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="grihostiOS home">
+        <img src="assets/logo-on-dark.png" alt="grihostiOS">
       </a>
-      <div class="badge-status">
-        ● Fresh Deployment Ready
-      </div>
+      <nav class="nav-links">
+        <a href="#features">সুবিধা</a>
+        <a href="#how">কীভাবে কাজ করে</a>
+        <a href="#contact">যোগাযোগ</a>
+        <a class="btn btn-primary" href="#contact">শুরু করুন</a>
+      </nav>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-subtitle-bn bn">আপনার জমি, আপনার নিয়ন্ত্রণ</div>
-      <h1>Institutional Operating System for <span class="highlight">Home, Land & Production</span></h1>
-      <p>Clean institutional engine for governed tenancy, legally compliant agreements, immutable receipts, and agricultural operations in Bangladesh.</p>
-    </div>
-  </section>
-
-  <main class="modules-section">
-    <div class="grid-cards">
-      <div class="card">
-        <div class="card-icon">📜</div>
-        <h3>Governed Tenancy</h3>
-        <h4 class="bn">ডিজিটাল ভাড়াচুক্তি ও যাচাই</h4>
-        <p>Bilingual, legally binding tenancy agreements compliant with the Premises Rent Control Act, 1991 and Information Technology standards.</p>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">💳</div>
-        <h3>Immutable Receipts</h3>
-        <h4 class="bn">অপরিবর্তনীয় রসিদ ও হিসাব</h4>
-        <p>Automated payment ledger with QR verification, bKash/Nagad settlement, and tamper-proof electronic receipts.</p>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">🌾</div>
-        <h3>Agricultural Land</h3>
-        <h4 class="bn">কৃষি ও বর্গা ব্যবস্থাপনা</h4>
-        <p>Sharecropper (বর্গা) contracts, seasonal harvest accounting, and parcel-level yield verification.</p>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">🐟</div>
-        <h3>Fisheries & Estates</h3>
-        <h4 class="bn">মৎস্য ও খামার কার্যক্রম</h4>
-        <p>Pond leasing, operational input audits, auction records, and harvest settlement governance.</p>
+  <main id="top">
+    <div class="hero">
+      <div class="wrap">
+        <div>
+          <div class="eyebrow">Home • Land • Production</div>
+          <h1 class="bn">আপনার সম্পদ,<br><span class="accent">আপনার ভবিষ্যৎ</span></h1>
+          <p class="tagline">One operating system for property, land and productive estates — governed, transparent and built for Bangladesh.</p>
+          <p class="tagline-bn bn">জমি • বাড়ি • ভাড়া • উৎপাদন — সব এক প্ল্যাটফর্মে।</p>
+          <div class="cta">
+            <a class="btn btn-primary" href="#contact">এখনই শুরু করুন</a>
+            <a class="btn btn-ghost" href="#features">আরও জানুন</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <img src="assets/logo-on-light.png" alt="grihostiOS — Home • Land • Production">
+          <div class="pillars">
+            <span>Property</span><span>Land</span><span>Rental</span><span>Production</span><span>Fisheries</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="fresh-launch-notice">
-      <h2>Clean Architecture Initialized</h2>
-      <p>Domain: <strong>grihosti.xyz</strong> | Project: <strong>Varizen/grihostiOS</strong></p>
-      <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #7B8B82;">All previous legacy uploads have been purged. The workspace is configured for fresh production deployment.</p>
-    </div>
+    <section id="features">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Platform</div>
+          <h2 class="bn">সবকিছু এক জায়গায়</h2>
+          <p class="lead">Land records, tenancy, production and settlement — connected, so every record is traceable.</p>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <div class="icon">🏠</div>
+            <h3>Property</h3>
+            <div class="bn-title bn">সম্পত্তি ব্যবস্থাপনা</div>
+            <p>Register properties, units and tenants in one ledger.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🗺️</div>
+            <h3>Land</h3>
+            <div class="bn-title bn">জমির রেকর্ড</div>
+            <p>Parcels, boundaries and survey references, mapped and governed.</p>
+          </div>
+          <div class="card">
+            <div class="icon">📄</div>
+            <h3>Agreements</h3>
+            <div class="bn-title bn">ই-চুক্তিপত্র ও রসিদ</div>
+            <p>Bilingual agreements and verifiable e-receipts for every payment.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🌾</div>
+            <h3>Production</h3>
+            <div class="bn-title bn">কৃষি ও মৎস্য</div>
+            <p>Crop seasons, sharecropping, fisheries batches and 50/50 settlements.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="how">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">How it works</div>
+          <h2 class="bn">তিন ধাপে শুরু করুন</h2>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="n">1</div>
+            <h3 class="bn">সম্পদ যুক্ত করুন</h3>
+            <p>Add your property or land with its basic records and photos.</p>
+          </div>
+          <div class="step">
+            <div class="n">2</div>
+            <h3 class="bn">চুক্তি তৈরি করুন</h3>
+            <p>Create a bilingual agreement and sign it digitally with both parties.</p>
+          </div>
+          <div class="step">
+            <div class="n">3</div>
+            <h3 class="bn">পর্যবেক্ষণ করুন</h3>
+            <p>Track rent, receipts, harvests and obligations from one dashboard.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-final" id="contact">
+      <div class="wrap">
+        <div class="kicker">Get started</div>
+        <h2 class="bn" style="margin-top:10px">আজই আপনার সম্পদ নিয়ন্ত্রণে নিন</h2>
+        <p class="lead bn">আপনার জমি, আপনার নিয়ন্ত্রণ — Your Land, Your Control.</p>
+        <div style="margin-top:28px">
+          <a class="btn btn-primary" href="mailto:hello@grihosti.xyz">hello@grihosti.xyz</a>
+        </div>
+        <p>Bangladesh-first • Bangla & English • Your data stays yours</p>
+      </div>
+    </section>
   </main>
 
   <footer>
-    <p>&copy; 2026 GrihostiOS. Engineered by Varizen Inc.</p>
-    <p class="bn">গৃহস্থি — প্রযুক্তি ও বিশ্বাসের মেলবন্ধন</p>
-    <div class="footer-links">
-      <a href="https://github.com/Varizen/grihostiOS" target="_blank" rel="noopener">GitHub Repository</a>
-      <a href="https://varizen.co" target="_blank" rel="noopener">Varizen Inc.</a>
+    <div class="wrap">
+      <div>
+        <div class="bn">আপনার জমি, আপনার নিয়ন্ত্রণ</div>
+        <div>© 2026 GrihostiOS · Engineered in Malaysia for Bangladesh</div>
+      </div>
+      <div><a href="https://grihosti.xyz">grihosti.xyz</a></div>
     </div>
   </footer>
 
