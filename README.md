@@ -17,8 +17,8 @@ GrihostiOS is a governed document and operational engine for:
 ## 🏛️ Brand & Identity
 - **Primary Domain**: `grihosti.xyz`
 - **Primary Vertical**: Property, Tenancy & Agriculture
-- **Primary Typography**: Shiliguri / Hind Siliguri (Bangla) & Inter (English)
-- **Palette**: Deep Green (`#1B4D3E`), Aqua (`#4ECDC4`), Rice Gold (`#D4AF37`), Paper Canvas (`#F8F6F0`), Deep Void (`#0A0F0D`).
+- **Primary Typography**: Hind Siliguri (Bangla) & Inter (English)
+- **Palette** (Option 5 "Plum & Green"): Plum `#3B1E3F`, Mauve `#8B5CF6`, Fresh Green `#22C55E`, Mint `#E9F7EF`, Slate `#374151`.
 
 ---
 
@@ -35,3 +35,4 @@ grihosti.xyz/
 ## 🚀 Status
 - **Clean Slate**: Initialized fresh. All outdated uploads purged and cleanly archived.
 - **Repository**: [Varizen/grihostiOS](https://github.com/Varizen/grihostiOS)
+
