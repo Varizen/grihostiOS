@@ -70,8 +70,11 @@
     .btn-ghost:hover { background: rgba(34,197,94,.12); }
 
     /* hero */
+    /* hero */
     .hero {
       background:
+        linear-gradient(rgba(44,20,48,.55), rgba(44,20,48,.82)),
+        url('assets/bd-home-soft.jpg') center 32% / cover no-repeat,
         linear-gradient(160deg, var(--gh-plum) 0%, var(--gh-plum-deep) 100%);
       color: #fff;
       position: relative;
@@ -96,10 +99,23 @@
     .cta { display: flex; gap: 14px; margin-top: 34px; flex-wrap: wrap; }
     .hero-card {
       background: #FFFFFF; border: 1px solid rgba(255,255,255,.16);
-      border-radius: 20px; padding: 36px; display: flex; flex-direction: column; align-items: center; gap: 22px;
+      border-radius: 20px; padding: 26px 26px 22px; display: flex; flex-direction: column; align-items: center; gap: 18px;
       box-shadow: 0 24px 60px rgba(20,8,24,.35);
     }
     .hero-card img { width: 100%; max-width: 380px; }
+    .hero-card .shot {
+      width: 100%; border-radius: 12px; display: block;
+      box-shadow: 0 10px 26px rgba(59,30,63,.18);
+    }
+    .hero-card .caption {
+      display: flex; align-items: center; gap: 9px;
+      font-size: 13.5px; font-weight: 600; color: var(--gh-slate);
+    }
+    .hero-card .caption .bn-cap { font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; }
+    .hero-card .caption .live {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--gh-green); flex: none;
+      box-shadow: 0 0 0 3px rgba(34,197,94,.18);
+    }
     .pillars { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
     .pillars span {
       font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 999px;
@@ -127,10 +143,31 @@
     .card .bn-title { font-size: 17px; font-weight: 700; color: var(--gh-plum); margin-top: 2px; }
     .card p { font-size: 15px; color: var(--gh-muted); margin-top: 10px; }
 
+    .scene { margin-top: 34px; }
+    .scene img {
+      width: 100%; max-height: 340px; object-fit: cover; display: block;
+      border-radius: 18px; border: 1px solid var(--gh-line);
+      box-shadow: 0 18px 44px rgba(59,30,63,.12);
+    }
+    .scene figcaption {
+      text-align: center; font-size: 14.5px; color: var(--gh-muted); margin-top: 12px;
+    }
+
     .band { background: var(--gh-plum); color: #fff; }
     .band h2 { color: #fff; }
     .band .kicker { color: var(--gh-green); }
     .band .lead { color: #D9CBDD; }
+    .band .steps { position: relative; z-index: 1; }
+    .band .wrap { position: relative; }
+    .band .wrap::before {
+      content: ""; position: absolute; inset: 0; z-index: 0;
+      border-radius: 24px;
+      background:
+        linear-gradient(rgba(44,20,48,.86), rgba(44,20,48,.94)),
+        url('assets/bd-home.jpg') center 40% / cover no-repeat;
+      opacity: .5;
+    }
+    .band .wrap > * { position: relative; z-index: 1; }
     .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .step { border: 1px solid rgba(255,255,255,.14); border-radius: 16px; padding: 28px; background: rgba(255,255,255,.03); }
     .step .n {
@@ -208,6 +245,7 @@
       h1 { font-size: 34px; }
       h2 { font-size: 28px; }
       section { padding: 64px 0; }
+      .scene img { max-height: 220px; }
       .fab {
         right: 12px; bottom: 12px; left: 12px;
         justify-content: center; padding: 14px 18px; font-size: 14px;
@@ -249,6 +287,11 @@
         </div>
         <div class="hero-card">
           <img src="assets/logo-on-light.png" alt="grihostiOS — Home • Land • Production">
+          <img class="shot" src="assets/bd-dashboard.jpg" alt="grihostiOS dashboard — properties, production units and rent collection at a glance" loading="lazy">
+          <div class="caption">
+            <span class="live" aria-hidden="true"></span>
+            <span class="bn-cap">স্টিএফএল হাউসের ভাড়া আজ সংগ্রহ হয়েছে</span>
+          </div>
           <div class="pillars">
             <span>Property</span><span>Land</span><span>Rental</span><span>Production</span><span>Fisheries</span>
           </div>
@@ -289,6 +332,10 @@
             <p>Crop seasons, sharecropping, fisheries batches and 50/50 settlements.</p>
           </div>
         </div>
+        <figure class="scene">
+          <img src="assets/bd-home.jpg" alt="A modern Bangladeshi home at dusk — the kind of property grihostiOS helps you govern" loading="lazy">
+          <figcaption class="bn">বাড়ি, জমি আর উৎপাদন — বাংলাদেশের জন্যই তৈরি</figcaption>
+        </figure>
       </div>
     </section>
 
