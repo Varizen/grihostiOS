@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>স্থাপত্য নকশা প্রস্তাব আহ্বান — grihostiOS</title>
-  <meta name="description" content="১,৬৯২ বর্গফুট জমির উপর ২-তলা সেমি-কমার্শিয়াল ও রেসিডেন্সিয়াল কমপ্লেক্সের স্থাপত্য নকশা প্রস্তাব আহ্বান।">
+  <title>১,৬৯২ বর্গফুটে স্মার্ট Mixed-Use Complex-এর নকশা চাই — grihostiOS</title>
+    <meta name="description" content="১,৬৯২ বর্গফুট জমির উপর ২-তলা Semi-Commercial + Residential Mixed-Use Complex-এর জন্য Architectural Design & Engineering প্রস্তাব আহ্বান।">
   <meta name="theme-color" content="#3B1E3F">
-  <meta property="og:title" content="স্থাপত্য নকশা প্রস্তাব আহ্বান — grihostiOS">
-  <meta property="og:description" content="১,৬৯২ বর্গফুট জমির উপর ২-তলা সেমি-কমার্শিয়াল ও রেসিডেন্সিয়াল কমপ্লেক্স — নকশা প্রস্তাব আহ্বান।">
+  <meta property="og:title" content="১,৬৯২ বর্গফুটে স্মার্ট Mixed-Use Complex-এর নকশা চাই — grihostiOS">
+  <meta property="og:description" content="২-তলা Semi-Commercial + Residential Mixed-Use Complex — Architectural Design & Engineering প্রস্তাব আহ্বান।">
   <meta property="og:image" content="https://grihosti.xyz/assets/logo-on-light.png">
   <link rel="icon" href="/assets/favicon.png" sizes="512x512">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
@@ -76,7 +76,17 @@
     .eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--gh-green); }
     .hero h1 { font-size: 40px; line-height: 1.25; font-weight: 800; letter-spacing: -.01em; }
     .hero h1 .accent { color: var(--gh-green); }
-    .hero .sub { font-size: 19px; color: #D9CBDD; margin-top: 18px; max-width: 660px; }
+    .hero .sub { font-size: 19px; color: #D9CBDD; margin-top: 18px; max-width: 720px; }
+    .hero-cta { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; }
+    .btn-cta, .btn-brief {
+      display: inline-block; text-decoration: none; font-weight: 700; font-size: 15px;
+      padding: 13px 26px; border-radius: 999px;
+      font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
+    }
+    .btn-cta { background: var(--gh-green); color: #0B2016; }
+    .btn-cta:hover { background: #1DB754; }
+    .btn-brief { border: 1.5px solid var(--gh-green); color: var(--gh-green); }
+    .btn-brief:hover { background: rgba(34,197,94,.12); }
 
     /* meta card */
     .meta {
@@ -125,6 +135,15 @@
       border-radius: 0 12px 12px 0; padding: 20px 22px; margin-top: 8px;
     }
     .callout p { font-size: 15px; }
+    .callout strong { color: var(--gh-plum); }
+
+    /* deliverable chips */
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chips span {
+      font-size: 14px; font-weight: 600; padding: 8px 16px; border-radius: 999px;
+      background: var(--gh-mint); color: var(--gh-green-deep);
+      border: 1px solid #D3EBDD;
+    }
 
     /* contact card */
     .contact {
@@ -201,6 +220,7 @@
       .meta dt { color: var(--gh-muted); font-size: 13px; text-transform: uppercase; letter-spacing: .04em; }
       .hero h1 { font-size: 29px; }
       .hero .sub { font-size: 17px; }
+      .btn-cta, .btn-brief { width: 100%; text-align: center; }
       h2 { font-size: 22px; }
       .weights th, .weights td { padding: 11px 8px; font-size: 14px; }
       .fab {
@@ -219,6 +239,7 @@
       .hero { background: #fff; color: #000; padding: 0 0 20px; }
       .hero::after { display: none; }
       .hero h1, .hero h1 .accent, .hero .sub { color: #000; }
+      .btn-brief { border-color: #999; color: #000; }
       .meta { box-shadow: none; margin-top: 0; border: 1px solid #ccc; }
       .contact { background: #fff; color: #000; border: 1px solid #ccc; }
       .contact h2, .contact .rows div, .contact .rows strong { color: #000; }
@@ -241,9 +262,13 @@
 
   <div class="hero">
     <div class="wrap">
-      <div class="eyebrow">Design Proposal Invitation</div>
-      <h1 class="bn">স্থাপত্য নকশা <span class="accent">প্রস্তাব আহ্বান</span></h1>
-      <p class="sub bn">১,৬৯২ বর্গফুট জমির উপর ২-তলা সেমি-কমার্শিয়াল ও রেসিডেন্সিয়াল কমপ্লেক্স</p>
+      <div class="eyebrow">Architectural Design &amp; Engineering Proposal</div>
+      <h1 class="bn">১,৬৯২ বর্গফুটে একটি স্মার্ট <span class="accent">Mixed-Use Complex</span>-এর নকশা চাই</h1>
+      <p class="sub bn">১,৬৯২ বর্গফুট জমির সর্বোত্তম ব্যবহার নিশ্চিত করে একটি আধুনিক, কার্যকরী ও নির্মাণযোগ্য ২-তলা Semi-Commercial + Residential Mixed-Use Complex</p>
+      <div class="hero-cta">
+        <a class="btn-cta" href="#submit">প্রস্তাব জমা দিন</a>
+        <a class="btn-brief" href="#brief">বিস্তারিত Project Brief</a>
+      </div>
     </div>
   </div>
 
@@ -280,6 +305,30 @@
 
   <main>
     <div class="wrap">
+
+      <section id="brief">
+        <h2 class="bn">আমরা যা খুঁজছি</h2>
+        <div class="callout">
+          <p class="bn"><strong>আমরা খুঁজছি এমন একটি ডিজাইন—যেখানে সীমিত জায়গার সর্বোচ্চ ব্যবহার, বাণিজ্যিক কার্যকারিতা, আবাসিক স্বাচ্ছন্দ্য, নিরাপত্তা, প্রাকৃতিক আলো-বাতাস এবং ভবিষ্যৎ রক্ষণাবেক্ষণ—সবকিছুর মধ্যে একটি ভারসাম্য তৈরি হবে।</strong></p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="bn">প্রস্তাবে প্রত্যাশিত</h2>
+        <div class="chips">
+          <span>Concept Design</span>
+          <span>Site Planning</span>
+          <span>Floor Plans</span>
+          <span>Elevations</span>
+          <span>Sections</span>
+          <span>3D Visualization</span>
+          <span>Preliminary Structural Concept</span>
+          <span>MEP Planning</span>
+          <span>Area Statement</span>
+          <span>Preliminary BOQ</span>
+          <span>Design Schedule</span>
+        </div>
+      </section>
 
       <section>
         <h2 class="bn">প্রকল্পের উদ্দেশ্য</h2>
@@ -374,7 +423,7 @@
         </table>
       </section>
 
-      <section>
+      <section id="submit">
         <h2 class="bn">প্রস্তাব জমাদান</h2>
         <p class="bn">আগ্রহী স্থপতি/আর্কিটেকচারাল ফার্ম/ডিজাইনারদের তাদের portfolio, design proposal এবং professional fee quotation সহ প্রস্তাব জমা দেওয়ার জন্য অনুরোধ করা হচ্ছে।</p>
         <ul class="bn">

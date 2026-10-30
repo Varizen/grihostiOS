@@ -153,6 +153,18 @@
       text-align: center; font-size: 14.5px; color: var(--gh-muted); margin-top: 12px;
     }
 
+    /* life gallery */
+    .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .gallery figure {
+      background: var(--gh-white); border: 1px solid var(--gh-line); border-radius: 16px;
+      overflow: hidden; transition: transform .15s, box-shadow .15s;
+    }
+    .gallery figure:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(59,30,63,.10); }
+    .gallery img { width: 100%; aspect-ratio: 16 / 9.2; object-fit: cover; display: block; }
+    .gallery figcaption { padding: 14px 16px 16px; }
+    .gallery .t { font-size: 15.5px; font-weight: 700; color: var(--gh-plum); }
+    .gallery .d { font-size: 13.5px; color: var(--gh-muted); margin-top: 4px; line-height: 1.55; }
+
     .band { background: var(--gh-plum); color: #fff; }
     .band h2 { color: #fff; }
     .band .kicker { color: var(--gh-green); }
@@ -239,9 +251,11 @@
       .grid { grid-template-columns: repeat(2, 1fr); }
       .steps { grid-template-columns: 1fr; }
       .nav-links a:not(.btn) { display: none; }
+      .gallery { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 560px) {
       .grid { grid-template-columns: 1fr; }
+      .gallery { grid-template-columns: 1fr; }
       h1 { font-size: 34px; }
       h2 { font-size: 28px; }
       section { padding: 64px 0; }
@@ -287,6 +301,7 @@
         </div>
         <div class="hero-card">
           <img src="assets/logo-on-light.png" alt="grihostiOS — Home • Land • Production">
+          <img class="shot" src="assets/scene-lounge.jpg" alt="A family and tenants gathered in a shared lounge — the people grihostiOS is built for" loading="lazy">
           <img class="shot" src="assets/bd-dashboard.jpg" alt="grihostiOS dashboard — properties, production units and rent collection at a glance" loading="lazy">
           <div class="caption">
             <span class="live" aria-hidden="true"></span>
@@ -338,6 +353,58 @@
         </figure>
       </div>
     </section>
+
+    <section id="life">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Made for Bangladeshi life</div>
+          <h2 class="bn">মানুষের জীবনের কথা ভেবে তৈরি</h2>
+          <p class="lead">From shared kitchens to harvest evenings — grihostiOS is designed around how families, farmers and communities actually live and work.</p>
+        </div>
+        <div class="gallery">
+          <figure>
+            <img src="assets/scene-farmers.jpg" alt="Farmers and community members sharing a meal after a day in the fields" loading="lazy">
+            <figcaption>
+              <div class="t bn">কৃষক ও কমিউনিটি</div>
+              <div class="d bn">বর্গা চাষি, ফসলের হিসাব আর উৎসব — সবাই মিলে, স্বচ্ছভাবে।</div>
+            </figcaption>
+          </figure>
+          <figure>
+            <img src="assets/scene-harvest.jpg" alt="Families resting together in a vegetable garden after harvest" loading="lazy">
+            <figcaption>
+              <div class="t bn">উৎপাদন ও ফসল</div>
+              <div class="d bn">প্রতিটি ফসলের মৌসুম, হিসাব ও নিষ্পত্তি — এক জায়গায়।</div>
+            </figcaption>
+          </figure>
+          <figure>
+            <img src="assets/scene-terrace.jpg" alt="People gathering on a rooftop terrace garden between city buildings" loading="lazy">
+            <figcaption>
+              <div class="t bn">ছাদ বাগান ও ছাদ ভাড়া</div>
+              <div class="d bn">শহরের ছাদেও উৎপাদন — হিসাব থাকবে আপনার হাতে।</div>
+            </figcaption>
+          </figure>
+          <figure>
+            <img src="assets/scene-lounge.jpg" alt="Young professionals working together on laptops in a shared lounge" loading="lazy">
+            <figcaption>
+              <div class="t bn">শেয়ার্ড বাসা ও ভাড়াটিয়া</div>
+              <div class="d bn">ভাড়া, চুক্তি ও রসিদ — বাড়িওয়ালা ও ভাড়াটিয়ার জন্য সমান স্বচ্ছ।</div>
+            </figcaption>
+          </figure>
+          <figure>
+            <img src="assets/scene-kitchen.jpg" alt="A couple cooking together in a bright shared kitchen" loading="lazy">
+            <figcaption>
+              <div class="t bn">শেয়ার্ড কিচেন ও ডাইনিং</div>
+              <div class="d bn">মিলিত থাকার খরচ, ভাগাভাগি — বিরোধ নয়, স্পষ্ট হিসাব।</div>
+            </figcaption>
+          </figure>
+          <figure>
+            <img src="assets/scene-urban-farm.jpg" alt="A woman tending aquaponics beds beside city buildings" loading="lazy">
+            <figcaption>
+              <div class="t bn">আরবান ফার্মিং ও মৎস্য</div>
+              <div class="d bn">শহরের মাঝেই মাছ ও সবজি — প্রতিটি ব্যাচের রেকর্ড ডিজিটাল।</div>
+            </figcaption>
+          </figure>
+        </div>
 
     <section class="band" id="how">
       <div class="wrap">
