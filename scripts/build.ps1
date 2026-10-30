@@ -9,10 +9,13 @@ $dist = Join-Path $src "dist"
 if (Test-Path $dist) { Remove-Item $dist -Recurse -Force }
 New-Item -ItemType Directory $dist | Out-Null
 
-foreach ($f in @("index.html", "404.html", "_headers", "_redirects")) {
+foreach ($f in @("_headers", "_redirects")) {
     $p = Join-Path $src $f
     if (Test-Path $p) { Copy-Item $p -Destination $dist }
 }
+
+# all root-level HTML pages
+Get-ChildItem $src -File -Filter *.html | Copy-Item -Destination $dist
 
 New-Item -ItemType Directory (Join-Path $dist "assets") | Out-Null
 Get-ChildItem (Join-Path $src "assets") -File | Copy-Item -Destination (Join-Path $dist "assets")
