@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>grihostiOS — আপনার সম্পদ, আপনার ভবিষ্যৎ | Your Land, Your Control</title>
+  <meta name="description" content="grihostiOS — Home • Land • Production. A governed operating system for property, land and productive estates in Bangladesh.">
+  <meta property="og:title" content="grihostiOS — Home • Land • Production">
+  <meta property="og:description" content="আপনার জমি, আপনার নিয়ন্ত্রণ — Your Land, Your Control">
+  <meta property="og:image" content="https://grihosti.xyz/assets/logo-on-light.png">
+  <meta property="og:image:width" content="2049">
+  <meta property="og:image:height" content="639">
+  <meta name="theme-color" content="#3B1E3F">
+  <link rel="icon" href="assets/favicon.png" sizes="512x512">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* grihostiOS — Option 5 "Plum & Green" */
+      --gh-plum: #3B1E3F;
+      --gh-plum-deep: #2C1430;
+      --gh-mauve: #8B5CF6;
+      --gh-green: #22C55E;
+      --gh-green-deep: #15803D;
+      --gh-mint: #E9F7EF;
+      --gh-slate: #374151;
+      --gh-muted: #6B7280;
+      --gh-surface: #F7F9FA;
+      --gh-line: #DDE3E8;
+      --gh-white: #FFFFFF;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', 'Hind Siliguri', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: var(--gh-surface);
+      color: var(--gh-slate);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .bn { font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; }
+
+    a { color: inherit; }
+
+    /* header */
+    header {
+      background: var(--gh-plum);
+      position: sticky; top: 0; z-index: 10;
+      box-shadow: 0 1px 0 rgba(255,255,255,.06);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .brand img { height: 40px; display: block; }
+    footer .brand img { height: 30px; margin-bottom: 10px; }
+    .nav-links { display: flex; gap: 22px; align-items: center; }
+    .nav-links a { color: #E8DCEB; text-decoration: none; font-size: 15px; font-weight: 500; }
+    .nav-links a:hover { color: var(--gh-green); }
+    .btn {
+      display: inline-block; text-decoration: none; font-weight: 700; font-size: 15px;
+      padding: 12px 22px; border-radius: 999px; transition: background .2s, transform .1s;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn-primary { background: var(--gh-green); color: #0B2016; }
+    .btn-primary:hover { background: #1DB754; }
+    .btn-ghost { border: 1.5px solid var(--gh-green); color: var(--gh-green); }
+    .btn-ghost:hover { background: rgba(34,197,94,.12); }
+
+    /* hero */
+    /* hero */
+    .hero {
+      background:
+        linear-gradient(rgba(44,20,48,.55), rgba(44,20,48,.82)),
+        url('assets/bd-home-soft.jpg') center 32% / cover no-repeat,
+        linear-gradient(160deg, var(--gh-plum) 0%, var(--gh-plum-deep) 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: ""; position: absolute; right: -120px; top: -140px;
+      width: 520px; height: 520px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(139,92,246,.35), transparent 70%);
+    }
+    .hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; padding-top: 88px; padding-bottom: 96px; position: relative; z-index: 1; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+      color: var(--gh-green); margin-bottom: 18px;
+    }
+    .eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--gh-green); }
+    h1 { font-size: 52px; line-height: 1.08; font-weight: 800; letter-spacing: -.02em; }
+    h1 .accent { color: var(--gh-green); }
+    .tagline { font-size: 20px; color: #E8DCEB; margin-top: 18px; max-width: 540px; }
+    .tagline-bn { font-size: 22px; color: #fff; margin-top: 10px; }
+    .cta { display: flex; gap: 14px; margin-top: 34px; flex-wrap: wrap; }
+    .hero-card {
+      background: #FFFFFF; border: 1px solid rgba(255,255,255,.16);
+      border-radius: 20px; padding: 26px 26px 22px; display: flex; flex-direction: column; align-items: center; gap: 18px;
+      box-shadow: 0 24px 60px rgba(20,8,24,.35);
+    }
+    .hero-card img { width: 100%; max-width: 380px; }
+    .hero-card .shot {
+      width: 100%; border-radius: 12px; display: block;
+      box-shadow: 0 10px 26px rgba(59,30,63,.18);
+    }
+    .hero-card .caption {
+      display: flex; align-items: center; gap: 9px;
+      font-size: 13.5px; font-weight: 600; color: var(--gh-slate);
+    }
+    .hero-card .caption .bn-cap { font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; }
+    .hero-card .caption .live {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--gh-green); flex: none;
+      box-shadow: 0 0 0 3px rgba(34,197,94,.18);
+    }
+    .pillars { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+    .pillars span {
+      font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 999px;
+      background: var(--gh-mint); color: var(--gh-green-deep);
+    }
+
+    /* sections */
+    section { padding: 88px 0; }
+    .section-head { text-align: center; max-width: 680px; margin: 0 auto 52px; }
+    .kicker { font-size: 13px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--gh-green-deep); }
+    h2 { font-size: 36px; line-height: 1.2; font-weight: 800; color: var(--gh-plum); margin-top: 10px; letter-spacing: -.01em; }
+    .lead { color: var(--gh-muted); margin-top: 12px; font-size: 17px; }
+
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .card {
+      background: var(--gh-white); border: 1px solid var(--gh-line); border-radius: 16px;
+      padding: 26px 24px; transition: transform .15s, box-shadow .15s, border-color .15s;
+    }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(59,30,63,.10); border-color: #CFC4D6; }
+    .icon {
+      width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center;
+      background: var(--gh-mint); color: var(--gh-green-deep); font-size: 22px; margin-bottom: 16px;
+    }
+    .card h3 { font-size: 18px; font-weight: 700; color: var(--gh-plum); }
+    .card .bn-title { font-size: 17px; font-weight: 700; color: var(--gh-plum); margin-top: 2px; }
+    .card p { font-size: 15px; color: var(--gh-muted); margin-top: 10px; }
+
+    .scene { margin-top: 34px; }
+    .scene img {
+      width: 100%; max-height: 340px; object-fit: cover; display: block;
+      border-radius: 18px; border: 1px solid var(--gh-line);
+      box-shadow: 0 18px 44px rgba(59,30,63,.12);
+    }
+    .scene figcaption {
+      text-align: center; font-size: 14.5px; color: var(--gh-muted); margin-top: 12px;
+    }
+
+    /* life gallery */
+    .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .gallery figure {
+      background: var(--gh-white); border: 1px solid var(--gh-line); border-radius: 16px;
+      overflow: hidden; transition: transform .15s, box-shadow .15s;
+    }
+    .gallery figure:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(59,30,63,.10); }
+    .gallery img { width: 100%; aspect-ratio: 16 / 9.2; object-fit: cover; display: block; }
+    .gallery figcaption { padding: 14px 16px 16px; }
+    .gallery .t { font-size: 15.5px; font-weight: 700; color: var(--gh-plum); }
+    .gallery .d { font-size: 13.5px; color: var(--gh-muted); margin-top: 4px; line-height: 1.55; }
+
+    .band { background: var(--gh-plum); color: #fff; }
+    .band h2 { color: #fff; }
+    .band .kicker { color: var(--gh-green); }
+    .band .lead { color: #D9CBDD; }
+    .band .steps { position: relative; z-index: 1; }
+    .band .wrap { position: relative; }
+    .band .wrap::before {
+      content: ""; position: absolute; inset: 0; z-index: 0;
+      border-radius: 24px;
+      background:
+        linear-gradient(rgba(44,20,48,.86), rgba(44,20,48,.94)),
+        url('assets/bd-home.jpg') center 40% / cover no-repeat;
+      opacity: .5;
+    }
+    .band .wrap > * { position: relative; z-index: 1; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .step { border: 1px solid rgba(255,255,255,.14); border-radius: 16px; padding: 28px; background: rgba(255,255,255,.03); }
+    .step .n {
+      width: 36px; height: 36px; border-radius: 50%; background: var(--gh-green); color: #0B2016;
+      display: grid; place-items: center; font-weight: 800; margin-bottom: 14px;
+    }
+    .step h3 { font-size: 19px; color: #fff; }
+    .step p { color: #D9CBDD; font-size: 15px; margin-top: 8px; }
+
+    .cta-final { text-align: center; }
+    .cta-final .wrap { max-width: 760px; }
+    .cta-final .btn-primary { font-size: 17px; padding: 15px 30px; }
+    .cta-final p { color: var(--gh-muted); margin-top: 18px; font-size: 15px; }
+
+    footer { background: var(--gh-plum-deep); color: #CBB9CF; padding: 40px 0; font-size: 14px; }
+    footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+    footer a { color: var(--gh-green); text-decoration: none; }
+    footer .bn { color: #fff; font-size: 15px; }
+
+    /* floating invitation button */
+    .fab {
+      position: fixed; right: 22px; bottom: 22px; z-index: 60;
+      display: inline-flex; align-items: center; gap: 11px;
+      padding: 15px 24px 15px 19px; border-radius: 999px;
+      background: linear-gradient(135deg, #22C55E 0%, #16A34A 52%, #8B5CF6 125%);
+      color: #06210F; font-weight: 800; font-size: 15px; line-height: 1.25;
+      text-decoration: none; overflow: hidden;
+      box-shadow: 0 14px 34px rgba(34,197,94,.42);
+      animation: fabPulse 2.6s ease-out infinite, fabBob 4.5s ease-in-out infinite;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .fab:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 18px 44px rgba(34,197,94,.55); }
+    .fab:active { transform: translateY(0) scale(.99); }
+    .fab .txt { font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; }
+    .fab .dot {
+      width: 10px; height: 10px; border-radius: 50%; background: #06210F; flex: none;
+      animation: fabBlink 1.4s ease-in-out infinite;
+    }
+    .fab .arrow { font-weight: 700; transition: transform .18s ease; }
+    .fab:hover .arrow { transform: translateX(3px); }
+    .fab::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(115deg, transparent 32%, rgba(255,255,255,.62) 50%, transparent 68%);
+      transform: translateX(-130%);
+      animation: fabShimmer 3s ease-in-out infinite;
+    }
+    @keyframes fabPulse {
+      0%   { box-shadow: 0 14px 34px rgba(34,197,94,.42), 0 0 0 0 rgba(34,197,94,.55); }
+      70%  { box-shadow: 0 14px 34px rgba(34,197,94,.42), 0 0 0 20px rgba(34,197,94,0); }
+      100% { box-shadow: 0 14px 34px rgba(34,197,94,.42), 0 0 0 0 rgba(34,197,94,0); }
+    }
+    @keyframes fabBob {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-5px); }
+    }
+    @keyframes fabShimmer {
+      0%   { transform: translateX(-130%); }
+      55%  { transform: translateX(130%); }
+      100% { transform: translateX(130%); }
+    }
+    @keyframes fabBlink {
+      0%, 100% { opacity: 1; }
+      50%      { opacity: .35; }
+    }
+
+    @media (max-width: 960px) {
+      .hero .wrap { grid-template-columns: 1fr; padding-top: 56px; padding-bottom: 64px; }
+      h1 { font-size: 40px; }
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .steps { grid-template-columns: 1fr; }
+      .nav-links a:not(.btn) { display: none; }
+      .gallery { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .grid { grid-template-columns: 1fr; }
+      .gallery { grid-template-columns: 1fr; }
+      h1 { font-size: 34px; }
+      h2 { font-size: 28px; }
+      section { padding: 64px 0; }
+      .scene img { max-height: 220px; }
+      .fab {
+        right: 12px; bottom: 12px; left: 12px;
+        justify-content: center; padding: 14px 18px; font-size: 14px;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .fab, .fab .dot, .fab::after { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="grihostiOS home">
+        <img src="assets/logo-on-dark.png" alt="grihostiOS">
+      </a>
+      <nav class="nav-links">
+        <a href="#features">সুবিধা</a>
+        <a href="#how">কীভাবে কাজ করে</a>
+        <a href="#contact">যোগাযোগ</a>
+        <a class="btn btn-primary" href="#contact">শুরু করুন</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <div class="wrap">
+        <div>
+          <div class="eyebrow">Home • Land • Production</div>
+          <h1 class="bn">আপনার সম্পদ,<br><span class="accent">আপনার ভবিষ্যৎ</span></h1>
+          <p class="tagline">One operating system for property, land and productive estates — governed, transparent and built for Bangladesh.</p>
+          <p class="tagline-bn bn">জমি • বাড়ি • ভাড়া • উৎপাদন — সব এক প্ল্যাটফর্মে।</p>
+          <div class="cta">
+            <a class="btn btn-primary" href="#contact">এখনই শুরু করুন</a>
+            <a class="btn btn-ghost" href="#features">আরও জানুন</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <img src="assets/logo-on-light.png" alt="grihostiOS — Home • Land • Production">
+          <img class="shot" src="assets/scene-lounge.jpg" alt="A family and tenants gathered in a shared lounge — the people grihostiOS is built for" loading="lazy">
+          <img class="shot" src="assets/bd-dashboard.jpg" alt="grihostiOS dashboard — properties, production units and rent collection at a glance" loading="lazy">
+          <div class="caption">
+            <span class="live" aria-hidden="true"></span>
+            <span class="bn-cap">স্টিএফএল হাউসের ভাড়া আজ সংগ্রহ হয়েছে</span>
+          </div>
+          <div class="pillars">
+            <span>Property</span><span>Land</span><span>Rental</span><span>Production</span><span>Fisheries</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="features">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Platform</div>
+          <h2 class="bn">সবকিছু এক জায়গায়</h2>
+          <p class="lead">Land records, tenancy, production and settlement — connected, so every record is traceable.</p>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <div class="icon">🏠</div>
+            <h3>Property</h3>
+            <div class="bn-title bn">সম্পত্তি ব্যবস্থাপনা</div>
+            <p>Register properties, units and tenants in one ledger.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🗺️</div>
+            <h3>Land</h3>
+            <div class="bn-title bn">জমির রেকর্ড</div>
+            <p>Parcels, boundaries and survey references, mapped and governed.</p>
+          </div>
+          <div class="card">
+            <div class="icon">📄</div>
+            <h3>Agreements</h3>
+            <div class="bn-title bn">ই-চুক্তিপত্র ও রসিদ</div>
+            <p>Bilingual agreements and verifiable e-receipts for every payment.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🌾</div>
+            <h3>Production</h3>
+            <div class="bn-title bn">কৃষি ও মৎস্য</div>
+            <p>Crop seasons, sharecropping, fisheries batches and 50/50 settlements.</p>
+          </div>
+        </div>
+        <figure class="scene">
+          <img src="assets/bd-home.jpg" alt="A modern Bangladeshi home at dusk — the kind of property grihostiOS helps you govern" loading="lazy">
+          <figcaption class="bn">বাড়ি, জমি আর উৎপাদন — বাংলাদেশের জন্যই তৈরি</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="life">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Made for Bangladeshi life</div>
+          <h2 class="bn">মানুষের জীবনের কথা ভেবে তৈরি</h2>
+          <p class="lead">From shared kitchens to harvest evenings — grihostiOS is designed around how families, farmers and communities actually live and work.</p>
+        </div>
+        <div class="gallery">
+          <figure>
+            <img src="assets/scene-farmers.jpg" alt="Farmers and community members sharing a meal after a day in the fields" loading="lazy">
+            <figcaption>
+              <div class="t bn">কৃষক ও কমিউনিটি</div>
+              <div class="d bn">বর্গা চাষি, ফসলের হিসাব আর উৎসব — সবাই মিলে, স্বচ্ছভাবে।</div>
+            </figcaption>
+          </figure>
+          <figure>
+            <img src="assets/scene-harvest.jpg" alt="Families resting together in a vegetable garden after harvest" loading="lazy">
+            <figcaption>
+              <div class="t bn">উৎপাদন ও ফসল</div>
+              <div class="d bn">প্রতিটি ফসলের মৌসুম, হিসাব ও নিষ্পত্তি — এক জায়গায়।</div>
+            </figcaption>
+          </figure>
+          <figure>
+            <img src="assets/scene-terrace.jpg" alt="People gathering on a rooftop terrace garden between city buildings" loading="lazy">
+            <figcaption>
+              <div class="t bn">ছাদ বাগান ও ছাদ ভাড়া</div>
+              <div class="d bn">শহরের ছাদেও উৎপাদন — হিসাব থাকবে আপনার হাতে।</div>
+            </figcaption>
+          </figure>
+          <figure>
+            <img src="assets/scene-lounge.jpg" alt="Young professionals working together on laptops in a shared lounge" loading="lazy">
+            <figcaption>
+              <div class="t bn">শেয়ার্ড বাসা ও ভাড়াটিয়া</div>
+              <div class="d bn">ভাড়া, চুক্তি ও রসিদ — বাড়িওয়ালা ও ভাড়াটিয়ার জন্য সমান স্বচ্ছ।</div>
+            </figcaption>
+          </figure>
+          <figure>
+            <img src="assets/scene-kitchen.jpg" alt="A couple cooking together in a bright shared kitchen" loading="lazy">
+            <figcaption>
+              <div class="t bn">শেয়ার্ড কিচেন ও ডাইনিং</div>
+              <div class="d bn">মিলিত থাকার খরচ, ভাগাভাগি — বিরোধ নয়, স্পষ্ট হিসাব।</div>
+            </figcaption>
+          </figure>
+          <figure>
+            <img src="assets/scene-urban-farm.jpg" alt="A woman tending aquaponics beds beside city buildings" loading="lazy">
+            <figcaption>
+              <div class="t bn">আরবান ফার্মিং ও মৎস্য</div>
+              <div class="d bn">শহরের মাঝেই মাছ ও সবজি — প্রতিটি ব্যাচের রেকর্ড ডিজিটাল।</div>
+            </figcaption>
+          </figure>
+        </div>
+
+    <section class="band" id="how">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">How it works</div>
+          <h2 class="bn">তিন ধাপে শুরু করুন</h2>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="n">1</div>
+            <h3 class="bn">সম্পদ যুক্ত করুন</h3>
+            <p>Add your property or land with its basic records and photos.</p>
+          </div>
+          <div class="step">
+            <div class="n">2</div>
+            <h3 class="bn">চুক্তি তৈরি করুন</h3>
+            <p>Create a bilingual agreement and sign it digitally with both parties.</p>
+          </div>
+          <div class="step">
+            <div class="n">3</div>
+            <h3 class="bn">পর্যবেক্ষণ করুন</h3>
+            <p>Track rent, receipts, harvests and obligations from one dashboard.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-final" id="contact">
+      <div class="wrap">
+        <div class="kicker">Get started</div>
+        <h2 class="bn" style="margin-top:10px">আজই আপনার সম্পদ নিয়ন্ত্রণে নিন</h2>
+        <p class="lead bn">আপনার জমি, আপনার নিয়ন্ত্রণ — Your Land, Your Control.</p>
+        <div style="margin-top:28px">
+          <a class="btn btn-primary" href="mailto:hello@grihosti.xyz">hello@grihosti.xyz</a>
+        </div>
+        <p>Bangladesh-first • Bangla & English • Your data stays yours</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>
+        <img class="brand" src="assets/logo-on-dark.png" alt="grihostiOS" style="height:30px;display:block;margin-bottom:10px">
+        <div class="bn">আপনার জমি, আপনার নিয়ন্ত্রণ</div>
+        <div>© 2026 GrihostiOS · Engineered in Malaysia for Bangladesh</div>
+      </div>
+      <div><a href="https://grihosti.xyz">grihosti.xyz</a></div>
+    </div>
+  </footer>
+
+  <a class="fab" href="/architecture-design-proposal" aria-label="স্থাপত্য নকশা প্রস্তাব আহ্বান — বিস্তারিত দেখুন">
+    <span class="dot" aria-hidden="true"></span>
+    <span class="txt">স্থাপত্য নকশা প্রস্তাব আহ্বান</span>
+    <span class="arrow" aria-hidden="true">→</span>
+  </a>
+
+</body>
+</html>

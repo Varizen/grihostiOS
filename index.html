@@ -5,12 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>grihostiOS — আপনার সম্পদ, আপনার ভবিষ্যৎ | Your Land, Your Control</title>
   <meta name="description" content="grihostiOS — Home • Land • Production. A governed operating system for property, land and productive estates in Bangladesh.">
+  <meta name="theme-color" content="#2C1430">
   <meta property="og:title" content="grihostiOS — Home • Land • Production">
   <meta property="og:description" content="আপনার জমি, আপনার নিয়ন্ত্রণ — Your Land, Your Control">
   <meta property="og:image" content="https://grihosti.xyz/assets/logo-on-light.png">
-  <meta property="og:image:width" content="2049">
-  <meta property="og:image:height" content="639">
-  <meta name="theme-color" content="#3B1E3F">
   <link rel="icon" href="assets/favicon.png" sizes="512x512">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
@@ -19,448 +17,514 @@
   <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* grihostiOS — Option 5 "Plum & Green" */
-      --gh-plum: #3B1E3F;
-      --gh-plum-deep: #2C1430;
-      --gh-mauve: #8B5CF6;
-      --gh-green: #22C55E;
-      --gh-green-deep: #15803D;
-      --gh-mint: #E9F7EF;
-      --gh-slate: #374151;
-      --gh-muted: #6B7280;
-      --gh-surface: #F7F9FA;
-      --gh-line: #DDE3E8;
-      --gh-white: #FFFFFF;
+      --plum: #3B1E3F; --plum-deep: #2C1430; --mauve: #8B5CF6;
+      --green: #22C55E; --green-deep: #15803D; --mint: #E9F7EF;
+      --slate: #374151; --muted: #6B7280; --surface: #F7F9FA; --line: #DDE3E8;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
+    html { scroll-behavior: smooth; }
     body {
-      font-family: 'Inter', 'Hind Siliguri', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-      background: var(--gh-surface);
-      color: var(--gh-slate);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
+      font-family: 'Inter', 'Hind Siliguri', system-ui, sans-serif;
+      background: var(--plum-deep); color: #fff;
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
     }
     .bn { font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; }
+    ::selection { background: var(--green); color: #06210F; }
 
-    a { color: inherit; }
+    /* ---------- progress rail ---------- */
+    .progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 100;
+      background: linear-gradient(90deg, var(--green), var(--mauve)); }
 
-    /* header */
-    header {
-      background: var(--gh-plum);
-      position: sticky; top: 0; z-index: 10;
-      box-shadow: 0 1px 0 rgba(255,255,255,.06);
+    /* ---------- nav ---------- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 90;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 28px; transition: background .3s, box-shadow .3s;
     }
-    .wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
-    .nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
-    .brand img { height: 40px; display: block; }
-    footer .brand img { height: 30px; margin-bottom: 10px; }
-    .nav-links { display: flex; gap: 22px; align-items: center; }
-    .nav-links a { color: #E8DCEB; text-decoration: none; font-size: 15px; font-weight: 500; }
-    .nav-links a:hover { color: var(--gh-green); }
-    .btn {
-      display: inline-block; text-decoration: none; font-weight: 700; font-size: 15px;
-      padding: 12px 22px; border-radius: 999px; transition: background .2s, transform .1s;
+    nav.solid { background: rgba(44,20,48,.92); backdrop-filter: blur(10px); box-shadow: 0 1px 0 rgba(255,255,255,.08); }
+    nav img { height: 38px; display: block; }
+    nav .links { display: flex; gap: 22px; align-items: center; }
+    nav .links a { color: #E8DCEB; text-decoration: none; font-size: 14.5px; font-weight: 500; }
+    nav .links a:hover { color: var(--green); }
+    nav .links .cta {
+      background: var(--green); color: #06210F; font-weight: 700;
+      padding: 10px 20px; border-radius: 999px;
     }
-    .btn:active { transform: translateY(1px); }
-    .btn-primary { background: var(--gh-green); color: #0B2016; }
-    .btn-primary:hover { background: #1DB754; }
-    .btn-ghost { border: 1.5px solid var(--gh-green); color: var(--gh-green); }
-    .btn-ghost:hover { background: rgba(34,197,94,.12); }
+    nav .links .cta:hover { color: #06210F; background: #1DB754; }
 
-    /* hero */
-    /* hero */
-    .hero {
-      background:
-        linear-gradient(rgba(44,20,48,.55), rgba(44,20,48,.82)),
-        url('assets/bd-home-soft.jpg') center 32% / cover no-repeat,
-        linear-gradient(160deg, var(--gh-plum) 0%, var(--gh-plum-deep) 100%);
-      color: #fff;
-      position: relative;
-      overflow: hidden;
+    /* ---------- hero ---------- */
+    .hero { position: relative; min-height: 100svh; display: flex; align-items: center; overflow: hidden; }
+    .hero-media { position: absolute; inset: 0; z-index: 0; }
+    .hero-media img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center 30%;
+      transform: scale(1.12); animation: heroDrift 26s ease-in-out infinite alternate;
+      opacity: .55;
     }
-    .hero::after {
-      content: ""; position: absolute; right: -120px; top: -140px;
-      width: 520px; height: 520px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(139,92,246,.35), transparent 70%);
-    }
-    .hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; padding-top: 88px; padding-bottom: 96px; position: relative; z-index: 1; }
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 13px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
-      color: var(--gh-green); margin-bottom: 18px;
-    }
-    .eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--gh-green); }
-    h1 { font-size: 52px; line-height: 1.08; font-weight: 800; letter-spacing: -.02em; }
-    h1 .accent { color: var(--gh-green); }
-    .tagline { font-size: 20px; color: #E8DCEB; margin-top: 18px; max-width: 540px; }
-    .tagline-bn { font-size: 22px; color: #fff; margin-top: 10px; }
-    .cta { display: flex; gap: 14px; margin-top: 34px; flex-wrap: wrap; }
-    .hero-card {
-      background: #FFFFFF; border: 1px solid rgba(255,255,255,.16);
-      border-radius: 20px; padding: 26px 26px 22px; display: flex; flex-direction: column; align-items: center; gap: 18px;
-      box-shadow: 0 24px 60px rgba(20,8,24,.35);
-    }
-    .hero-card img { width: 100%; max-width: 380px; }
-    .hero-card .shot {
-      width: 100%; border-radius: 12px; display: block;
-      box-shadow: 0 10px 26px rgba(59,30,63,.18);
-    }
-    .hero-card .caption {
-      display: flex; align-items: center; gap: 9px;
-      font-size: 13.5px; font-weight: 600; color: var(--gh-slate);
-    }
-    .hero-card .caption .bn-cap { font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; }
-    .hero-card .caption .live {
-      width: 8px; height: 8px; border-radius: 50%; background: var(--gh-green); flex: none;
-      box-shadow: 0 0 0 3px rgba(34,197,94,.18);
-    }
-    .pillars { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-    .pillars span {
-      font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 999px;
-      background: var(--gh-mint); color: var(--gh-green-deep);
-    }
-
-    /* sections */
-    section { padding: 88px 0; }
-    .section-head { text-align: center; max-width: 680px; margin: 0 auto 52px; }
-    .kicker { font-size: 13px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--gh-green-deep); }
-    h2 { font-size: 36px; line-height: 1.2; font-weight: 800; color: var(--gh-plum); margin-top: 10px; letter-spacing: -.01em; }
-    .lead { color: var(--gh-muted); margin-top: 12px; font-size: 17px; }
-
-    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-    .card {
-      background: var(--gh-white); border: 1px solid var(--gh-line); border-radius: 16px;
-      padding: 26px 24px; transition: transform .15s, box-shadow .15s, border-color .15s;
-    }
-    .card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(59,30,63,.10); border-color: #CFC4D6; }
-    .icon {
-      width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center;
-      background: var(--gh-mint); color: var(--gh-green-deep); font-size: 22px; margin-bottom: 16px;
-    }
-    .card h3 { font-size: 18px; font-weight: 700; color: var(--gh-plum); }
-    .card .bn-title { font-size: 17px; font-weight: 700; color: var(--gh-plum); margin-top: 2px; }
-    .card p { font-size: 15px; color: var(--gh-muted); margin-top: 10px; }
-
-    .scene { margin-top: 34px; }
-    .scene img {
-      width: 100%; max-height: 340px; object-fit: cover; display: block;
-      border-radius: 18px; border: 1px solid var(--gh-line);
-      box-shadow: 0 18px 44px rgba(59,30,63,.12);
-    }
-    .scene figcaption {
-      text-align: center; font-size: 14.5px; color: var(--gh-muted); margin-top: 12px;
-    }
-
-    /* life gallery */
-    .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .gallery figure {
-      background: var(--gh-white); border: 1px solid var(--gh-line); border-radius: 16px;
-      overflow: hidden; transition: transform .15s, box-shadow .15s;
-    }
-    .gallery figure:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(59,30,63,.10); }
-    .gallery img { width: 100%; aspect-ratio: 16 / 9.2; object-fit: cover; display: block; }
-    .gallery figcaption { padding: 14px 16px 16px; }
-    .gallery .t { font-size: 15.5px; font-weight: 700; color: var(--gh-plum); }
-    .gallery .d { font-size: 13.5px; color: var(--gh-muted); margin-top: 4px; line-height: 1.55; }
-
-    .band { background: var(--gh-plum); color: #fff; }
-    .band h2 { color: #fff; }
-    .band .kicker { color: var(--gh-green); }
-    .band .lead { color: #D9CBDD; }
-    .band .steps { position: relative; z-index: 1; }
-    .band .wrap { position: relative; }
-    .band .wrap::before {
-      content: ""; position: absolute; inset: 0; z-index: 0;
-      border-radius: 24px;
-      background:
-        linear-gradient(rgba(44,20,48,.86), rgba(44,20,48,.94)),
-        url('assets/bd-home.jpg') center 40% / cover no-repeat;
-      opacity: .5;
-    }
-    .band .wrap > * { position: relative; z-index: 1; }
-    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .step { border: 1px solid rgba(255,255,255,.14); border-radius: 16px; padding: 28px; background: rgba(255,255,255,.03); }
-    .step .n {
-      width: 36px; height: 36px; border-radius: 50%; background: var(--gh-green); color: #0B2016;
-      display: grid; place-items: center; font-weight: 800; margin-bottom: 14px;
-    }
-    .step h3 { font-size: 19px; color: #fff; }
-    .step p { color: #D9CBDD; font-size: 15px; margin-top: 8px; }
-
-    .cta-final { text-align: center; }
-    .cta-final .wrap { max-width: 760px; }
-    .cta-final .btn-primary { font-size: 17px; padding: 15px 30px; }
-    .cta-final p { color: var(--gh-muted); margin-top: 18px; font-size: 15px; }
-
-    footer { background: var(--gh-plum-deep); color: #CBB9CF; padding: 40px 0; font-size: 14px; }
-    footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
-    footer a { color: var(--gh-green); text-decoration: none; }
-    footer .bn { color: #fff; font-size: 15px; }
-
-    /* floating invitation button */
-    .fab {
-      position: fixed; right: 22px; bottom: 22px; z-index: 60;
-      display: inline-flex; align-items: center; gap: 11px;
-      padding: 15px 24px 15px 19px; border-radius: 999px;
-      background: linear-gradient(135deg, #22C55E 0%, #16A34A 52%, #8B5CF6 125%);
-      color: #06210F; font-weight: 800; font-size: 15px; line-height: 1.25;
-      text-decoration: none; overflow: hidden;
-      box-shadow: 0 14px 34px rgba(34,197,94,.42);
-      animation: fabPulse 2.6s ease-out infinite, fabBob 4.5s ease-in-out infinite;
-      transition: transform .18s ease, box-shadow .18s ease;
-    }
-    .fab:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 18px 44px rgba(34,197,94,.55); }
-    .fab:active { transform: translateY(0) scale(.99); }
-    .fab .txt { font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; }
-    .fab .dot {
-      width: 10px; height: 10px; border-radius: 50%; background: #06210F; flex: none;
-      animation: fabBlink 1.4s ease-in-out infinite;
-    }
-    .fab .arrow { font-weight: 700; transition: transform .18s ease; }
-    .fab:hover .arrow { transform: translateX(3px); }
-    .fab::after {
+    @keyframes heroDrift { from { transform: scale(1.12) translateY(0); } to { transform: scale(1.2) translateY(-3%); } }
+    .hero-media::after {
       content: ""; position: absolute; inset: 0;
-      background: linear-gradient(115deg, transparent 32%, rgba(255,255,255,.62) 50%, transparent 68%);
-      transform: translateX(-130%);
-      animation: fabShimmer 3s ease-in-out infinite;
+      background: linear-gradient(180deg, rgba(44,20,48,.72) 0%, rgba(44,20,48,.45) 45%, var(--plum-deep) 100%);
     }
-    @keyframes fabPulse {
-      0%   { box-shadow: 0 14px 34px rgba(34,197,94,.42), 0 0 0 0 rgba(34,197,94,.55); }
-      70%  { box-shadow: 0 14px 34px rgba(34,197,94,.42), 0 0 0 20px rgba(34,197,94,0); }
-      100% { box-shadow: 0 14px 34px rgba(34,197,94,.42), 0 0 0 0 rgba(34,197,94,0); }
+    .hero-inner { position: relative; z-index: 2; max-width: 1160px; margin: 0 auto; padding: 120px 28px 80px; width: 100%; }
+    .kicker {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-size: 12.5px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase;
+      color: var(--green); margin-bottom: 22px;
+      border: 1px solid rgba(34,197,94,.35); border-radius: 999px; padding: 8px 16px;
+      background: rgba(34,197,94,.08);
     }
-    @keyframes fabBob {
-      0%, 100% { transform: translateY(0); }
-      50%      { transform: translateY(-5px); }
+    .kicker::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+    h1 { font-size: clamp(44px, 8vw, 88px); line-height: 1.04; font-weight: 800; letter-spacing: -.025em; max-width: 900px; }
+    h1 .accent {
+      background: linear-gradient(92deg, var(--green) 10%, #6EE7A0 50%, var(--mauve) 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
     }
-    @keyframes fabShimmer {
-      0%   { transform: translateX(-130%); }
-      55%  { transform: translateX(130%); }
-      100% { transform: translateX(130%); }
-    }
-    @keyframes fabBlink {
-      0%, 100% { opacity: 1; }
-      50%      { opacity: .35; }
-    }
+    .hero-sub { font-size: clamp(17px, 2.2vw, 21px); color: #D9CBDD; margin-top: 26px; max-width: 620px; line-height: 1.65; }
+    .hero-bn { font-size: clamp(19px, 2.4vw, 24px); color: #fff; margin-top: 12px; }
+    .hero-cta { display: flex; gap: 14px; margin-top: 40px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 700; font-size: 16px;
+      padding: 16px 30px; border-radius: 999px; transition: transform .18s, box-shadow .18s, background .18s; }
+    .btn-primary { background: var(--green); color: #06210F; box-shadow: 0 12px 32px rgba(34,197,94,.35); }
+    .btn-primary:hover { transform: translateY(-2px); background: #1DB754; box-shadow: 0 16px 40px rgba(34,197,94,.45); }
+    .btn-ghost { border: 1.5px solid rgba(255,255,255,.3); color: #fff; }
+    .btn-ghost:hover { border-color: var(--green); color: var(--green); }
 
+    /* live stat bar */
+    .stats { display: flex; gap: 0; margin-top: 64px; flex-wrap: wrap;
+      border: 1px solid rgba(255,255,255,.14); border-radius: 20px; overflow: hidden;
+      background: rgba(255,255,255,.05); backdrop-filter: blur(8px); max-width: 780px; }
+    .stat { flex: 1 1 150px; padding: 24px 20px; border-right: 1px solid rgba(255,255,255,.1); }
+    .stat:last-child { border-right: 0; }
+    .stat .num { font-size: clamp(28px, 4vw, 40px); font-weight: 800; letter-spacing: -.02em; }
+    .stat .num em { font-style: normal; color: var(--green); }
+    .stat .lbl { font-size: 13px; color: #C9B8CE; margin-top: 4px; }
+
+    /* scroll hint */
+    .hint { position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); z-index: 2;
+      display: flex; flex-direction: column; align-items: center; gap: 8px; color: #C9B8CE; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+    .hint .mouse { width: 24px; height: 38px; border: 2px solid rgba(255,255,255,.4); border-radius: 14px; position: relative; }
+    .hint .mouse::after { content: ""; position: absolute; top: 7px; left: 50%; width: 4px; height: 8px; margin-left: -2px;
+      border-radius: 4px; background: var(--green); animation: wheel 1.8s infinite; }
+    @keyframes wheel { 0% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(12px); } }
+
+    /* ---------- reveal ---------- */
+    .reveal { opacity: 0; transform: translateY(34px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+    .reveal.in { opacity: 1; transform: none; }
+    .d1 { transition-delay: .1s; } .d2 { transition-delay: .2s; } .d3 { transition-delay: .3s; }
+
+    /* ---------- chapter strip ---------- */
+    .strip { position: relative; padding: 110px 28px; max-width: 1160px; margin: 0 auto; }
+    .chapter { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-bottom: 120px; }
+    .chapter:last-child { margin-bottom: 0; }
+    .chapter.flip .txt { order: 2; }
+    .chapter.flip .vis { order: 1; }
+    .chap-num { font-size: 13px; font-weight: 800; letter-spacing: .14em; color: var(--green); text-transform: uppercase; display: flex; align-items: center; gap: 12px; }
+    .chap-num::after { content: ""; height: 1px; flex: 1; background: linear-gradient(90deg, rgba(34,197,94,.5), transparent); }
+    .chapter h2 { font-size: clamp(30px, 4.6vw, 48px); line-height: 1.14; font-weight: 800; letter-spacing: -.02em; margin-top: 16px; }
+    .chapter p { color: #C9B8CE; font-size: 17px; line-height: 1.7; margin-top: 18px; max-width: 480px; }
+    .vis { border-radius: 22px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.45); border: 1px solid rgba(255,255,255,.1); }
+    .vis img { width: 100%; display: block; transition: transform .7s cubic-bezier(.2,.7,.2,1); }
+    .vis:hover img { transform: scale(1.045); }
+    .vis .cap { padding: 16px 20px; font-size: 14px; color: #C9B8CE; background: rgba(255,255,255,.04); }
+    .vis .cap strong { color: #fff; font-weight: 600; }
+
+    /* ---------- app demo ---------- */
+    .demo-wrap { position: relative; padding: 110px 28px; }
+    .demo { max-width: 1000px; margin: 0 auto; border-radius: 26px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,.12); background: linear-gradient(160deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      backdrop-filter: blur(10px); box-shadow: 0 40px 100px rgba(0,0,0,.5); }
+    .demo-bar { display: flex; align-items: center; gap: 8px; padding: 14px 18px; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .demo-bar .dot { width: 11px; height: 11px; border-radius: 50%; }
+    .demo-bar .url { margin-left: 12px; font-size: 12.5px; color: #A995AE; background: rgba(255,255,255,.06); border-radius: 8px; padding: 6px 14px; }
+    .demo-body { display: grid; grid-template-columns: 200px 1fr; min-height: 380px; }
+    .demo-side { border-right: 1px solid rgba(255,255,255,.08); padding: 18px 12px; display: flex; flex-direction: column; gap: 4px; }
+    .side-item { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-radius: 10px; font-size: 14px; color: #C9B8CE; cursor: pointer; border: 0; background: none; text-align: left; font-family: inherit; transition: background .15s, color .15s; }
+    .side-item:hover { background: rgba(255,255,255,.05); color: #fff; }
+    .side-item.on { background: rgba(139,92,246,.22); color: #fff; font-weight: 600; }
+    .demo-main { padding: 26px 30px; }
+    .demo-main h3 { font-size: 20px; font-weight: 700; }
+    .demo-main .sub { color: #A995AE; font-size: 13.5px; margin-top: 4px; }
+    .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; }
+    .tile { border: 1px solid rgba(255,255,255,.1); border-radius: 14px; padding: 18px; background: rgba(255,255,255,.04); }
+    .tile .v { font-size: 28px; font-weight: 800; }
+    .tile .v.green { color: var(--green); }
+    .tile .k { font-size: 12.5px; color: #A995AE; margin-top: 3px; }
+    .tile .delta { font-size: 12px; color: var(--green); margin-top: 8px; font-weight: 600; }
+    .activity { margin-top: 22px; }
+    .activity .row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.07); font-size: 14px; }
+    .activity .row:last-child { border: 0; }
+    .activity .when { margin-left: auto; color: #A995AE; font-size: 12.5px; }
+    .activity .ok { width: 26px; height: 26px; border-radius: 50%; background: rgba(34,197,94,.18); color: var(--green);
+      display: grid; place-items: center; font-size: 13px; flex: none; }
+    .demo-note { text-align: center; color: #A995AE; font-size: 13.5px; margin-top: 22px; }
+
+    /* ---------- gallery ---------- */
+    .gal-wrap { max-width: 1160px; margin: 0 auto; padding: 110px 28px; }
+    .sec-head { text-align: center; max-width: 640px; margin: 0 auto 56px; }
+    .sec-head .kick { font-size: 13px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; color: var(--green); }
+    .sec-head h2 { font-size: clamp(30px, 4.6vw, 46px); font-weight: 800; letter-spacing: -.02em; margin-top: 12px; }
+    .sec-head p { color: #C9B8CE; margin-top: 14px; font-size: 16.5px; line-height: 1.65; }
+    .gal { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .gal figure { position: relative; border-radius: 18px; overflow: hidden; border: 1px solid rgba(255,255,255,.1); cursor: pointer; }
+    .gal img { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+    .gal figure:hover img { transform: scale(1.06); }
+    .gal figcaption { position: absolute; inset: auto 0 0 0; padding: 40px 18px 16px;
+      background: linear-gradient(transparent, rgba(20,8,24,.92)); }
+    .gal .t { font-weight: 700; font-size: 15.5px; }
+    .gal .d { font-size: 12.5px; color: #D9CBDD; margin-top: 3px; line-height: 1.5; max-height: 0; overflow: hidden; transition: max-height .35s ease, margin .35s ease; }
+    .gal figure:hover .d { max-height: 80px; margin-top: 6px; }
+
+    /* ---------- rfp banner ---------- */
+    .rfp { max-width: 1160px; margin: 0 auto 110px; padding: 0 28px; }
+    .rfp-card { position: relative; overflow: hidden; border-radius: 26px; border: 1px solid rgba(34,197,94,.3);
+      background:
+        radial-gradient(600px 300px at 85% -10%, rgba(139,92,246,.35), transparent 65%),
+        linear-gradient(150deg, #3B1E3F, #2C1430);
+      padding: clamp(34px, 5vw, 60px); display: flex; align-items: center; justify-content: space-between; gap: 30px; flex-wrap: wrap; }
+    .rfp-card h2 { font-size: clamp(24px, 3.6vw, 38px); font-weight: 800; letter-spacing: -.02em; line-height: 1.2; max-width: 560px; }
+    .rfp-card h2 em { font-style: normal; color: var(--green); }
+    .rfp-card p { color: #C9B8CE; margin-top: 12px; max-width: 520px; }
+    .rfp-card .go { flex: none; }
+
+    /* ---------- footer ---------- */
+    footer { border-top: 1px solid rgba(255,255,255,.08); padding: 44px 28px; }
+    .foot { max-width: 1160px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .foot img { height: 30px; }
+    .foot .bn { font-size: 14.5px; color: #fff; }
+    .foot .en { font-size: 13px; color: #A995AE; margin-top: 3px; }
+    .foot a { color: var(--green); text-decoration: none; font-size: 14px; }
+
+    /* ---------- floating rfp button ---------- */
+    .fab { position: fixed; right: 22px; bottom: 22px; z-index: 80; display: inline-flex; align-items: center; gap: 11px;
+      padding: 15px 24px 15px 19px; border-radius: 999px; overflow: hidden; text-decoration: none;
+      background: linear-gradient(135deg, #22C55E 0%, #16A34A 52%, #8B5CF6 125%);
+      color: #06210F; font-weight: 800; font-size: 15px;
+      box-shadow: 0 14px 34px rgba(34,197,94,.42);
+      animation: fabPulse 2.6s ease-out infinite, fabBob 4.5s ease-in-out infinite; transition: transform .18s; }
+    .fab:hover { transform: translateY(-2px) scale(1.03); }
+    .fab .dot2 { width: 10px; height: 10px; border-radius: 50%; background: #06210F; animation: blink 1.4s infinite; }
+    .fab::after { content: ""; position: absolute; inset: 0;
+      background: linear-gradient(115deg, transparent 32%, rgba(255,255,255,.62) 50%, transparent 68%);
+      transform: translateX(-130%); animation: shimmer 3s infinite; }
+    @keyframes fabPulse { 0% { box-shadow: 0 14px 34px rgba(34,197,94,.42), 0 0 0 0 rgba(34,197,94,.55); }
+      70% { box-shadow: 0 14px 34px rgba(34,197,94,.42), 0 0 0 20px rgba(34,197,94,0); } 100% { box-shadow: 0 14px 34px rgba(34,197,94,.42); } }
+    @keyframes fabBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+    @keyframes shimmer { 0% { transform: translateX(-130%); } 55%,100% { transform: translateX(130%); } }
+    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+
+    /* ---------- responsive ---------- */
     @media (max-width: 960px) {
-      .hero .wrap { grid-template-columns: 1fr; padding-top: 56px; padding-bottom: 64px; }
-      h1 { font-size: 40px; }
-      .grid { grid-template-columns: repeat(2, 1fr); }
-      .steps { grid-template-columns: 1fr; }
-      .nav-links a:not(.btn) { display: none; }
-      .gallery { grid-template-columns: repeat(2, 1fr); }
+      .chapter { grid-template-columns: 1fr; gap: 28px; margin-bottom: 80px; }
+      .chapter.flip .txt { order: 1; } .chapter.flip .vis { order: 2; }
+      .demo-body { grid-template-columns: 1fr; }
+      .demo-side { flex-direction: row; overflow-x: auto; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.08); }
+      .side-item { white-space: nowrap; }
+      .gal { grid-template-columns: 1fr 1fr; }
+      nav .links a:not(.cta) { display: none; }
     }
     @media (max-width: 560px) {
-      .grid { grid-template-columns: 1fr; }
-      .gallery { grid-template-columns: 1fr; }
-      h1 { font-size: 34px; }
-      h2 { font-size: 28px; }
-      section { padding: 64px 0; }
-      .scene img { max-height: 220px; }
-      .fab {
-        right: 12px; bottom: 12px; left: 12px;
-        justify-content: center; padding: 14px 18px; font-size: 14px;
-      }
+      .gal { grid-template-columns: 1fr; }
+      .tiles { grid-template-columns: 1fr; }
+      .stat { flex: 1 1 40%; border-bottom: 1px solid rgba(255,255,255,.1); }
+      .fab { right: 12px; bottom: 12px; left: 12px; justify-content: center; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .fab, .fab .dot, .fab::after { animation: none; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+      html { scroll-behavior: auto; }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="wrap nav">
-      <a class="brand" href="#top" aria-label="grihostiOS home">
-        <img src="assets/logo-on-dark.png" alt="grihostiOS">
-      </a>
-      <nav class="nav-links">
-        <a href="#features">সুবিধা</a>
-        <a href="#how">কীভাবে কাজ করে</a>
-        <a href="#contact">যোগাযোগ</a>
-        <a class="btn btn-primary" href="#contact">শুরু করুন</a>
-      </nav>
+<div class="progress" id="progress"></div>
+
+<nav id="nav">
+  <a href="#top" aria-label="grihostiOS home"><img src="assets/logo-on-dark.png" alt="grihostiOS"></a>
+  <div class="links">
+    <a href="#story">গল্প</a>
+    <a href="#demo">ডেমো</a>
+    <a href="#life">জীবন</a>
+    <a class="cta bn" href="#contact">শুরু করুন</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-media"><img src="assets/bd-home-soft.jpg" alt="" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="kicker">Home • Land • Production</div>
+    <h1 class="bn reveal in">আপনার সম্পদ,<br><span class="accent">আপনার ভবিষ্যৎ</span> —<br>এক প্ল্যাটফর্মে।</h1>
+    <p class="hero-sub reveal in d1">One operating system for property, land and productive estates — governed, transparent and built for Bangladesh.</p>
+    <p class="hero-bn bn reveal in d1">জমি • বাড়ি • ভাড়া • উৎপাদন — সব এক প্ল্যাটফর্মে।</p>
+    <div class="hero-cta reveal in d2">
+      <a class="btn btn-primary bn" href="#contact">এখনই শুরু করুন</a>
+      <a class="btn btn-ghost bn" href="#story">গল্পটা দেখুন</a>
     </div>
-  </header>
+    <div class="stats reveal in d3" role="list">
+      <div class="stat" role="listitem"><div class="num"><span data-count="28">0</span></div><div class="lbl bn">নথিভুক্ত সম্পত্তি</div></div>
+      <div class="stat" role="listitem"><div class="num"><span data-count="12">0</span></div><div class="lbl bn">উৎপাদন ইউনিট</div></div>
+      <div class="stat" role="listitem"><div class="num">৳<span data-count="46000">0</span></div><div class="lbl bn">ভাড়া আদায় (মাসিক)</div></div>
+      <div class="stat" role="listitem"><div class="num"><span data-count="100">0</span><em>%</em></div><div class="lbl bn">রসিদ যাচাইযোগ্য</div></div>
+    </div>
+  </div>
+  <div class="hint" aria-hidden="true"><div class="mouse"></div>scroll</div>
+</header>
 
-  <main id="top">
-    <div class="hero">
-      <div class="wrap">
-        <div>
-          <div class="eyebrow">Home • Land • Production</div>
-          <h1 class="bn">আপনার সম্পদ,<br><span class="accent">আপনার ভবিষ্যৎ</span></h1>
-          <p class="tagline">One operating system for property, land and productive estates — governed, transparent and built for Bangladesh.</p>
-          <p class="tagline-bn bn">জমি • বাড়ি • ভাড়া • উৎপাদন — সব এক প্ল্যাটফর্মে।</p>
-          <div class="cta">
-            <a class="btn btn-primary" href="#contact">এখনই শুরু করুন</a>
-            <a class="btn btn-ghost" href="#features">আরও জানুন</a>
-          </div>
-        </div>
-        <div class="hero-card">
-          <img src="assets/logo-on-light.png" alt="grihostiOS — Home • Land • Production">
-          <img class="shot" src="assets/scene-lounge.jpg" alt="A family and tenants gathered in a shared lounge — the people grihostiOS is built for" loading="lazy">
-          <img class="shot" src="assets/bd-dashboard.jpg" alt="grihostiOS dashboard — properties, production units and rent collection at a glance" loading="lazy">
-          <div class="caption">
-            <span class="live" aria-hidden="true"></span>
-            <span class="bn-cap">স্টিএফএল হাউসের ভাড়া আজ সংগ্রহ হয়েছে</span>
-          </div>
-          <div class="pillars">
-            <span>Property</span><span>Land</span><span>Rental</span><span>Production</span><span>Fisheries</span>
-          </div>
-        </div>
+<main>
+  <!-- story chapters -->
+  <div class="strip" id="story">
+    <div class="chapter reveal">
+      <div class="txt">
+        <div class="chap-num">Chapter 01 — বাড়ি</div>
+        <h2 class="bn">প্রতিটি বাড়ির একটি স্পষ্ট হিসাব থাকবে</h2>
+        <p class="bn">ভাড়াটিয়া, চুক্তি, রসিদ — লিখিত-অলিখিত সব ঝামেলার অবসান। বাড়িওয়ালা ও ভাড়াটিয়া দুজনই দেখবেন একই সত্য।</p>
+      </div>
+      <div class="vis">
+        <img src="assets/scene-lounge.jpg" alt="Tenants and owner sharing a lounge — transparent rental relationships" loading="lazy">
+        <div class="cap bn"><strong>স্টিএফএল হাউস —</strong> ৬টি ইউনিটের প্রতিটি ভাড়া ডিজিটাল রসিদে সংগৃহীত</div>
       </div>
     </div>
-
-    <section id="features">
-      <div class="wrap">
-        <div class="section-head">
-          <div class="kicker">Platform</div>
-          <h2 class="bn">সবকিছু এক জায়গায়</h2>
-          <p class="lead">Land records, tenancy, production and settlement — connected, so every record is traceable.</p>
-        </div>
-        <div class="grid">
-          <div class="card">
-            <div class="icon">🏠</div>
-            <h3>Property</h3>
-            <div class="bn-title bn">সম্পত্তি ব্যবস্থাপনা</div>
-            <p>Register properties, units and tenants in one ledger.</p>
-          </div>
-          <div class="card">
-            <div class="icon">🗺️</div>
-            <h3>Land</h3>
-            <div class="bn-title bn">জমির রেকর্ড</div>
-            <p>Parcels, boundaries and survey references, mapped and governed.</p>
-          </div>
-          <div class="card">
-            <div class="icon">📄</div>
-            <h3>Agreements</h3>
-            <div class="bn-title bn">ই-চুক্তিপত্র ও রসিদ</div>
-            <p>Bilingual agreements and verifiable e-receipts for every payment.</p>
-          </div>
-          <div class="card">
-            <div class="icon">🌾</div>
-            <h3>Production</h3>
-            <div class="bn-title bn">কৃষি ও মৎস্য</div>
-            <p>Crop seasons, sharecropping, fisheries batches and 50/50 settlements.</p>
-          </div>
-        </div>
-        <figure class="scene">
-          <img src="assets/bd-home.jpg" alt="A modern Bangladeshi home at dusk — the kind of property grihostiOS helps you govern" loading="lazy">
-          <figcaption class="bn">বাড়ি, জমি আর উৎপাদন — বাংলাদেশের জন্যই তৈরি</figcaption>
-        </figure>
+    <div class="chapter flip reveal">
+      <div class="txt">
+        <div class="chap-num">Chapter 02 — জমি</div>
+        <h2 class="bn">জমির দলিল থেকে দখল — সব এক সুতোয়</h2>
+        <p class="bn">প্লট, সীমানা, জরিপ রেকর্ড আর বর্গা চাষি — সময়ের সাথে সব রেকর্ড সংযুক্ত, যাচাইযোগ্য ও নিরাপদ।</p>
       </div>
-    </section>
-
-    <section id="life">
-      <div class="wrap">
-        <div class="section-head">
-          <div class="kicker">Made for Bangladeshi life</div>
-          <h2 class="bn">মানুষের জীবনের কথা ভেবে তৈরি</h2>
-          <p class="lead">From shared kitchens to harvest evenings — grihostiOS is designed around how families, farmers and communities actually live and work.</p>
-        </div>
-        <div class="gallery">
-          <figure>
-            <img src="assets/scene-farmers.jpg" alt="Farmers and community members sharing a meal after a day in the fields" loading="lazy">
-            <figcaption>
-              <div class="t bn">কৃষক ও কমিউনিটি</div>
-              <div class="d bn">বর্গা চাষি, ফসলের হিসাব আর উৎসব — সবাই মিলে, স্বচ্ছভাবে।</div>
-            </figcaption>
-          </figure>
-          <figure>
-            <img src="assets/scene-harvest.jpg" alt="Families resting together in a vegetable garden after harvest" loading="lazy">
-            <figcaption>
-              <div class="t bn">উৎপাদন ও ফসল</div>
-              <div class="d bn">প্রতিটি ফসলের মৌসুম, হিসাব ও নিষ্পত্তি — এক জায়গায়।</div>
-            </figcaption>
-          </figure>
-          <figure>
-            <img src="assets/scene-terrace.jpg" alt="People gathering on a rooftop terrace garden between city buildings" loading="lazy">
-            <figcaption>
-              <div class="t bn">ছাদ বাগান ও ছাদ ভাড়া</div>
-              <div class="d bn">শহরের ছাদেও উৎপাদন — হিসাব থাকবে আপনার হাতে।</div>
-            </figcaption>
-          </figure>
-          <figure>
-            <img src="assets/scene-lounge.jpg" alt="Young professionals working together on laptops in a shared lounge" loading="lazy">
-            <figcaption>
-              <div class="t bn">শেয়ার্ড বাসা ও ভাড়াটিয়া</div>
-              <div class="d bn">ভাড়া, চুক্তি ও রসিদ — বাড়িওয়ালা ও ভাড়াটিয়ার জন্য সমান স্বচ্ছ।</div>
-            </figcaption>
-          </figure>
-          <figure>
-            <img src="assets/scene-kitchen.jpg" alt="A couple cooking together in a bright shared kitchen" loading="lazy">
-            <figcaption>
-              <div class="t bn">শেয়ার্ড কিচেন ও ডাইনিং</div>
-              <div class="d bn">মিলিত থাকার খরচ, ভাগাভাগি — বিরোধ নয়, স্পষ্ট হিসাব।</div>
-            </figcaption>
-          </figure>
-          <figure>
-            <img src="assets/scene-urban-farm.jpg" alt="A woman tending aquaponics beds beside city buildings" loading="lazy">
-            <figcaption>
-              <div class="t bn">আরবান ফার্মিং ও মৎস্য</div>
-              <div class="d bn">শহরের মাঝেই মাছ ও সবজি — প্রতিটি ব্যাচের রেকর্ড ডিজিটাল।</div>
-            </figcaption>
-          </figure>
-        </div>
-
-    <section class="band" id="how">
-      <div class="wrap">
-        <div class="section-head">
-          <div class="kicker">How it works</div>
-          <h2 class="bn">তিন ধাপে শুরু করুন</h2>
-        </div>
-        <div class="steps">
-          <div class="step">
-            <div class="n">1</div>
-            <h3 class="bn">সম্পদ যুক্ত করুন</h3>
-            <p>Add your property or land with its basic records and photos.</p>
-          </div>
-          <div class="step">
-            <div class="n">2</div>
-            <h3 class="bn">চুক্তি তৈরি করুন</h3>
-            <p>Create a bilingual agreement and sign it digitally with both parties.</p>
-          </div>
-          <div class="step">
-            <div class="n">3</div>
-            <h3 class="bn">পর্যবেক্ষণ করুন</h3>
-            <p>Track rent, receipts, harvests and obligations from one dashboard.</p>
-          </div>
-        </div>
+      <div class="vis">
+        <img src="assets/scene-home-land.jpg" alt="Home and land side by side — records connected" loading="lazy">
+        <div class="cap bn"><strong>পার্সেল ২৭/বি —</strong> দলিল, মৌজা ম্যাপ ও বর্তমান দখল — এক স্ক্রিনে</div>
       </div>
-    </section>
-
-    <section class="cta-final" id="contact">
-      <div class="wrap">
-        <div class="kicker">Get started</div>
-        <h2 class="bn" style="margin-top:10px">আজই আপনার সম্পদ নিয়ন্ত্রণে নিন</h2>
-        <p class="lead bn">আপনার জমি, আপনার নিয়ন্ত্রণ — Your Land, Your Control.</p>
-        <div style="margin-top:28px">
-          <a class="btn btn-primary" href="mailto:hello@grihosti.xyz">hello@grihosti.xyz</a>
-        </div>
-        <p>Bangladesh-first • Bangla & English • Your data stays yours</p>
+    </div>
+    <div class="chapter reveal">
+      <div class="txt">
+        <div class="chap-num">Chapter 03 — উৎপাদন</div>
+        <h2 class="bn">ফসল, মাছ ও ৫০-৫০ নিষ্পত্তি</h2>
+        <p class="bn">মৌসুম শুরু থেকে বিক্রি পর্যন্ত প্রতিটি ধাপ রেকর্ডে। বর্গা চাষির সাথে নিষ্পত্তি হবে গণনা-নির্ভর, মুখের কথায় নয়।</p>
       </div>
-    </section>
-  </main>
+      <div class="vis">
+        <img src="assets/scene-harvest.jpg" alt="Families after harvest — 50/50 settlements computed fairly" loading="lazy">
+        <div class="cap bn"><strong>মৌসুম আমন ১৪৩৩ —</strong> ৯০% নিষ্পত্তি সম্পন্ন, প্রতিটি হিসাব সংরক্ষিত</div>
+      </div>
+    </div>
+  </div>
 
-  <footer>
-    <div class="wrap">
+  <!-- interactive app demo -->
+  <div class="demo-wrap" id="demo">
+    <div class="sec-head reveal">
+      <div class="kick">Interactive preview</div>
+      <h2 class="bn">ড্যাশবোর্ডটা নিজেই ঘুরে দেখুন</h2>
+      <p>Click through the actual grihostiOS workspace — every number below is computed from a live mini-ledger.</p>
+    </div>
+    <div class="demo reveal d1">
+      <div class="demo-bar">
+        <span class="dot" style="background:#FF5F57"></span><span class="dot" style="background:#FEBC2E"></span><span class="dot" style="background:#28C840"></span>
+        <span class="url">app.grihosti.xyz / overview</span>
+      </div>
+      <div class="demo-body">
+        <div class="demo-side" role="tablist">
+          <button class="side-item on" data-tab="overview" role="tab">🏠 Overview</button>
+          <button class="side-item" data-tab="properties" role="tab">🏢 Properties</button>
+          <button class="side-item" data-tab="land" role="tab">🗺️ Land</button>
+          <button class="side-item" data-tab="production" role="tab">🌾 Production</button>
+          <button class="side-item" data-tab="finance" role="tab">📊 Finance</button>
+        </div>
+        <div class="demo-main" id="demoMain"><!-- filled by JS --></div>
+      </div>
+    </div>
+    <p class="demo-note bn reveal">※ প্রাথমিক কনসেপ্ট ভিজ্যুয়াল — চূড়ান্ত পণ্যের ইন্টারফেস প্রকাশের সময় পরিবর্তিত হতে পারে।</p>
+  </div>
+
+  <!-- life gallery -->
+  <div class="gal-wrap" id="life">
+    <div class="sec-head reveal">
+      <div class="kick">Made for Bangladeshi life</div>
+      <h2 class="bn">মানুষের জীবনের কথা ভেবে তৈরি</h2>
+      <p>From shared kitchens to harvest evenings — designed around how families, farmers and communities actually live and work.</p>
+    </div>
+    <div class="gal reveal d1">
+      <figure><img src="assets/scene-farmers.jpg" alt="Farmers sharing a meal" loading="lazy"><figcaption><div class="t bn">কৃষক ও কমিউনিটি</div><div class="d bn">বর্গা চাষি, ফসলের হিসাব আর উৎসব — সবাই মিলে, স্বচ্ছভাবে।</div></figcaption></figure>
+      <figure><img src="assets/scene-harvest.jpg" alt="Families resting after harvest" loading="lazy"><figcaption><div class="t bn">উৎপাদন ও ফসল</div><div class="d bn">প্রতিটি মৌসুম, হিসাব ও নিষ্পত্তি — এক জায়গায়।</div></figcaption></figure>
+      <figure><img src="assets/scene-terrace.jpg" alt="Rooftop garden gathering" loading="lazy"><figcaption><div class="t bn">ছাদ বাগান ও ছাদ ভাড়া</div><div class="d bn">শহরের ছাদেও উৎপাদন — হিসাব আপনার হাতে।</div></figcaption></figure>
+      <figure><img src="assets/scene-lounge.jpg" alt="Young professionals in shared lounge" loading="lazy"><figcaption><div class="t bn">শেয়ার্ড বাসা ও ভাড়াটিয়া</div><div class="d bn">ভাড়া, চুক্তি ও রসিদ — সবার জন্য সমান স্বচ্ছ।</div></figcaption></figure>
+      <figure><img src="assets/scene-kitchen.jpg" alt="Couple cooking in shared kitchen" loading="lazy"><figcaption><div class="t bn">শেয়ার্ড কিচেন</div><div class="d bn">মিলিত থাকার খরচ ভাগাভাগি — স্পষ্ট হিসাবে।</div></figcaption></figure>
+      <figure><img src="assets/scene-urban-farm.jpg" alt="Woman tending aquaponics" loading="lazy"><figcaption><div class="t bn">আরবান ফার্মিং</div><div class="d bn">মাছ ও সবজি — প্রতিটি ব্যাচের রেকর্ড ডিজিটাল।</div></figcaption></figure>
+    </div>
+  </div>
+
+  <!-- rfp banner -->
+  <div class="rfp" id="rfp">
+    <div class="rfp-card reveal">
       <div>
-        <img class="brand" src="assets/logo-on-dark.png" alt="grihostiOS" style="height:30px;display:block;margin-bottom:10px">
-        <div class="bn">আপনার জমি, আপনার নিয়ন্ত্রণ</div>
-        <div>© 2026 GrihostiOS · Engineered in Malaysia for Bangladesh</div>
+        <h2 class="bn">১,৬৯২ বর্গফুটে স্মার্ট <em>Mixed-Use Complex</em>-এর নকশা চাই</h2>
+        <p class="bn">Architectural Design &amp; Engineering Proposal — যোগ্য স্থপতি ও কনসালট্যান্টদের নিকট হতে প্রস্তাব আহ্বান করা হচ্ছে।</p>
       </div>
-      <div><a href="https://grihosti.xyz">grihosti.xyz</a></div>
+      <div class="go">
+        <a class="btn btn-primary bn" href="/architecture-design-proposal">বিস্তারিত দেখুন →</a>
+      </div>
+    </div>
+  </div>
+
+  <footer id="contact">
+    <div class="foot">
+      <div>
+        <img src="assets/logo-on-dark.png" alt="grihostiOS">
+        <div class="bn" style="margin-top:12px">আপনার জমি, আপনার নিয়ন্ত্রণ</div>
+        <div class="en">© 2026 GrihostiOS · Engineered in Malaysia for Bangladesh · <a href="mailto:hello@grihosti.xyz">hello@grihosti.xyz</a></div>
+      </div>
+      <a href="/architecture-design-proposal" class="bn">স্থাপত্য নকশা প্রস্তাব আহ্বান →</a>
     </div>
   </footer>
+</main>
 
-  <a class="fab" href="/architecture-design-proposal" aria-label="স্থাপত্য নকশা প্রস্তাব আহ্বান — বিস্তারিত দেখুন">
-    <span class="dot" aria-hidden="true"></span>
-    <span class="txt">স্থাপত্য নকশা প্রস্তাব আহ্বান</span>
-    <span class="arrow" aria-hidden="true">→</span>
-  </a>
+<a class="fab" href="/architecture-design-proposal" aria-label="স্থাপত্য নকশা প্রস্তাব আহ্বান">
+  <span class="dot2" aria-hidden="true"></span>
+  <span class="bn">স্থাপত্য নকশা প্রস্তাব আহ্বান</span>
+</a>
 
+<script>
+(function () {
+  "use strict";
+  var $ = function (s, c) { return (c || document).querySelector(s); };
+  var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+
+  /* nav solidify + progress rail */
+  var nav = $("#nav"), prog = $("#progress");
+  function onScroll() {
+    var y = window.scrollY;
+    nav.classList.toggle("solid", y > 40);
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    prog.style.width = (h > 0 ? (y / h) * 100 : 0) + "%";
+  }
+  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+  /* reveal on scroll */
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { threshold: .14 });
+  $$(".reveal").forEach(function (el) { io.observe(el); });
+
+  /* count-up stats */
+  var counted = false;
+  var statIO = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting || counted) return;
+      counted = true;
+      $$("[data-count]").forEach(function (el) {
+        var end = +el.getAttribute("data-count"), t0 = null, dur = 1600;
+        function step(t) {
+          if (!t0) t0 = t;
+          var p = Math.min((t - t0) / dur, 1);
+          p = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(end * p).toLocaleString("en-IN");
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    });
+  }, { threshold: .4 });
+  var stats = $(".stats"); if (stats) statIO.observe(stats);
+
+  /* mini-ledger powering the demo */
+  var DATA = {
+    overview: {
+      title: "Overview", sub: "সব সম্পদ এক নজরে",
+      tiles: [
+        { v: "28", k: "Properties", d: "+12% এই মাসে", green: false },
+        { v: "12", k: "Production Units", d: "+8% এই মাসে", green: true },
+        { v: "৳46,000", k: "Rent collected (Oct)", d: "৩৬টি রসিদ যাচাইকৃত", green: true },
+        { v: "50/50", k: "Settlement ratio", d: "আমন ১৪৩৩ মৌসুম", green: false }
+      ],
+      activity: [
+        { t: "স্টিএফএল হাউস — ভাড়া সংগ্রহ", w: "আজ", ok: true },
+        { t: "পার্সেল ২৭/বি — দলিল যাচাই", w: "গতকাল", ok: true },
+        { t: "মৎস্য ব্যাচ #৪১ — বিক্রি নিষ্পত্তি", w: "৩ দিন আগে", ok: true }
+      ]
+    },
+    properties: {
+      title: "Properties", sub: "ভবন ও ইউনিট ব্যবস্থাপনা",
+      tiles: [
+        { v: "6", k: "Units — স্টিএফএল হাউস", d: "5 occupied, 1 vacant", green: false },
+        { v: "৳18,500", k: "Monthly rent roll", d: "সব রসিদ ডিজিটাল", green: true },
+        { v: "2", k: "Active agreements", d: "দ্বিভাষিক ই-চুক্তিপত্র", green: false },
+        { v: "0", k: "Overdue", d: "কোনো বকেয়া নেই", green: true }
+      ],
+      activity: [
+        { t: "ইউনিট ৩বি — নতুন চুক্তি স্বাক্ষর", w: "আজ", ok: true },
+        { t: "ইউনিট ১ক — মাসিক ভাড়া আদায়", w: "আজ", ok: true },
+        { t: "ইউনিট ২ক — রসিদ QR যাচাই", w: "গতকাল", ok: true }
+      ]
+    },
+    land: {
+      title: "Land", sub: "জমি ও দলিল রেকর্ড",
+      tiles: [
+        { v: "3", k: "Parcels tracked", d: "মোট ১,৬৯২+ বর্গফুট", green: false },
+        { v: "২৭/বি", k: "Latest verified deed", d: "মৌজা ম্যাপ সংযুক্ত", green: true },
+        { v: "1", k: "Sharecropper (বর্গা)", d: "চুক্তিকৃত চাষি", green: false },
+        { v: "100%", k: "Boundary records", d: "জরিপ রেফারেন্স সহ", green: true }
+      ],
+      activity: [
+        { t: "পার্সেল ২৭/বি — RS খতিয়ান মিলকরণ", w: "২ দিন আগে", ok: true },
+        { t: "বর্গা চুক্তি — মৌসুম হালনাগাদ", w: "৫ দিন আগে", ok: true },
+        { t: "সীমানা জরিপ রেফারেন্স সংরক্ষণ", w: "১ সপ্তাহ আগে", ok: true }
+      ]
+    },
+    production: {
+      title: "Production", sub: "ফসল ও মৎস্য ব্যবস্থাপনা",
+      tiles: [
+        { v: "12", k: "Active batches", d: "৮ সবজি + ৪ মৎস্য", green: false },
+        { v: "410 kg", k: "Harvest this season", d: "আমন ১৪৩৩", green: true },
+        { v: "৳21,300", k: "Sales settled", d: "৫০-৫০ নিষ্পত্তি", green: true },
+        { v: "#৪১", k: "Fish batch", d: " tilapia — ৬ মাস", green: false }
+      ],
+      activity: [
+        { t: "মৎস্য ব্যাচ #৪১ — ওজন রেকর্ড", w: "আজ", ok: true },
+        { t: "সবজি প্লট ২ — সেচ লগ", w: "গতকাল", ok: true },
+        { t: "ফসল বিক্রি — নিষ্পত্তি সম্পন্ন", w: "৩ দিন আগে", ok: true }
+      ]
+    },
+    finance: {
+      title: "Finance", sub: "আয়-ব্যয় ও রসিদ",
+      tiles: [
+        { v: "৳46,000", k: "In — October", d: "৩৬টি ডিজিটাল রসিদ", green: true },
+        { v: "৳12,700", k: "Out — maintenance", d: "৬টি প্রতিষ্ঠান বিল", green: false },
+        { v: "৳33,300", k: "Net", d: "সব লেনদেন যাচাইযোগ্য", green: true },
+        { v: "QR", k: "Receipt verification", d: "প্রতিটি রসিদে স্বাক্ষর", green: false }
+      ],
+      activity: [
+        { t: "বিকাশ — ভাড়া আদায় ৳6,200", w: "আজ", ok: true },
+        { t: "মেরামত বিল — প্লাম্বার ৳1,800", w: "গতকাল", ok: true },
+        { t: "নগদ — ফসল বিক্রি ৳9,400", w: "৩ দিন আগে", ok: true }
+      ]
+    }
+  };
+
+  function render(tab) {
+    var d = DATA[tab]; if (!d) return;
+    var html = '<h3>' + d.title + '</h3><div class="sub bn">' + d.sub + '</div><div class="tiles">';
+    d.tiles.forEach(function (t) {
+      html += '<div class="tile"><div class="v' + (t.green ? ' green' : '') + '">' + t.v + '</div><div class="k bn">' + t.k + '</div><div class="delta bn">' + t.d + '</div></div>';
+    });
+    html += '</div><div class="activity">';
+    d.activity.forEach(function (a) {
+      html += '<div class="row"><span class="ok">✓</span><span class="bn">' + a.t + '</span><span class="when bn">' + a.w + '</span></div>';
+    });
+    html += '</div>';
+    var m = $("#demoMain");
+    m.innerHTML = html;
+    m.style.animation = "none"; void m.offsetWidth; m.style.animation = "";
+  }
+  $$(".side-item").forEach(function (b) {
+    b.addEventListener("click", function () {
+      $$(".side-item").forEach(function (x) { x.classList.remove("on"); });
+      b.classList.add("on");
+      render(b.getAttribute("data-tab"));
+    });
+  });
+  render("overview");
+
+  /* count-up inside demo tiles on first paint is native via render */
+})();
+</script>
 </body>
 </html>
