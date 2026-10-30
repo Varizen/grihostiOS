@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>১,৬৯২ বর্গফুটে স্মার্ট Mixed-Use Complex-এর নকশা চাই — grihostiOS</title>
-    <meta name="description" content="১,৬৯২ বর্গফুট জমির উপর ২-তলা Semi-Commercial + Residential Mixed-Use Complex-এর জন্য Architectural Design & Engineering প্রস্তাব আহ্বান।">
-  <meta name="theme-color" content="#3B1E3F">
+  <meta name="description" content="১,৬৯২ বর্গফুট জমির উপর ২-তলা Semi-Commercial + Residential Mixed-Use Complex-এর জন্য Architectural Design & Engineering প্রস্তাব আহ্বান।">
+  <meta name="theme-color" content="#2C1430">
   <meta property="og:title" content="১,৬৯২ বর্গফুটে স্মার্ট Mixed-Use Complex-এর নকশা চাই — grihostiOS">
   <meta property="og:description" content="২-তলা Semi-Commercial + Residential Mixed-Use Complex — Architectural Design & Engineering প্রস্তাব আহ্বান।">
   <meta property="og:image" content="https://grihosti.xyz/assets/logo-on-light.png">
@@ -17,459 +17,313 @@
   <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* grihostiOS — Option 5 "Plum & Green" */
-      --gh-plum: #3B1E3F;
-      --gh-plum-deep: #2C1430;
-      --gh-mauve: #8B5CF6;
-      --gh-green: #22C55E;
-      --gh-green-deep: #15803D;
-      --gh-mint: #E9F7EF;
-      --gh-slate: #374151;
-      --gh-muted: #6B7280;
-      --gh-surface: #F7F9FA;
-      --gh-line: #DDE3E8;
-      --gh-white: #FFFFFF;
+      --plum: #3B1E3F; --plum-deep: #2C1430; --mauve: #8B5CF6;
+      --green: #22C55E; --green-deep: #15803D; --mint: #E9F7EF;
+      --slate: #374151; --muted: #6B7280; --line: #DDE3E8;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Inter', 'Hind Siliguri', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-      background: var(--gh-surface);
-      color: var(--gh-slate);
-      line-height: 1.75;
-      -webkit-font-smoothing: antialiased;
-    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', 'Hind Siliguri', system-ui, sans-serif; background: var(--plum-deep); color: #fff; -webkit-font-smoothing: antialiased; }
     .bn { font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; }
-    a { color: inherit; }
+    ::selection { background: var(--green); color: #06210F; }
 
-    .wrap { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+    .progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 100; background: linear-gradient(90deg, var(--green), var(--mauve)); }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 90; display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 28px; transition: background .3s, box-shadow .3s; }
+    nav.solid { background: rgba(44,20,48,.92); backdrop-filter: blur(10px); box-shadow: 0 1px 0 rgba(255,255,255,.08); }
+    nav img { height: 36px; }
+    nav .links a { color: #E8DCEB; text-decoration: none; font-size: 14.5px; font-weight: 500; }
+    nav .links a:hover { color: var(--green); }
 
-    /* header */
-    header {
-      background: var(--gh-plum);
-      position: sticky; top: 0; z-index: 10;
-      box-shadow: 0 1px 0 rgba(255,255,255,.06);
-    }
-    .nav { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 16px; }
-    .brand img { height: 36px; display: block; }
-    .nav-links { display: flex; gap: 18px; align-items: center; }
-    .nav-links a { color: #E8DCEB; text-decoration: none; font-size: 15px; font-weight: 500; }
-    .nav-links a:hover { color: var(--gh-green); }
+    .hero { position: relative; padding: 150px 28px 90px; text-align: center; overflow: hidden; }
+    .hero::before { content: ""; position: absolute; inset: 0;
+      background: radial-gradient(700px 380px at 50% -10%, rgba(139,92,246,.4), transparent 65%); }
+    .hero > * { position: relative; z-index: 1; }
+    .pill { display: inline-flex; align-items: center; gap: 9px; font-size: 12.5px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--green); border: 1px solid rgba(34,197,94,.35); border-radius: 999px; padding: 8px 18px;
+      background: rgba(34,197,94,.08); }
+    .pill::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+    h1 { font-size: clamp(34px, 6vw, 64px); font-weight: 800; line-height: 1.12; letter-spacing: -.02em; margin: 26px auto 0; max-width: 860px; }
+    h1 .accent { background: linear-gradient(92deg, var(--green), #6EE7A0 55%, var(--mauve)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .lede { color: #C9B8CE; font-size: clamp(16px, 2vw, 19px); max-width: 700px; margin: 22px auto 0; line-height: 1.7; }
+    .hero-cta { display: flex; gap: 14px; justify-content: center; margin-top: 38px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 700; font-size: 16px;
+      padding: 15px 30px; border-radius: 999px; transition: transform .18s, box-shadow .18s; font-family: 'Hind Siliguri', sans-serif; }
+    .btn-primary { background: var(--green); color: #06210F; box-shadow: 0 12px 32px rgba(34,197,94,.35); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(34,197,94,.45); }
+    .btn-ghost { border: 1.5px solid rgba(255,255,255,.3); color: #fff; }
+    .btn-ghost:hover { border-color: var(--green); color: var(--green); }
+    .deadline { margin-top: 26px; color: #C9B8CE; font-size: 14px; }
+    .deadline strong { color: var(--green); }
 
-    /* hero */
-    .hero {
-      background: linear-gradient(160deg, var(--gh-plum) 0%, var(--gh-plum-deep) 100%);
-      color: #fff; padding: 56px 0 64px; position: relative; overflow: hidden;
-    }
-    .hero::after {
-      content: ""; position: absolute; right: -140px; top: -160px;
-      width: 480px; height: 480px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(139,92,246,.32), transparent 70%);
-    }
-    .hero .wrap { position: relative; z-index: 1; }
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 13px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
-      color: var(--gh-green); margin-bottom: 16px;
-    }
-    .eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--gh-green); }
-    .hero h1 { font-size: 40px; line-height: 1.25; font-weight: 800; letter-spacing: -.01em; }
-    .hero h1 .accent { color: var(--gh-green); }
-    .hero .sub { font-size: 19px; color: #D9CBDD; margin-top: 18px; max-width: 720px; }
-    .hero-cta { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; }
-    .btn-cta, .btn-brief {
-      display: inline-block; text-decoration: none; font-weight: 700; font-size: 15px;
-      padding: 13px 26px; border-radius: 999px;
-      font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
-    }
-    .btn-cta { background: var(--gh-green); color: #0B2016; }
-    .btn-cta:hover { background: #1DB754; }
-    .btn-brief { border: 1.5px solid var(--gh-green); color: var(--gh-green); }
-    .btn-brief:hover { background: rgba(34,197,94,.12); }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 0 28px; }
+    main { padding-bottom: 60px; }
 
-    /* meta card */
-    .meta {
-      background: var(--gh-white); border: 1px solid var(--gh-line); border-radius: 18px;
-      padding: 8px 26px; margin-top: -34px; position: relative; z-index: 2;
-      box-shadow: 0 18px 44px rgba(59,30,63,.10);
-    }
-    .meta dl { display: grid; grid-template-columns: 1fr; }
-    .meta .row {
-      display: grid; grid-template-columns: 250px 1fr; gap: 16px;
-      padding: 15px 0; border-bottom: 1px solid var(--gh-line);
-    }
-    .meta .row:last-child { border-bottom: 0; }
-    .meta dt { font-weight: 700; color: var(--gh-plum); font-size: 15px; }
-    .meta dd { color: var(--gh-slate); font-size: 15px; }
+    .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: -46px; position: relative; z-index: 2; }
+    .fact { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); border-radius: 18px;
+      padding: 22px; backdrop-filter: blur(8px); }
+    .fact .k { font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; color: #A995AE; font-weight: 600; }
+    .fact .v { font-size: 19px; font-weight: 700; margin-top: 7px; }
+    .fact .v.big { font-size: 24px; color: var(--green); }
+    .fact .s { font-size: 12.5px; color: #C9B8CE; margin-top: 4px; }
 
-    /* sections */
-    main { padding: 56px 0 80px; }
-    section { margin-bottom: 52px; }
-    h2 {
-      font-size: 26px; line-height: 1.3; font-weight: 800; color: var(--gh-plum);
-      letter-spacing: -.01em; padding-bottom: 12px; border-bottom: 3px solid var(--gh-mint);
-      margin-bottom: 22px;
-    }
-    h3 { font-size: 18px; font-weight: 700; color: var(--gh-plum); margin: 26px 0 10px; }
-    p { margin-bottom: 14px; font-size: 16px; }
-    p:last-child { margin-bottom: 0; }
+    section { margin: 84px 0; }
+    .sec-kick { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--green); display: flex; align-items: center; gap: 12px; }
+    .sec-kick::after { content: ""; height: 1px; flex: 1; background: linear-gradient(90deg, rgba(34,197,94,.5), transparent); }
+    h2 { font-size: clamp(26px, 3.8vw, 38px); font-weight: 800; letter-spacing: -.015em; margin-top: 14px; line-height: 1.22; }
+    .sec-lead { color: #C9B8CE; margin-top: 12px; font-size: 16.5px; line-height: 1.7; max-width: 720px; }
 
-    ul, ol { padding-left: 24px; }
-    li { margin-bottom: 9px; font-size: 16px; }
-    ul li::marker { color: var(--gh-green-deep); }
-    ol li::marker { color: var(--gh-green-deep); font-weight: 700; }
+    .balance { border: 1px solid rgba(34,197,94,.3); border-radius: 22px; padding: clamp(26px, 4vw, 44px);
+      background: radial-gradient(500px 260px at 90% -20%, rgba(139,92,246,.28), transparent 60%), rgba(255,255,255,.04);
+      font-size: clamp(17px, 2.2vw, 21px); line-height: 1.75; font-weight: 500; }
+    .balance em { font-style: normal; color: var(--green); font-weight: 700; }
 
-    /* evaluation table */
-    .weights { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 15px; }
-    .weights th, .weights td { text-align: left; padding: 13px 14px; border-bottom: 1px solid var(--gh-line); }
-    .weights th { background: var(--gh-mint); color: var(--gh-plum); font-weight: 700; font-size: 14px; }
-    .weights td:last-child { text-align: right; font-weight: 700; color: var(--gh-green-deep); white-space: nowrap; width: 90px; }
-    .weights tr:last-child td { border-bottom: 0; }
-    .bar { height: 7px; border-radius: 99px; background: var(--gh-mint); overflow: hidden; margin-top: 7px; }
-    .bar span { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--gh-green), var(--gh-green-deep)); }
+    .checks { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 26px; }
+    .check { display: flex; align-items: center; gap: 13px; border: 1px solid rgba(255,255,255,.1); border-radius: 14px;
+      padding: 15px 17px; background: rgba(255,255,255,.04); font-size: 15px; transition: border-color .2s, background .2s; }
+    .check:hover { border-color: rgba(34,197,94,.4); background: rgba(34,197,94,.06); }
+    .check .box { width: 22px; height: 22px; border-radius: 7px; border: 2px solid var(--green); flex: none;
+      display: grid; place-items: center; color: var(--green); font-size: 13px; font-weight: 800; }
+    .check .n { margin-left: auto; color: #A995AE; font-size: 12px; font-weight: 600; }
 
-    /* callout */
-    .callout {
-      background: var(--gh-mint); border-left: 4px solid var(--gh-green);
-      border-radius: 0 12px 12px 0; padding: 20px 22px; margin-top: 8px;
-    }
-    .callout p { font-size: 15px; }
-    .callout strong { color: var(--gh-plum); }
+    .cons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 26px; }
+    .con { border: 1px solid rgba(255,255,255,.1); border-radius: 16px; padding: 20px; background: rgba(255,255,255,.04); }
+    .con .ic { font-size: 24px; }
+    .con .t { font-weight: 700; font-size: 15.5px; margin-top: 10px; }
+    .con .d { color: #A995AE; font-size: 13px; margin-top: 5px; line-height: 1.6; }
 
-    /* deliverable chips */
-    .chips { display: flex; flex-wrap: wrap; gap: 10px; }
-    .chips span {
-      font-size: 14px; font-weight: 600; padding: 8px 16px; border-radius: 999px;
-      background: var(--gh-mint); color: var(--gh-green-deep);
-      border: 1px solid #D3EBDD;
-    }
+    .crit { margin-top: 26px; display: grid; gap: 16px; }
+    .crit .row { display: grid; grid-template-columns: 1fr 64px; align-items: center; gap: 16px; }
+    .crit .nm { font-size: 15.5px; font-weight: 600; display: flex; justify-content: space-between; }
+    .crit .bar { grid-column: 1 / -1; height: 8px; border-radius: 99px; background: rgba(255,255,255,.08); overflow: hidden; }
+    .crit .bar i { display: block; height: 100%; width: 0; border-radius: 99px;
+      background: linear-gradient(90deg, var(--green), var(--mauve)); transition: width 1.1s cubic-bezier(.2,.7,.2,1); }
+    .crit .pct { font-size: 20px; font-weight: 800; text-align: right; color: var(--green); }
 
-    /* contact card */
-    .contact {
-      background: var(--gh-plum); color: #fff; border-radius: 18px; padding: 30px 28px;
-    }
-    .contact h2 { color: #fff; border-bottom-color: rgba(255,255,255,.16); }
-    .contact .rows { display: grid; gap: 10px; margin-top: 6px; }
-    .contact .rows div { font-size: 15px; color: #D9CBDD; }
-    .contact .rows strong { color: #fff; font-weight: 600; }
+    .timeline { margin-top: 26px; border-left: 2px solid rgba(34,197,94,.35); padding-left: 28px; display: grid; gap: 26px; }
+    .tl { position: relative; }
+    .tl::before { content: ""; position: absolute; left: -37px; top: 4px; width: 16px; height: 16px; border-radius: 50%;
+      background: var(--plum-deep); border: 3px solid var(--green); }
+    .tl .ph { font-size: 12.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--green); }
+    .tl .t { font-size: 17px; font-weight: 700; margin-top: 4px; }
+    .tl .d { color: #C9B8CE; font-size: 14px; margin-top: 4px; line-height: 1.65; max-width: 560px; }
 
-    /* note */
-    .note {
-      border: 1px dashed #CBB9CF; border-radius: 12px; padding: 18px 20px;
-      font-size: 14px; color: var(--gh-muted); background: #FCFAFD;
-    }
-    .note strong { color: var(--gh-plum); }
+    .submit { border-radius: 24px; border: 1px solid rgba(255,255,255,.12); overflow: hidden;
+      background: linear-gradient(160deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); }
+    .submit-in { padding: clamp(26px, 4vw, 44px); }
+    .slot { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+      border: 1px dashed rgba(255,255,255,.2); border-radius: 14px; padding: 16px 20px; margin-top: 12px; }
+    .slot .k { font-size: 14px; color: #C9B8CE; }
+    .slot .v { font-size: 15px; font-weight: 600; }
+    .mailto { margin-top: 26px; text-align: center; }
 
-    /* footer */
-    footer { background: var(--gh-plum-deep); color: #CBB9CF; padding: 36px 0; font-size: 14px; }
-    footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
-    footer a { color: var(--gh-green); text-decoration: none; }
-    footer .bn { color: #fff; font-size: 15px; }
+    .contact { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); border-radius: 22px; padding: clamp(26px, 4vw, 40px); }
+    .contact .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 20px; }
+    .contact .cell .k { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: #A995AE; font-weight: 600; }
+    .contact .cell .v { font-size: 16px; font-weight: 600; margin-top: 5px; }
 
-    /* floating action button */
-    .fab {
-      position: fixed; right: 22px; bottom: 22px; z-index: 60;
-      display: inline-flex; align-items: center; gap: 11px;
-      padding: 15px 24px 15px 19px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #22C55E 0%, #16A34A 52%, #8B5CF6 125%);
-      color: #06210F; font-weight: 800; font-size: 15px; line-height: 1.2;
-      text-decoration: none; overflow: hidden;
-      box-shadow: 0 14px 34px rgba(34,197,94,.42);
-      animation: fabPulse 2.6s ease-out infinite, fabBob 4.5s ease-in-out infinite;
-      transition: transform .18s ease, box-shadow .18s ease;
-    }
-    .fab:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 18px 44px rgba(34,197,94,.55); }
-    .fab:active { transform: translateY(0) scale(.99); }
-    .fab .dot {
-      width: 10px; height: 10px; border-radius: 50%; background: #06210F; flex: none;
-      animation: fabBlink 1.4s ease-in-out infinite;
-    }
-    .fab .txt { font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; }
-    .fab .arrow { font-weight: 700; transition: transform .18s ease; }
-    .fab:hover .arrow { transform: translateX(3px); }
-    /* shimmer sweep */
-    .fab::after {
-      content: ""; position: absolute; inset: 0;
-      background: linear-gradient(115deg, transparent 32%, rgba(255,255,255,.62) 50%, transparent 68%);
-      transform: translateX(-130%);
-      animation: fabShimmer 3s ease-in-out infinite;
-    }
-    @keyframes fabPulse {
-      0%   { box-shadow: 0 14px 34px rgba(34,197,94,.42), 0 0 0 0 rgba(34,197,94,.55); }
-      70%  { box-shadow: 0 14px 34px rgba(34,197,94,.42), 0 0 0 20px rgba(34,197,94,0); }
-      100% { box-shadow: 0 14px 34px rgba(34,197,94,.42), 0 0 0 0 rgba(34,197,94,0); }
-    }
-    @keyframes fabBob {
-      0%, 100% { transform: translateY(0); }
-      50%      { transform: translateY(-5px); }
-    }
-    @keyframes fabShimmer {
-      0%   { transform: translateX(-130%); }
-      55%  { transform: translateX(130%); }
-      100% { transform: translateX(130%); }
-    }
-    @keyframes fabBlink {
-      0%, 100% { opacity: 1; }
-      50%      { opacity: .35; }
-    }
+    .note { border: 1px dashed rgba(255,255,255,.2); border-radius: 14px; padding: 18px 22px; font-size: 14px; color: #C9B8CE; margin-top: 60px; line-height: 1.7; }
+    .note strong { color: #fff; }
 
-    @media (max-width: 760px) {
-      .meta .row { grid-template-columns: 1fr; gap: 4px; }
-      .meta dt { color: var(--gh-muted); font-size: 13px; text-transform: uppercase; letter-spacing: .04em; }
-      .hero h1 { font-size: 29px; }
-      .hero .sub { font-size: 17px; }
-      .btn-cta, .btn-brief { width: 100%; text-align: center; }
-      h2 { font-size: 22px; }
-      .weights th, .weights td { padding: 11px 8px; font-size: 14px; }
-      .fab {
-        right: 12px; bottom: 12px; left: 12px;
-        justify-content: center; padding: 14px 18px; font-size: 14px;
-      }
-    }
+    footer { border-top: 1px solid rgba(255,255,255,.08); padding: 40px 28px; }
+    .foot { max-width: 980px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; }
+    .foot img { height: 28px; }
+    .foot .en { font-size: 12.5px; color: #A995AE; margin-top: 4px; }
+    .foot a { color: var(--green); text-decoration: none; font-size: 14px; }
 
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    @media (max-width: 860px) {
+      .facts { grid-template-columns: 1fr 1fr; }
+      .cons { grid-template-columns: 1fr 1fr; }
+      .checks { grid-template-columns: 1fr; }
+      .contact .grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .facts, .cons { grid-template-columns: 1fr; }
+      .crit .row { grid-template-columns: 1fr 48px; }
+    }
     @media (prefers-reduced-motion: reduce) {
-      .fab, .fab .dot, .fab::after { animation: none; }
-    }
-
-    @media print {
-      header, footer, .fab { display: none; }
-      body { background: #fff; }
-      .hero { background: #fff; color: #000; padding: 0 0 20px; }
-      .hero::after { display: none; }
-      .hero h1, .hero h1 .accent, .hero .sub { color: #000; }
-      .btn-brief { border-color: #999; color: #000; }
-      .meta { box-shadow: none; margin-top: 0; border: 1px solid #ccc; }
-      .contact { background: #fff; color: #000; border: 1px solid #ccc; }
-      .contact h2, .contact .rows div, .contact .rows strong { color: #000; }
-      section { margin-bottom: 26px; break-inside: avoid; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+      .crit .bar i { width: var(--w) !important; }
+      html { scroll-behavior: auto; }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="wrap nav">
-      <a class="brand" href="/" aria-label="grihostiOS home">
-        <img src="/assets/logo-on-dark.png" alt="grihostiOS">
-      </a>
-      <nav class="nav-links">
-        <a href="/">← হোম</a>
-      </nav>
-    </div>
-  </header>
+<div class="progress" id="progress"></div>
 
-  <div class="hero">
-    <div class="wrap">
-      <div class="eyebrow">Architectural Design &amp; Engineering Proposal</div>
-      <h1 class="bn">১,৬৯২ বর্গফুটে একটি স্মার্ট <span class="accent">Mixed-Use Complex</span>-এর নকশা চাই</h1>
-      <p class="sub bn">১,৬৯২ বর্গফুট জমির সর্বোত্তম ব্যবহার নিশ্চিত করে একটি আধুনিক, কার্যকরী ও নির্মাণযোগ্য ২-তলা Semi-Commercial + Residential Mixed-Use Complex</p>
-      <div class="hero-cta">
-        <a class="btn-cta" href="#submit">প্রস্তাব জমা দিন</a>
-        <a class="btn-brief" href="#brief">বিস্তারিত Project Brief</a>
+<nav id="nav">
+  <a href="/" aria-label="grihostiOS home"><img src="/assets/logo-on-dark.png" alt="grihostiOS"></a>
+  <div class="links"><a href="/" class="bn">← হোম</a></div>
+</nav>
+
+<header class="hero">
+  <div class="pill bn">Architectural Design &amp; Engineering Proposal</div>
+  <h1 class="bn">১,৬৯২ বর্গফুটে একটি স্মার্ট <span class="accent">Mixed-Use Complex</span>-এর নকশা চাই</h1>
+  <p class="lede bn">আধুনিক, কার্যকরী ও নির্মাণযোগ্য ২-তলা Semi-Commercial + Residential Complex — যোগ্য Architect, Architectural Firm এবং Engineering Consultant-দের নিকট হতে প্রস্তাব আহ্বান।</p>
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="#submit">প্রস্তাব জমা দিন</a>
+    <a class="btn btn-ghost" href="#brief">বিস্তারিত Project Brief</a>
+  </div>
+  <p class="deadline bn">প্রস্তাব জমাদানের শেষ তারিখ: <strong>[তারিখ ও সময়]</strong></p>
+</header>
+
+<div class="wrap">
+  <div class="facts">
+    <div class="fact"><div class="k bn">জমির আয়তন</div><div class="v big bn">১,৬৯২ বর্গফুট</div><div class="s bn">সর্বোত্তম ব্যবহার বাধ্যতামূলক</div></div>
+    <div class="fact"><div class="k bn">ভবনের উচ্চতা</div><div class="v big bn">২ তলা</div><div class="s bn">Ground + First floor</div></div>
+    <div class="fact"><div class="k bn">প্রকল্পের ধরন</div><div class="v">Semi-Commercial +<br>Residential</div><div class="s">Mixed-Use Complex</div></div>
+    <div class="fact"><div class="k bn">অবস্থান</div><div class="v bn">[ঠিকানা/এলাকা]</div><div class="s bn">স্থানীয় বিধিমালা প্রযোজ্য</div></div>
+    <div class="fact"><div class="k bn">আহ্বানকারী</div><div class="v bn">[প্রতিষ্ঠান/মালিকের নাম]</div><div class="s bn">মালিক পক্ষ</div></div>
+    <div class="fact"><div class="k bn">মূল্যায়ন</div><div class="v big">6 × criteria</div><div class="s">Design 50% · Site 15% · Tech+Cost 20%</div></div>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <section id="brief" class="reveal">
+    <div class="sec-kick bn">ব্রিফ</div>
+    <h2 class="bn">আমরা যা খুঁজছি</h2>
+    <div class="balance bn" style="margin-top:24px">
+      এমন একটি ডিজাইন যেখানে <em>সীমিত জায়গার সর্বোচ্চ ব্যবহার</em>, <em>বাণিজ্যিক কার্যকারিতা</em>, <em>আবাসিক স্বাচ্ছন্দ্য</em>, নিরাপত্তা, প্রাকৃতিক আলো-বাতাস এবং ভবিষ্যৎ রক্ষণাবেক্ষণ — <em>সবকিছুর মধ্যে একটি ভারসাম্য</em> তৈরি হবে।
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="sec-kick bn">ডেলিভারেবল</div>
+    <h2 class="bn">প্রস্তাবে প্রত্যাশিত</h2>
+    <p class="sec-lead bn">১১টি উপকরণ — প্রতিটি মূল্যায়নের অংশ।</p>
+    <div class="checks">
+      <div class="check"><span class="box">✓</span> Concept Design<span class="n">01</span></div>
+      <div class="check"><span class="box">✓</span> Site Planning<span class="n">02</span></div>
+      <div class="check"><span class="box">✓</span> Floor Plans<span class="n">03</span></div>
+      <div class="check"><span class="box">✓</span> Elevations<span class="n">04</span></div>
+      <div class="check"><span class="box">✓</span> Sections<span class="n">05</span></div>
+      <div class="check"><span class="box">✓</span> 3D Visualization<span class="n">06</span></div>
+      <div class="check"><span class="box">✓</span> Preliminary Structural Concept<span class="n">07</span></div>
+      <div class="check"><span class="box">✓</span> MEP Planning<span class="n">08</span></div>
+      <div class="check"><span class="box">✓</span> Area Statement<span class="n">09</span></div>
+      <div class="check"><span class="box">✓</span> Preliminary BOQ<span class="n">10</span></div>
+      <div class="check"><span class="box">✓</span> Design Schedule<span class="n">11</span></div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="sec-kick bn">বিবেচনা</div>
+    <h2 class="bn">নকশায় যেসব বিষয় বিবেচনা করতে হবে</h2>
+    <div class="cons">
+      <div class="con"><div class="ic">📐</div><div class="t bn">সর্বোচ্চ জমি ব্যবহার</div><div class="d bn">১,৬৯২ বর্গফুটের প্রতিটি ইঞ্চির কার্যকর বিন্যাস</div></div>
+      <div class="con"><div class="ic">🏪</div><div class="t bn">বাণিজ্যিক কার্যকারিতা</div><div class="d bn">গ্রাউন্ড ফ্লোরে ভাড়া-উপযোগী ফ্রন্টেজ</div></div>
+      <div class="con"><div class="ic">🏠</div><div class="t bn">আবাসিক স্বাচ্ছন্দ্য</div><div class="d bn">আপার ফ্লোরে পৃথক, শান্ত আবাসিক পরিবেশ</div></div>
+      <div class="con"><div class="ic">🚪</div><div class="t bn">পৃথক প্রবেশপথ</div><div class="d bn">বাণিজ্যিক ও আবাসিক — নিয়ন্ত্রিত অ্যাক্সেস</div></div>
+      <div class="con"><div class="ic">☀️</div><div class="t bn">আলো ও বাতাস</div><div class="d bn">প্রাকৃতিক ভেন্টিলেশন ও ডে-লাইটিং</div></div>
+      <div class="con"><div class="ic">🛡️</div><div class="t bn">নিরাপত্তা ও গোপনীয়তা</div><div class="d bn">দুই ব্যবহারকারী গ্রুপের জন্য পৃথক গোপনীয়তা</div></div>
+      <div class="con"><div class="ic">🪜</div><div class="t bn">সিঁড়ি ও Circulation</div><div class="d bn">কার্যকর ভার্টিকাল মুভমেন্ট</div></div>
+      <div class="con"><div class="ic">🚗</div><div class="t bn">পার্কিং ও Access</div><div class="d bn">বাস্তবসম্মত ভেহিক্যুলার সমাধান</div></div>
+      <div class="con"><div class="ic">⚡</div><div class="t bn">MEP ও Service Shaft</div><div class="d bn">প্লাম্বিং, ইলেকট্রিক্যাল পরিকল্পনা</div></div>
+      <div class="con"><div class="ic">🌿</div><div class="t bn">Energy-efficient</div><div class="d bn">প্যাসিভ ডিজাইন কৌশল</div></div>
+      <div class="con"><div class="ic">🏛️</div><div class="t bn">Building Code</div><div class="d bn">Setback, FAR/coverage সম্মত</div></div>
+      <div class="con"><div class="ic">🧱</div><div class="t bn">Facade ও নান্দনিকতা</div><div class="d bn">আধুনিক, আকর্ষণীয় রূপ</div></div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="sec-kick bn">মূল্যায়ন</div>
+    <h2 class="bn">যেভাবে প্রস্তাব মূল্যায়ন হবে</h2>
+    <div class="crit" id="crit">
+      <div class="row"><div class="nm bn">Design Concept &amp; Creativity <b>25%</b></div><div class="pct">25%</div><div class="bar"><i data-w="25"></i></div></div>
+      <div class="row"><div class="nm bn">Space Planning &amp; Functional Efficiency <b>25%</b></div><div class="pct">25%</div><div class="bar"><i data-w="25"></i></div></div>
+      <div class="row"><div class="nm bn">Site Utilization <b>15%</b></div><div class="pct">15%</div><div class="bar"><i data-w="15"></i></div></div>
+      <div class="row"><div class="nm bn">Architectural Appearance <b>15%</b></div><div class="pct">15%</div><div class="bar"><i data-w="15"></i></div></div>
+      <div class="row"><div class="nm bn">Technical Feasibility <b>10%</b></div><div class="pct">10%</div><div class="bar"><i data-w="10"></i></div></div>
+      <div class="row"><div class="nm bn">Cost Efficiency <b>10%</b></div><div class="pct">10%</div><div class="bar"><i data-w="10"></i></div></div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="sec-kick bn">প্রক্রিয়া</div>
+    <h2 class="bn">নির্বাচনের ধাপ</h2>
+    <div class="timeline">
+      <div class="tl"><div class="ph bn">ধাপ ১</div><div class="t bn">প্রস্তাব জমাদান</div><div class="d bn">Portfolio, design proposal ও fee quotation সহ সম্পূর্ণ প্রস্তাব।</div></div>
+      <div class="tl"><div class="ph bn">ধাপ ২</div><div class="t bn">প্রাথমিক যাচাই</div><div class="d bn">সম্পূর্ণতা ও প্রযোজ্যতা যাচাই — শর্ত পূরণকারীদের শর্টলিস্ট।</div></div>
+      <div class="tl"><div class="ph bn">ধাপ ৩</div><div class="t bn">মূল্যায়ন ও ভারসাম্য পরীক্ষা</div><div class="d bn">৬টি ক্রাইটেরিয়ায় স্কোরিং; প্রয়োজনে ওরাল প্রেজেন্টেশন।</div></div>
+      <div class="tl"><div class="ph bn">ধাপ ৪</div><div class="t bn">চূড়ান্ত নির্বাচন ও চুক্তি</div><div class="d bn">নির্বাচিত প্রস্তাবদাতার সাথে scope ও schedule চূড়ান্তকরণ।</div></div>
+    </div>
+  </section>
+
+  <section id="submit" class="reveal">
+    <div class="sec-kick bn">জমাদান</div>
+    <h2 class="bn">প্রস্তাব জমা দিন</h2>
+    <p class="sec-lead bn">আগ্রহী স্থপতি/ফার্ম/ডিজাইনারদের নিম্নোক্ত মাধ্যমে প্রস্তাব জমাদানের জন্য অনুরোধ করা হচ্ছে।</p>
+    <div class="submit" style="margin-top:24px">
+      <div class="submit-in">
+        <div class="slot"><span class="k bn">জমাদানের মাধ্যম</span><span class="v bn">[Email / Online Portal / Physical Submission]</span></div>
+        <div class="slot"><span class="k bn">শেষ তারিখ</span><span class="v bn">[তারিখ]</span></div>
+        <div class="slot"><span class="k bn">সময়</span><span class="v bn">[সময়]</span></div>
+        <div class="mailto">
+          <a class="btn btn-primary bn" href="mailto:hello@grihosti.xyz?subject=%E0%A6%B8%E0%A7%8D%E0%A6%A5%E0%A6%BE%E0%A6%AA%E0%A6%A4%E0%A7%8D%E0%A6%AF%20%E0%A6%A8%E0%A6%95%E0%A6%B6%E0%A6%BE%20%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%B8%E0%A7%8D%E0%A6%A4%E0%A6%BE%E0%A6%AC">ই-মেইলে প্রস্তাব পাঠান</a>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="wrap">
-    <div class="meta">
-      <dl>
-        <div class="row">
-          <dt class="bn">প্রস্তাব আহ্বানকারী</dt>
-          <dd>[প্রতিষ্ঠান/মালিকের নাম]</dd>
-        </div>
-        <div class="row">
-          <dt class="bn">প্রকল্পের ধরন</dt>
-          <dd>Semi-Commercial &amp; Residential Complex</dd>
-        </div>
-        <div class="row">
-          <dt class="bn">জমির আয়তন</dt>
-          <dd class="bn">১,৬৯২ বর্গফুট</dd>
-        </div>
-        <div class="row">
-          <dt class="bn">ভবনের উচ্চতা</dt>
-          <dd class="bn">২ তলা</dd>
-        </div>
-        <div class="row">
-          <dt class="bn">অবস্থান</dt>
-          <dd>[ঠিকানা/এলাকা]</dd>
-        </div>
-        <div class="row">
-          <dt class="bn">প্রস্তাব জমাদানের শেষ তারিখ</dt>
-          <dd>[তারিখ ও সময়]</dd>
-        </div>
-      </dl>
-    </div>
-  </div>
-
-  <main>
-    <div class="wrap">
-
-      <section id="brief">
-        <h2 class="bn">আমরা যা খুঁজছি</h2>
-        <div class="callout">
-          <p class="bn"><strong>আমরা খুঁজছি এমন একটি ডিজাইন—যেখানে সীমিত জায়গার সর্বোচ্চ ব্যবহার, বাণিজ্যিক কার্যকারিতা, আবাসিক স্বাচ্ছন্দ্য, নিরাপত্তা, প্রাকৃতিক আলো-বাতাস এবং ভবিষ্যৎ রক্ষণাবেক্ষণ—সবকিছুর মধ্যে একটি ভারসাম্য তৈরি হবে।</strong></p>
-        </div>
-      </section>
-
-      <section>
-        <h2 class="bn">প্রস্তাবে প্রত্যাশিত</h2>
-        <div class="chips">
-          <span>Concept Design</span>
-          <span>Site Planning</span>
-          <span>Floor Plans</span>
-          <span>Elevations</span>
-          <span>Sections</span>
-          <span>3D Visualization</span>
-          <span>Preliminary Structural Concept</span>
-          <span>MEP Planning</span>
-          <span>Area Statement</span>
-          <span>Preliminary BOQ</span>
-          <span>Design Schedule</span>
-        </div>
-      </section>
-
-      <section>
-        <h2 class="bn">প্রকল্পের উদ্দেশ্য</h2>
-        <p class="bn">১,৬৯২ বর্গফুট আয়তনের জমির সর্বোত্তম ব্যবহার নিশ্চিত করে একটি আধুনিক, কার্যকর, নান্দনিক এবং ভবিষ্যৎ-উপযোগী <strong>২-তলা সেমি-কমার্শিয়াল ও রেসিডেন্সিয়াল কমপ্লেক্সের স্থাপত্য নকশা</strong> প্রণয়নের জন্য যোগ্য স্থপতি/আর্কিটেকচারাল ফার্ম/ডিজাইন প্রফেশনালদের নিকট হতে নকশা প্রস্তাব আহ্বান করা হচ্ছে।</p>
-        <p class="bn">প্রকল্পটির নকশায় বাণিজ্যিক ও আবাসিক ব্যবহারের মধ্যে যথাযথ ভারসাম্য, ব্যবহারকারীর গোপনীয়তা, পর্যাপ্ত আলো-বাতাস, নিরাপত্তা, পার্কিং/অ্যাক্সেস, কার্যকর circulation এবং নির্মাণযোগ্যতা বিবেচনা করতে হবে।</p>
-      </section>
-
-      <section>
-        <h2 class="bn">নকশায় যেসব বিষয় বিবেচনা করতে হবে</h2>
-        <ul class="bn">
-          <li>জমির সর্বোচ্চ কার্যকর ব্যবহার</li>
-          <li>গ্রাউন্ড ও আপার ফ্লোরের উপযুক্ত space planning</li>
-          <li>বাণিজ্যিক ও আবাসিক অংশের পৃথক/নিয়ন্ত্রিত প্রবেশপথ</li>
-          <li>পর্যাপ্ত প্রাকৃতিক আলো ও বায়ু চলাচল</li>
-          <li>সিঁড়ি ও circulation-এর কার্যকর বিন্যাস</li>
-          <li>পার্কিং ও vehicle access-এর সম্ভাব্য সমাধান</li>
-          <li>নিরাপত্তা ও privacy</li>
-          <li>ভবিষ্যৎ maintenance-এর সুবিধা</li>
-          <li>আধুনিক ও আকর্ষণীয় facade</li>
-          <li>energy-efficient design</li>
-          <li>plumbing, electrical ও service shaft-এর যথাযথ planning</li>
-          <li>স্থানীয় building code, setback, FAR/coverage এবং অন্যান্য প্রযোজ্য বিধিমালা বিবেচনা</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2 class="bn">প্রত্যাশিত Design Submission</h2>
-        <p class="bn">প্রস্তাবদাতাকে নিম্নোক্ত উপকরণ জমা দিতে হবে:</p>
-        <ol class="bn">
-          <li>Site Analysis</li>
-          <li>Concept Design</li>
-          <li>Ground Floor Plan</li>
-          <li>First Floor Plan</li>
-          <li>Roof Plan — প্রযোজ্য হলে</li>
-          <li>চারদিকের Elevation</li>
-          <li>গুরুত্বপূর্ণ Section</li>
-          <li>3D Exterior View / Render</li>
-          <li>Interior Concept — প্রয়োজন অনুযায়ী</li>
-          <li>Area Statement</li>
-          <li>Proposed Space Allocation</li>
-          <li>Preliminary Material &amp; Finishing Concept</li>
-          <li>Parking / Access Plan</li>
-          <li>Preliminary Construction Cost Estimate — যদি প্রস্তাবের অংশ হয়</li>
-          <li>Design Rationale / Concept Statement</li>
-        </ol>
-      </section>
-
-      <section>
-        <h2 class="bn">Design Brief</h2>
-        <p class="bn">প্রস্তাবদাতাকে জমির আয়তন ও স্থানীয় বিধিমালা বিবেচনা করে এমন একটি পরিকল্পনা দিতে হবে যাতে সীমিত জমির মধ্যে <strong>বাণিজ্যিক ব্যবহারযোগ্যতা এবং আরামদায়ক আবাসিক পরিবেশ—উভয়ই সর্বোচ্চ করা যায়।</strong></p>
-        <div class="callout">
-          <p class="bn">চূড়ান্ত space requirements, room schedule এবং commercial/residential area ratio নির্বাচিত design concept-এর সঙ্গে আলোচনার মাধ্যমে নির্ধারণ করা যেতে পারে।</p>
-        </div>
-      </section>
-
-      <section>
-        <h2 class="bn">মূল্যায়নের ভিত্তি</h2>
-        <p class="bn">প্রস্তাবসমূহ নিম্নোক্ত বিষয় বিবেচনায় মূল্যায়ন করা হবে:</p>
-        <table class="weights">
-          <thead>
-            <tr>
-              <th class="bn">মূল্যায়নের বিষয়</th>
-              <th class="bn">ওজন</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Design Concept &amp; Creativity<div class="bar"><span style="width:25%"></span></div></td>
-              <td>25%</td>
-            </tr>
-            <tr>
-              <td>Space Planning &amp; Functional Efficiency<div class="bar"><span style="width:25%"></span></div></td>
-              <td>25%</td>
-            </tr>
-            <tr>
-              <td>Site Utilization<div class="bar"><span style="width:15%"></span></div></td>
-              <td>15%</td>
-            </tr>
-            <tr>
-              <td>Architectural Appearance<div class="bar"><span style="width:15%"></span></div></td>
-              <td>15%</td>
-            </tr>
-            <tr>
-              <td>Technical Feasibility<div class="bar"><span style="width:10%"></span></div></td>
-              <td>10%</td>
-            </tr>
-            <tr>
-              <td>Estimated Cost / Cost Efficiency<div class="bar"><span style="width:10%"></span></div></td>
-              <td>10%</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <section id="submit">
-        <h2 class="bn">প্রস্তাব জমাদান</h2>
-        <p class="bn">আগ্রহী স্থপতি/আর্কিটেকচারাল ফার্ম/ডিজাইনারদের তাদের portfolio, design proposal এবং professional fee quotation সহ প্রস্তাব জমা দেওয়ার জন্য অনুরোধ করা হচ্ছে।</p>
-        <ul class="bn">
-          <li><strong>জমাদানের মাধ্যম:</strong> [Email / Online Portal / Physical Submission]</li>
-          <li><strong>শেষ তারিখ:</strong> [তারিখ]</li>
-          <li><strong>সময়:</strong> [সময়]</li>
-        </ul>
-      </section>
-
-      <section>
-        <div class="contact">
-          <h2 class="bn">যোগাযোগ</h2>
-          <div class="rows">
-            <div><strong class="bn">Project / Procurement Contact:</strong></div>
-            <div>[নাম]</div>
-            <div>[প্রতিষ্ঠান]</div>
-            <div>[মোবাইল]</div>
-            <div>[ই-মেইল]</div>
-            <div>[ঠিকানা]</div>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <p class="note bn"><strong>নোট:</strong> এটি একটি design proposal invitation। প্রকল্পের চূড়ান্ত নির্মাণ, অনুমোদন, structural design এবং অন্যান্য engineering services প্রয়োজন অনুযায়ী পৃথকভাবে নির্ধারণ করা হবে।</p>
-      </section>
-
-    </div>
-  </main>
-
-  <footer>
-    <div class="wrap">
-      <div>
-        <img src="/assets/logo-on-dark.png" alt="grihostiOS" style="height:28px;display:block;margin-bottom:10px">
-        <div class="bn">আপনার জমি, আপনার নিয়ন্ত্রণ</div>
-        <div>© 2026 GrihostiOS · Engineered in Malaysia for Bangladesh</div>
+  <section class="reveal">
+    <div class="sec-kick bn">যোগাযোগ</div>
+    <h2 class="bn">Contact</h2>
+    <div class="contact">
+      <div class="grid">
+        <div class="cell"><div class="k bn">নাম</div><div class="v bn">[নাম]</div></div>
+        <div class="cell"><div class="k bn">প্রতিষ্ঠান</div><div class="v bn">[প্রতিষ্ঠান]</div></div>
+        <div class="cell"><div class="k bn">মোবাইল</div><div class="v bn">[মোবাইল]</div></div>
+        <div class="cell"><div class="k bn">ই-মেইল</div><div class="v bn">[ই-মেইল]</div></div>
+        <div class="cell"><div class="k bn">ঠিকানা</div><div class="v bn">[ঠিকানা]</div></div>
       </div>
-      <div><a href="/">grihosti.xyz</a></div>
     </div>
-  </footer>
+    <p class="note bn"><strong>নোট:</strong> এটি একটি design proposal invitation। প্রকল্পের চূড়ান্ত নির্মাণ, অনুমোদন, structural design এবং অন্যান্য engineering services প্রয়োজন অনুযায়ী পৃথকভাবে নির্ধারণ করা হবে।</p>
+  </section>
 
-  <a class="fab" href="mailto:hello@grihosti.xyz?subject=%E0%A6%A8%E0%A6%95%E0%A6%B6%E0%A6%BE%20%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%B8%E0%A7%8D%E0%A6%A4%E0%A6%BE%E0%A6%AC%20%E0%A6%9C%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A6%BE%E0%A6%A8" aria-label="নকশা প্রস্তাব জমা দিন">
-    <span class="dot" aria-hidden="true"></span>
-    <span class="txt">প্রস্তাব জমা দিন</span>
-    <span class="arrow" aria-hidden="true">→</span>
-  </a>
+</main>
 
+<footer>
+  <div class="foot">
+    <div>
+      <img src="/assets/logo-on-dark.png" alt="grihostiOS">
+      <div class="en">© 2026 GrihostiOS · Engineered in Malaysia for Bangladesh</div>
+    </div>
+    <a href="/">grihosti.xyz</a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var nav = document.getElementById("nav"), prog = document.getElementById("progress");
+  function onScroll() {
+    nav.classList.toggle("solid", window.scrollY > 40);
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    prog.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + "%";
+  }
+  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add("in");
+      if (e.target.id === "crit") {
+        e.target.querySelectorAll("i[data-w]").forEach(function (b) {
+          requestAnimationFrame(function () { b.style.width = b.getAttribute("data-w") * 4 + "%"; });
+        });
+      }
+      io.unobserve(e.target);
+    });
+  }, { threshold: .15 });
+  document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+})();
+</script>
 </body>
 </html>
