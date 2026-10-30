@@ -4,7 +4,8 @@
   "description": "GrihostiOS — Institutional operating system for property, tenancy, and agricultural land in Bangladesh",
   "main": "index.html",
   "scripts": {
-    "start": "npx serve ."
+    "start": "npx serve .",
+    "deploy": "wrangler pages deploy . --project-name=grihosti-xyz --commit-dirty=true"
   },
   "keywords": [
     "grihosti",
