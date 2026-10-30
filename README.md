@@ -21,21 +21,37 @@ GrihostiOS is a governed document and operational engine for:
 - **Primary Typography**: Hind Siliguri (Bangla) & Inter (English)
 - **Palette** (Option 5 "Plum & Green"): Plum `#3B1E3F`, Mauve `#8B5CF6`, Fresh Green `#22C55E`, Mint `#E9F7EF`, Slate `#374151`.
 
-> 📌 **Canonical brand reference (locked):** see [`BRAND.md`](./BRAND.md) and the master key art at `assets/brand-reference-2026-10-31.jpg`. All future design work must match this reference.
+> 📌 **Canonical brand reference (locked):** see [`BRAND.md`](./BRAND.md) and the master key art at `assets/brand/hero-key-art-2026-10-31.jpg`. All future design work must match this reference.
+
+---
+
+## 🚀 Deployment
+
+Live on Cloudflare Pages: **https://grihosti-xyz.pages.dev**
+
+See [`DEPLOY.md`](./DEPLOY.md) for the Pages project details, deploy commands, and the outstanding DNS records needed to serve `grihosti.xyz` itself.
 
 ---
 
 ## 📁 Repository Structure
 ```
 grihosti.xyz/
-├── index.html        # Clean landing interface
-├── README.md         # Architecture and system documentation
-└── package.json      # Workspace definitions
+├── index.html        # Bilingual landing page (Bangla default)
+├── 404.html          # Branded not-found page
+├── _headers          # Cloudflare Pages security + cache headers
+├── BRAND.md          # Locked brand reference
+├── DEPLOY.md         # Deployment guide
+├── assets/           # Public assets (logos, favicons)
+│   └── brand/        # Internal brand reference set (not published)
+├── scripts/build.ps1 # Builds dist/ for deployment
+├── wrangler.toml     # Cloudflare Pages config
+└── .github/workflows/deploy.yml
 ```
 
 ---
 
 ## 🚀 Status
-- **Clean Slate**: Initialized fresh. All outdated uploads purged and cleanly archived.
+- **Landing page**: live and bilingual (Bangla default, English secondary).
+- **Custom domain**: `grihosti.xyz` pending DNS at Spaceship — see [`DEPLOY.md`](./DEPLOY.md).
 - **Repository**: [Varizen/grihostiOS](https://github.com/Varizen/grihostiOS)
 
