@@ -8,7 +8,12 @@
   <meta property="og:title" content="grihostiOS — Home • Land • Production">
   <meta property="og:description" content="আপনার জমি, আপনার নিয়ন্ত্রণ — Your Land, Your Control">
   <meta property="og:image" content="https://grihosti.xyz/assets/logo-on-light.png">
-  <link rel="icon" href="assets/favicon.png">
+  <meta property="og:image:width" content="2049">
+  <meta property="og:image:height" content="639">
+  <meta name="theme-color" content="#3B1E3F">
+  <link rel="icon" href="assets/favicon.png" sizes="512x512">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -50,6 +55,7 @@
     .wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
     .nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
     .brand img { height: 40px; display: block; }
+    footer .brand img { height: 30px; margin-bottom: 10px; }
     .nav-links { display: flex; gap: 22px; align-items: center; }
     .nav-links a { color: #E8DCEB; text-decoration: none; font-size: 15px; font-weight: 500; }
     .nav-links a:hover { color: var(--gh-green); }
@@ -89,14 +95,15 @@
     .tagline-bn { font-size: 22px; color: #fff; margin-top: 10px; }
     .cta { display: flex; gap: 14px; margin-top: 34px; flex-wrap: wrap; }
     .hero-card {
-      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+      background: #FFFFFF; border: 1px solid rgba(255,255,255,.16);
       border-radius: 20px; padding: 36px; display: flex; flex-direction: column; align-items: center; gap: 22px;
+      box-shadow: 0 24px 60px rgba(20,8,24,.35);
     }
     .hero-card img { width: 100%; max-width: 380px; }
     .pillars { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
     .pillars span {
       font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 999px;
-      background: rgba(34,197,94,.14); color: #BFF5D3;
+      background: var(--gh-mint); color: var(--gh-green-deep);
     }
 
     /* sections */
@@ -274,6 +281,7 @@
   <footer>
     <div class="wrap">
       <div>
+        <img class="brand" src="assets/logo-on-dark.png" alt="grihostiOS" style="height:30px;display:block;margin-bottom:10px">
         <div class="bn">আপনার জমি, আপনার নিয়ন্ত্রণ</div>
         <div>© 2026 GrihostiOS · Engineered in Malaysia for Bangladesh</div>
       </div>

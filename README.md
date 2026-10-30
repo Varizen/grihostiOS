@@ -17,8 +17,11 @@ GrihostiOS is a governed document and operational engine for:
 ## 🏛️ Brand & Identity
 - **Primary Domain**: `grihosti.xyz`
 - **Primary Vertical**: Property, Tenancy & Agriculture
+- **Tagline**: `Home • Land • Production`
 - **Primary Typography**: Hind Siliguri (Bangla) & Inter (English)
 - **Palette** (Option 5 "Plum & Green"): Plum `#3B1E3F`, Mauve `#8B5CF6`, Fresh Green `#22C55E`, Mint `#E9F7EF`, Slate `#374151`.
+
+> 📌 **Canonical brand reference (locked):** see [`BRAND.md`](./BRAND.md) and the master key art at `assets/brand-reference-2026-10-31.jpg`. All future design work must match this reference.
 
 ---
 
