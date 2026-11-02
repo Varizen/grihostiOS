@@ -52,6 +52,7 @@ grihosti.xyz/
 
 ## 🚀 Status
 - **Landing page**: live and bilingual (Bangla default, English secondary).
-- **Custom domain**: `grihosti.xyz` pending DNS at Spaceship — see [`DEPLOY.md`](./DEPLOY.md).
+- **Custom domain**: `grihosti.xyz` zone added to Cloudflare; waiting on the
+  Spaceship nameserver switch — see [`DEPLOY.md`](./DEPLOY.md).
 - **Repository**: [Varizen/grihostiOS](https://github.com/Varizen/grihostiOS)
 

@@ -1,6 +1,6 @@
 # Deployment
 
-**Status: live on Cloudflare Pages, custom domain pending DNS.**
+**Status: live on Cloudflare Pages; custom domain waiting on nameserver change at Spaceship.**
 
 | Item | Value |
 |---|---|
@@ -9,7 +9,7 @@
 | Production branch | `main` |
 | Build output dir | `dist/` (see `scripts/build.ps1`) |
 | Pages URL | https://grihosti-xyz.pages.dev |
-| Custom domain | `grihosti.xyz`, `www.grihosti.xyz` — **pending DNS** |
+| Custom domain | `grihosti.xyz`, `www.grihosti.xyz` — **pending nameserver propagation** |
 
 ---
 
@@ -19,9 +19,23 @@
 `172.66.2.113`) but **no origin, Worker or Pages project was ever attached**.
 Every request returned **Cloudflare error 1001 (DNS resolution error)**.
 
-The `grihosti.xyz` zone is **not** in this Cloudflare account. Its nameservers
-are `launch1.spaceship.net` / `launch2.spaceship.net` (Spaceship registrar),
-so DNS is edited at Spaceship, not in the Cloudflare dashboard.
+The `grihosti.xyz` zone was **not** in this Cloudflare account. Its nameservers
+were `launch1.spaceship.net` / `launch2.spaceship.net` (Spaceship registrar),
+so DNS was edited at Spaceship, not in the Cloudflare dashboard.
+
+---
+
+## Current state
+
+The `grihosti.xyz` zone has now been added to account `VIC`. Inside it:
+
+- the two bogus proxied apex `A` records were deleted
+- `grihosti.xyz` → `CNAME` → `grihosti-xyz.pages.dev` (proxied)
+- `www.grihosti.xyz` → `CNAME` → `grihosti-xyz.pages.dev` (proxied)
+- existing `MX`, `SRV` and `SPF` records for Spacemail were left untouched
+
+The zone is still **pending** because the registrar nameservers have not been
+switched yet.
 
 ---
 
@@ -63,10 +77,26 @@ To run `grihosti.xyz` entirely on Cloudflare instead, add the zone to account
 
 ---
 
+## Activate the custom domain
+
+1. Log into Spaceship → **Domains** → `grihosti.xyz` → **Nameservers**.
+2. Replace `launch1.spaceship.net` and `launch2.spaceship.net` with:
+   - `joel.ns.cloudflare.com`
+   - `monika.ns.cloudflare.com`
+3. Make sure DNSSEC is **off** at Spaceship before switching.
+4. Save, then wait for propagation (usually 1–2 hours, up to 24).
+5. In Cloudflare → `grihosti.xyz` → **Overview**, click **Check nameservers now**.
+6. Once the zone is **Active**, open Pages → `grihosti-xyz` → **Custom domains**
+   and click **Check DNS records** for both hostnames.
+
+Cloudflare then issues the Universal SSL certificate automatically.
+
+---
+
 ## Verified live
 
 ```text
-GET /                       -> 200  text/html      13989 bytes
+GET /                       -> 200  text/html      35765 bytes
 GET /assets/logo-on-dark.png-> 200  image/png     588132 bytes
 GET /assets/favicon-32.png  -> 200  image/png       2874 bytes
 GET /nonexistent            -> 404  branded page
