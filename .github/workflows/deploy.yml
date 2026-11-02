@@ -23,13 +23,21 @@ jobs:
           set -euo pipefail
           rm -rf dist
           mkdir -p dist/assets
-          cp index.html 404.html _headers dist/
+          # every root-level HTML page
+          cp ./*.html dist/
+          # optional Pages config files
+          for f in _headers _redirects; do
+            [ -f "$f" ] && cp "$f" dist/
+          done
           # assets/brand/ is an internal reference set and is not published
           find assets -maxdepth 1 -type f -exec cp {} dist/assets/ \;
+          echo "Bundle contents:"
+          find dist -type f | sort
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: "4.156.2"
           command: pages deploy dist --project-name=grihosti-xyz --branch=main
