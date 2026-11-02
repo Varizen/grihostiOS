@@ -48,11 +48,14 @@ npx wrangler pages deploy dist --project-name=grihosti-xyz --branch=main
 
 Set `CLOUDFLARE_ACCOUNT_ID=ffdc985581a586cce38fc03d38bd1e61` if wrangler asks.
 
-Deploys also run on push to `main` via `.github/workflows/deploy.yml`, which
-needs two repository secrets:
+Deploys also run on push to `main` via `.github/workflows/deploy.yml`. The
+repository secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` are
+configured, so CI publishes automatically. The token is scoped to
+**Cloudflare Pages: Edit** only.
 
-- `CLOUDFLARE_API_TOKEN`
-- `CLOUDFLARE_ACCOUNT_ID`
+> The Pages project has **no Git integration** (`Git Provider: No`). Cloudflare
+> does not build from the repo itself — the GitHub Actions workflow builds
+> `dist/` and uploads it with Wrangler.
 
 ---
 
