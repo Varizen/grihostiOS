@@ -43,6 +43,11 @@ grihosti.xyz/
 ├── DEPLOY.md         # Deployment guide
 ├── assets/           # Public assets (logos, favicons)
 │   └── brand/        # Internal brand reference set (not published)
+├── procurement/      # Sourcing & supply-chain management system
+│   ├── index.html    # Internal console
+│   ├── vendor-portal.html
+│   └── db/schema.sql # PostgreSQL schema
+├── rfq/              # Proposal submission template
 ├── scripts/build.ps1 # Builds dist/ for deployment
 ├── wrangler.toml     # Cloudflare Pages config
 └── .github/workflows/deploy.yml
@@ -50,8 +55,20 @@ grihosti.xyz/
 
 ---
 
+## 🧾 Procurement
+
+Internal sourcing and supply-chain system covering vendor registration, staged
+RFQ submission, evaluation, normalization, award and contract. See
+[`procurement/README.md`](./procurement/README.md).
+
+- Internal console: `/procurement/`
+- Vendor portal: `/procurement/vendor-portal`
+
+---
+
 ## 🚀 Status
 - **Landing page**: live and bilingual (Bangla default, English secondary).
+- **Procurement**: live at `/procurement/` and `/procurement/vendor-portal`.
 - **Custom domain**: `grihosti.xyz` zone added to Cloudflare; waiting on the
   Spaceship nameserver switch — see [`DEPLOY.md`](./DEPLOY.md).
 - **Repository**: [Varizen/grihostiOS](https://github.com/Varizen/grihostiOS)
