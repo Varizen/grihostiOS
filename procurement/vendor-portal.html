@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vendor Portal — grihostiOS Procurement</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --plum:#3B1E3F; --plum-deep:#2C1430; --mauve:#8B5CF6; --green:#22C55E;
+  --green-deep:#15803D; --mint:#E9F7EF; --slate:#374151; --muted:#6B7280;
+  --surface:#F7F9FA; --line:#DDE3E8; --white:#fff;
+  --amber:#B45309; --amber-bg:#FEF3C7; --red:#B91C1C; --red-bg:#FEE2E2;
+  --blue:#1D4ED8; --blue-bg:#DBEAFE;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Hind Siliguri',system-ui,sans-serif;background:var(--surface);color:var(--slate);line-height:1.55;font-size:14px}
+.bn{font-family:'Hind Siliguri',sans-serif}
+
+header{background:var(--plum);color:#fff;padding:0 20px;position:sticky;top:0;z-index:50;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.hdr{max-width:1080px;margin:0 auto;display:flex;align-items:center;gap:14px;height:58px}
+.hdr h1{font-size:15px;font-weight:700}
+.hdr .tag{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(34,197,94,.18);color:#BFF5D3;padding:3px 9px;border-radius:999px}
+.hdr .spacer{flex:1}
+.hdr .who{font-size:12px;color:#D9C9DD}
+
+main{max-width:1080px;margin:0 auto;padding:22px 20px 80px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:22px;margin-bottom:16px}
+.card>h2{font-size:17px;font-weight:700;color:var(--plum);margin-bottom:4px}
+.card>h2+.sub{font-size:12.5px;color:var(--muted);margin-bottom:18px}
+.card h3{font-size:13.5px;font-weight:700;color:var(--plum);margin:20px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.card h3:first-of-type{margin-top:0}
+
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:820px){.g2,.g3{grid-template-columns:1fr}}
+
+label{display:block;font-size:11.5px;font-weight:600;color:var(--slate);margin-bottom:4px}
+label .req{color:var(--red)}
+label .bn{display:block;font-size:10.5px;font-weight:400;color:var(--muted);margin-top:1px}
+input,select,textarea{width:100%;font:inherit;font-size:13px;padding:8px 10px;border:1px solid var(--line);border-radius:7px;background:var(--white);color:var(--slate)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--mauve);box-shadow:0 0 0 3px rgba(139,92,246,.12)}
+textarea{resize:vertical;min-height:74px}
+input[type=file]{padding:6px;font-size:12px}
+input[readonly]{background:#F3F4F6;color:var(--muted)}
+
+.btn{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:13px;font-weight:700;padding:9px 16px;border-radius:8px;border:1px solid transparent;cursor:pointer;text-decoration:none}
+.btn-primary{background:var(--green);color:#0B2016}
+.btn-primary:hover{background:#1DB754}
+.btn-plum{background:var(--plum);color:#fff}
+.btn-ghost{background:var(--white);border-color:var(--line);color:var(--slate)}
+.btn-ghost:hover{border-color:var(--mauve);color:var(--plum)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.row.end{justify-content:flex-end}
+
+.pill{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.pill.gray{background:#E5E7EB;color:#4B5563}
+.pill.green{background:var(--mint);color:var(--green-deep)}
+.pill.amber{background:var(--amber-bg);color:var(--amber)}
+.pill.red{background:var(--red-bg);color:var(--red)}
+.pill.blue{background:var(--blue-bg);color:var(--blue)}
+.pill.plum{background:#F3E8F5;color:var(--plum)}
+
+.note{border-radius:8px;padding:11px 14px;font-size:12.5px;margin:12px 0;border:1px solid}
+.note.info{background:var(--blue-bg);border-color:#BFDBFE;color:#1E3A8A}
+.note.warn{background:var(--amber-bg);border-color:#FCD34D;color:#78350F}
+.note.ok{background:var(--mint);border-color:#A7E8C0;color:var(--green-deep)}
+.note.bad{background:var(--red-bg);border-color:#FCA5A5;color:#7F1D1D}
+
+.steps{display:flex;gap:0;margin:18px 0 22px;flex-wrap:wrap}
+.step{flex:1;min-width:104px;padding:10px 8px 10px 24px;font-size:11.5px;font-weight:600;color:var(--muted);background:#F3F5F7;border-right:2px solid var(--white);position:relative}
+.step:first-child{border-radius:8px 0 0 8px;padding-left:12px}
+.step:last-child{border-radius:0 8px 8px 0;border-right:none}
+.step.done{background:var(--mint);color:var(--green-deep)}
+.step.now{background:var(--plum);color:#fff}
+.step .k{display:block;font-size:9.5px;font-weight:800;letter-spacing:.06em;opacity:.75;text-transform:uppercase}
+
+.empty{text-align:center;padding:34px 16px;color:var(--muted);font-size:13px}
+.empty b{display:block;color:var(--slate);font-size:14px;margin-bottom:4px}
+
+.toast{position:fixed;bottom:22px;right:22px;background:var(--plum);color:#fff;padding:12px 18px;border-radius:9px;font-size:13px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.25);opacity:0;transform:translateY(12px);transition:.25s;pointer-events:none;z-index:200;max-width:340px}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast.err{background:var(--red)}
+
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px}
+.hint{font-size:11px;color:var(--muted);margin-top:3px}
+.lockbox{background:#F3F4F6;border:1px dashed #C7CDD4;border-radius:9px;padding:18px;text-align:center;color:var(--muted);font-size:12.5px}
+.lockbox b{display:block;color:var(--slate);font-size:13.5px;margin-bottom:4px}
+
+.otpbox{display:flex;gap:8px}
+.otpbox input{flex:1;letter-spacing:.35em;font-size:16px;text-align:center;font-weight:700}
+
+dl.kv{font-size:12.5px;display:grid;grid-template-columns:170px 1fr;gap:6px 14px}
+dl.kv dt{color:var(--muted);font-weight:600}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr">
+    <h1>Vendor Portal</h1>
+    <span class="tag">grihostiOS Procurement</span>
+    <span class="spacer"></span>
+    <span class="who" id="whoami">Not registered</span>
+  </div>
+</header>
+
+<main>
+
+<section id="view-register">
+  <div class="card">
+    <h2>Vendor registration</h2>
+    <p class="sub">Free registration with a Bangladeshi mobile number. No licence or certificate is required. Companies incorporated less than 5 years ago may register under the special condition.</p>
+
+    <form id="regForm">
+      <h3>1 · Mobile verification</h3>
+      <div class="grid g2">
+        <div>
+          <label>Bangladeshi mobile <span class="req">*</span><span class="bn">মোবাইল নম্বর</span></label>
+          <input name="mobile_bd" id="regMobile" placeholder="+8801712345678" required>
+          <p class="hint">Format: +8801XXXXXXXXX. This number is your login identity.</p>
+        </div>
+        <div>
+          <label>Verification code <span class="req">*</span><span class="bn">যাচাইকরণ কোড</span></label>
+          <div class="otpbox">
+            <input id="otpInput" placeholder="000000" maxlength="6" inputmode="numeric">
+            <button type="button" class="btn btn-ghost" id="sendOtp">Send code</button>
+          </div>
+          <p class="hint" id="otpHint">A 6-digit code is sent by SMS. In this demo the code is <b>123456</b>.</p>
+        </div>
+      </div>
+
+      <h3>2 · Company</h3>
+      <div class="grid g3">
+        <div><label>Legal name <span class="req">*</span><span class="bn">আইনি নাম</span></label><input name="legal_name" required></div>
+        <div><label>Trade name<span class="bn">বাণিজ্যিক নাম</span></label><input name="trade_name"></div>
+        <div><label>Entity type <span class="req">*</span></label>
+          <select name="entity_type" required>
+            <option value="">Select…</option>
+            <option value="sole_proprietor">Sole proprietor</option>
+            <option value="partnership">Partnership</option>
+            <option value="private_ltd">Private Ltd</option>
+            <option value="public_ltd">Public Ltd</option>
+            <option value="llp">LLP</option>
+            <option value="cooperative">Cooperative</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div><label>Incorporation date <span class="req">*</span><span class="bn">নিবন্ধনের তারিখ</span></label><input type="date" name="incorporation_date" required></div>
+        <div><label>TIN<span class="bn">টিআইএন</span></label><input name="tin"></div>
+        <div><label>BIN / VAT<span class="bn">বিআইএন</span></label><input name="bin"></div>
+      </div>
+
+      <h3>3 · Contact</h3>
+      <div class="grid g3">
+        <div><label>Contact person <span class="req">*</span></label><input name="contact_person" required></div>
+        <div><label>Designation<span class="bn">পদবি</span></label><input name="contact_designation"></div>
+        <div><label>Email <span class="req">*</span></label><input type="email" name="email" required></div>
+        <div><label>District <span class="req">*</span></label><input name="district" required></div>
+        <div><label>Division <span class="req">*</span></label><input name="division" required></div>
+        <div><label>Postcode</label><input name="postcode"></div>
+      </div>
+      <div style="margin-top:12px"><label>Address <span class="req">*</span><span class="bn">ঠিকানা</span></label><input name="address_line" required></div>
+
+      <h3>4 · Brochure &amp; attachments</h3>
+      <div class="grid g2">
+        <div>
+          <label>Company brochure<span class="bn">ব্রোশিওর</span></label>
+          <input type="file" id="regBrochure" accept=".pdf,.doc,.docx,.ppt,.pptx,.png,.jpg,.jpeg">
+          <p class="hint">Optional. Any licence or certificate may be attached but is not required.</p>
+        </div>
+        <div>
+          <label>Other documents<span class="bn">অন্যান্য নথি</span></label>
+          <input type="file" id="regOther" multiple>
+          <p class="hint">Trade licence, ISO certificate, audited financials — all optional.</p>
+        </div>
+      </div>
+
+      <div id="regYoung" style="display:none">
+        <div class="note warn"><b>Special condition — company under 5 years.</b> Registration is allowed with a written justification and an approver. Your account is flagged <span class="pill amber">conditional</span> until reviewed.</div>
+        <div class="grid g2">
+          <div><label>Justification <span class="req">*</span><span class="bn">যুক্তি</span></label><textarea name="young_company_justification"></textarea></div>
+          <div><label>Approved by <span class="req">*</span><span class="bn">অনুমোদনকারী</span></label><input name="young_company_approved_by"></div>
+        </div>
+      </div>
+
+      <h3>5 · Declarations</h3>
+      <div class="grid g2">
+        <div>
+          <label style="display:flex;gap:8px;align-items:flex-start;font-weight:500"><input type="checkbox" name="no_conflict_of_interest" style="width:auto;margin-top:2px"><span>No conflict of interest.<span class="bn">স্বার্থের সংঘাত নেই</span></span></label>
+          <label style="display:flex;gap:8px;align-items:flex-start;font-weight:500;margin-top:8px"><input type="checkbox" name="no_bribery_undertaking" style="width:auto;margin-top:2px"><span>Anti-bribery undertaking (ISO 37001).<span class="bn">ঘুষবিরোধী অঙ্গীকার</span></span></label>
+        </div>
+        <div>
+          <label style="display:flex;gap:8px;align-items:flex-start;font-weight:500"><input type="checkbox" name="litigation_disclosed" style="width:auto;margin-top:2px"><span>Litigation disclosed.<span class="bn">মামলা প্রকাশ</span></span></label>
+          <div style="margin-top:8px"><label>Litigation details</label><textarea name="litigation_details" style="min-height:52px"></textarea></div>
+        </div>
+      </div>
+
+      <div class="row end" style="margin-top:18px">
+        <button type="submit" class="btn btn-primary">Register</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section id="view-dash" style="display:none">
+  <div class="card">
+    <div class="row">
+      <div style="flex:1">
+        <h2 id="dashName">—</h2>
+        <p class="sub" id="dashMeta" style="margin-bottom:0"></p>
+      </div>
+      <button class="btn btn-ghost" id="logout">Sign out</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Invitations</h2>
+    <p class="sub">RFQs you have been invited to. Complete each gate in order.</p>
+    <div id="invList"></div>
+  </div>
+</section>
+
+<section id="view-rfq" style="display:none">
+  <div class="card">
+    <button class="btn btn-ghost" id="backDash" style="margin-bottom:14px">← Back</button>
+    <h2 id="rfqTitle">—</h2>
+    <p class="sub" id="rfqMeta" style="margin-bottom:0"></p>
+    <div class="steps" id="rfqSteps"></div>
+    <div id="rfqBody"></div>
+  </div>
+</section>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const KEY = 'gh_procurement_v1';
+const SESSION = 'gh_vendor_session';
+let db = { vendors:[], rfqs:[], invitations:[], ndas:[], rounds:[], submissions:[], evals:[], norms:[], locks:[], awards:[], agreements:[], workOrders:[], bgs:[] };
+let me = null;
+let currentRfq = null;
+
+function load(){
+  try{ const raw = localStorage.getItem(KEY); if(raw) Object.assign(db, JSON.parse(raw)); }catch(e){}
+  try{ const s = localStorage.getItem(SESSION); if(s) me = db.vendors.find(v=>v.id===s) || null; }catch(e){}
+}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(db)); }catch(e){ toast('Storage full', true); } }
+function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+function esc(s){ return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function bdt(n){ return n==null||n==='' ? '—' : '৳ ' + Number(n).toLocaleString('en-BD',{maximumFractionDigits:2}); }
+function dt(s){ if(!s) return '—'; const d=new Date(s); return isNaN(d)?'—':d.toLocaleString('en-GB',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}); }
+function toast(msg, err){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = 'toast show' + (err?' err':'');
+  clearTimeout(t._h); t._h = setTimeout(()=>t.className='toast', 3200);
+}
+
+const regForm = document.getElementById('regForm');
+const regYoung = document.getElementById('regYoung');
+let otpSent = false;
+
+regForm.incorporation_date.addEventListener('change', () => {
+  const v = regForm.incorporation_date.value;
+  if(!v){ regYoung.style.display='none'; return; }
+  const yrs = (Date.now() - new Date(v).getTime()) / 31557600000;
+  regYoung.style.display = yrs < 5 ? 'block' : 'none';
+});
+
+document.getElementById('sendOtp').addEventListener('click', () => {
+  const m = document.getElementById('regMobile').value.replace(/[\s-]/g,'');
+  if(!/^\+8801[3-9]\d{8}$/.test(m)){ toast('Enter a valid +8801XXXXXXXXX number', true); return; }
+  otpSent = true;
+  document.getElementById('otpHint').innerHTML = 'Code sent to <b>' + esc(m) + '</b>. Demo code: <b>123456</b>.';
+  toast('Verification code sent');
+});
+
+regForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const f = new FormData(regForm);
+  const mobile = (f.get('mobile_bd')||'').replace(/[\s-]/g,'');
+  if(!/^\+8801[3-9]\d{8}$/.test(mobile)){ toast('Mobile must be +8801XXXXXXXXX', true); return; }
+  if(!otpSent){ toast('Send and enter the verification code first', true); return; }
+  if(document.getElementById('otpInput').value.trim() !== '123456'){ toast('Incorrect verification code', true); return; }
+  if(db.vendors.some(v => v.mobile_bd === mobile)){ toast('This mobile number is already registered', true); return; }
+
+  const inc = f.get('incorporation_date');
+  const yrs = (Date.now() - new Date(inc).getTime()) / 31557600000;
+  const young = yrs < 5;
+  if(young && (!f.get('young_company_justification') || !f.get('young_company_approved_by'))){
+    toast('Young company needs justification and approver', true); return;
+  }
+
+  const docs = [];
+  const br = document.getElementById('regBrochure').files[0];
+  if(br) docs.push({type:'brochure', name:br.name, size:br.size});
+  for(const o of document.getElementById('regOther').files) docs.push({type:'other', name:o.name, size:o.size});
+
+  const seq = String(db.vendors.length + 1).padStart(4,'0');
+  const vendor = {
+    id: uid(),
+    reg_no: `GH-VND-${new Date().getFullYear()}-${seq}`,
+    legal_name: f.get('legal_name'), trade_name: f.get('trade_name'),
+    entity_type: f.get('entity_type'), incorporation_date: inc,
+    years_in_business: +yrs.toFixed(2), is_young_company: young,
+    young_company_justification: f.get('young_company_justification') || null,
+    young_company_approved_by: f.get('young_company_approved_by') || null,
+    tin: f.get('tin'), bin: f.get('bin'),
+    address_line: f.get('address_line'), district: f.get('district'),
+    division: f.get('division'), postcode: f.get('postcode'),
+    contact_person: f.get('contact_person'), contact_designation: f.get('contact_designation'),
+    mobile_bd: mobile, mobile_verified_at: new Date().toISOString(),
+    email: f.get('email'),
+    business_category: [], employee_count: null, annual_turnover_bdt: null,
+    status: young ? 'conditional' : 'pending',
+    documents: docs,
+    declarations: {
+      no_conflict_of_interest: !!f.get('no_conflict_of_interest'),
+      no_bribery_undertaking: !!f.get('no_bribery_undertaking'),
+      litigation_disclosed: !!f.get('litigation_disclosed'),
+      litigation_details: f.get('litigation_details') || null
+    },
+    created_at: new Date().toISOString()
+  };
+  db.vendors.push(vendor);
+  save();
+  localStorage.setItem(SESSION, vendor.id);
+  me = vendor;
+  toast(`Registered ${vendor.reg_no}`);
+  render();
+});
+
+document.getElementById('logout').addEventListener('click', () => {
+  localStorage.removeItem(SESSION); me = null; currentRfq = null; render();
+});
+document.getElementById('backDash').addEventListener('click', () => { currentRfq = null; render(); });
+
+function roundOf(rfqId, stage){
+  const rs = db.rounds.filter(r=>r.rfq_id===rfqId && r.stage===stage).sort((a,b)=>b.round_no-a.round_no);
+  return rs[0] || null;
+}
+function ndaOf(rfqId, vid){ return db.ndas.find(n=>n.rfq_id===rfqId && n.vendor_id===vid) || null; }
+function subOf(rfqId, vid, stage){
+  return db.submissions.find(s=>s.rfq_id===rfqId && s.vendor_id===vid && s.stage===stage && s.status==='submitted');
+}
+
+function render(){
+  const reg = document.getElementById('view-register');
+  const dash = document.getElementById('view-dash');
+  const rfqV = document.getElementById('view-rfq');
+  const who = document.getElementById('whoami');
+
+  if(!me){
+    reg.style.display=''; dash.style.display='none'; rfqV.style.display='none';
+    who.textContent = 'Not registered';
+    return;
+  }
+  who.textContent = me.legal_name + ' · ' + me.reg_no;
+
+  if(currentRfq){ reg.style.display='none'; dash.style.display='none'; rfqV.style.display=''; renderRfq(); return; }
+
+  reg.style.display='none'; rfqV.style.display='none'; dash.style.display='';
+  document.getElementById('dashName').textContent = me.legal_name;
+  document.getElementById('dashMeta').innerHTML =
+    `${esc(me.reg_no)} · ${esc(me.district)} · <span class="pill ${me.status==='verified'?'green':me.status==='conditional'?'amber':'gray'}">${esc(me.status)}</span>`;
+
+  const invs = db.invitations.filter(i=>i.vendor_id===me.id);
+  const el = document.getElementById('invList');
+  if(!invs.length){
+    el.innerHTML = '<div class="empty"><b>No invitations yet</b>You will see RFQs here once procurement invites you.</div>';
+    return;
+  }
+  el.innerHTML = invs.map(i=>{
+    const r = db.rfqs.find(x=>x.id===i.rfq_id); if(!r) return '';
+    const nda = !!ndaOf(r.id, me.id);
+    const t = subOf(r.id, me.id, 'technical');
+    const c = subOf(r.id, me.id, 'commercial');
+    const tR = roundOf(r.id,'technical'), cR = roundOf(r.id,'commercial');
+    const done = [nda, t, c].filter(Boolean).length;
+    return `<div style="border:1px solid var(--line);border-radius:9px;padding:14px;margin-bottom:10px">
+      <div class="row">
+        <div style="flex:1;min-width:220px">
+          <div class="mono" style="color:var(--muted)">${esc(r.rfq_no)}</div>
+          <b style="font-size:14px">${esc(r.title)}</b>
+          <div style="font-size:11.5px;color:var(--muted);margin-top:3px">
+            B-1 NDA ${dt(r.nda_deadline)} · B-2 ${dt(r.technical_due_at)} · B-3 ${dt(r.commercial_due_at)}
+          </div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:4px">${done}/3 gates</div>
+          <button class="btn btn-plum btn-sm" data-open="${r.id}">Open</button>
+        </div>
+      </div>
+      <div class="row" style="margin-top:10px;gap:6px">
+        <span class="pill ${nda?'green':'gray'}">B-1 NDA ${nda?'✓':'—'}</span>
+        <span class="pill ${t?'green':tR?.is_open?'blue':'gray'}">B-2 Technical ${t?'✓':tR?.is_open?'open':'closed'}</span>
+        <span class="pill ${c?'green':cR?.is_open?'blue':'gray'}">B-3 Commercial ${c?'✓':cR?.is_open?'open':'closed'}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+document.getElementById('invList').addEventListener('click', e => {
+  const b = e.target.closest('[data-open]'); if(!b) return;
+  currentRfq = b.dataset.open; render();
+});
+
+function renderRfq(){
+  const r = db.rfqs.find(x=>x.id===currentRfq); if(!r) return;
+  document.getElementById('rfqTitle').textContent = r.title;
+  document.getElementById('rfqMeta').innerHTML =
+    `<span class="mono">${esc(r.rfq_no)}</span> · Budget ${bdt(r.budget_estimate)} · ${esc(r.category||'—')}`;
+
+  const ndaRec = ndaOf(r.id, me.id);
+  const nda = !!ndaRec;
+  const t = subOf(r.id, me.id, 'technical');
+  const c = subOf(r.id, me.id, 'commercial');
+  const tR = roundOf(r.id,'technical'), cR = roundOf(r.id,'commercial');
+
+  const steps = [
+    {k:'B-0', t:'Alignment', done:true},
+    {k:'B-1', t:'NDA', done:nda},
+    {k:'B-2', t:'Technical', done:!!t},
+    {k:'B-3', t:'Commercial', done:!!c}
+  ];
+  const nowIdx = steps.findIndex(s=>!s.done);
+  document.getElementById('rfqSteps').innerHTML = steps.map((s,i)=>
+    `<div class="step ${s.done?'done':i===nowIdx?'now':''}"><span class="k">${s.k}</span>${s.t}</div>`).join('');
+
+  let html = '';
+
+  html += `<h3>B-0 · Pre-submission alignment</h3>
+    <div class="note info">Pre-bid meeting: <b>${dt(r.prebid_meeting_at)}</b>. Clarifications are issued to all invited vendors equally.</div>
+    ${r.description ? `<p style="font-size:12.5px;color:var(--muted)">${esc(r.description)}</p>` : ''}`;
+
+  html += `<h3>B-1 · Signed NDA</h3>`;
+  if(ndaRec){
+    html += `<div class="note ok"><b>NDA on record.</b> Signed by ${esc(ndaRec.signatory_name)} (${esc(ndaRec.designation)}) on ${dt(ndaRec.signed_at)}.
+      ${ndaRec.file_name ? `<br><span style="font-size:11.5px">Attachment: ${esc(ndaRec.file_name)}</span>` : ''}</div>`;
+  } else {
+    html += `<div class="note warn">The signed NDA must be submitted on day 1 of the RFQ. Deadline: <b>${dt(r.nda_deadline)}</b>. This unlocks the technical submission zone.</div>
+      <form id="ndaForm">
+        <div class="grid g2">
+          <div><label>Signatory name <span class="req">*</span></label><input name="signatory_name" value="${esc(me.contact_person||'')}" required></div>
+          <div><label>Designation <span class="req">*</span></label><input name="designation" value="${esc(me.contact_designation||'Authorised Signatory')}" required></div>
+        </div>
+        <div style="margin-top:12px">
+          <label>Signed NDA document <span class="req">*</span><span class="bn">স্বাক্ষরিত এনডিএ</span></label>
+          <input type="file" name="nda_file" accept=".pdf,.jpg,.jpeg,.png" required>
+          <p class="hint">PDF or scanned image. The file hash is recorded against your submission.</p>
+        </div>
+        <div class="row end" style="margin-top:14px"><button type="submit" class="btn btn-primary">Submit NDA</button></div>
+      </form>`;
+  }
+
+  html += `<h3>B-2 · Technical submission</h3>`;
+  if(!nda){
+    html += `<div class="lockbox"><b>Locked</b>Submit the signed NDA first to unlock the technical zone.</div>`;
+  } else if(t){
+    html += `<div class="note ok"><b>Submitted — round ${t.round_no}.</b> ${dt(t.submitted_at)}. This cannot be changed unless procurement opens a new round.</div>
+      <dl class="kv">
+        <dt>Scope understanding</dt><dd>${esc(t.payload.scope_understanding||'—')}</dd>
+        <dt>Method statement</dt><dd>${esc(t.payload.method_statement||'—')}</dd>
+        <dt>Programme</dt><dd>${esc(t.payload.programme_days||'—')} days</dd>
+        <dt>Key personnel</dt><dd>${esc((t.payload.key_personnel||[]).join(', ')||'—')}</dd>
+        ${t.files?.length ? `<dt>Attachment</dt><dd>${esc(t.files[0].name)}</dd>` : ''}
+      </dl>`;
+  } else if(!tR?.is_open){
+    html += `<div class="lockbox"><b>Round closed</b>The technical submission window is not open. Procurement will open the next round if required.</div>`;
+  } else {
+    html += `<div class="note info">Round ${tR.round_no} is open. Due <b>${dt(r.technical_due_at)}</b>. Submit strictly per the template — a price-only quotation is not acceptable.</div>
+      <form id="techForm">
+        <div><label>Scope understanding <span class="req">*</span><span class="bn">কাজের পরিধি বোঝাপড়া</span></label><textarea name="scope_understanding" required></textarea></div>
+        <div style="margin-top:12px"><label>Method statement / approach <span class="req">*</span><span class="bn">পদ্ধতি বিবরণ</span></label><textarea name="method_statement" required></textarea></div>
+        <div class="grid g2" style="margin-top:12px">
+          <div><label>Programme (days) <span class="req">*</span></label><input type="number" name="programme_days" min="1" value="90" required></div>
+          <div><label>Key personnel</label><input name="key_personnel" placeholder="Project Manager, Site Engineer…"></div>
+        </div>
+        <div style="margin-top:12px">
+          <label>Technical proposal document <span class="req">*</span><span class="bn">কারিগরি প্রস্তাব</span></label>
+          <input type="file" name="tech_file" accept=".pdf,.doc,.docx,.xls,.xlsx" required>
+          <p class="hint">Completed template plus drawings, ITP and programme.</p>
+        </div>
+        <div class="row end" style="margin-top:14px"><button type="submit" class="btn btn-primary">Submit technical</button></div>
+      </form>`;
+  }
+
+  html += `<h3>B-3 · Commercial submission</h3>`;
+  if(!t){
+    html += `<div class="lockbox"><b>Locked</b>The commercial zone opens after your technical submission is accepted.</div>`;
+  } else if(c){
+    html += `<div class="note ok"><b>Submitted — round ${c.round_no}.</b> ${dt(c.submitted_at)}. Amount ${bdt(c.total_amount)}.</div>`;
+  } else if(!cR?.is_open){
+    html += `<div class="lockbox"><b>Round closed</b>The commercial submission window is not open.</div>`;
+  } else {
+    html += `<div class="note info">Round ${cR.round_no} is open. Due <b>${dt(r.commercial_due_at)}</b>. Price is held separately and opened only after technical evaluation.</div>
+      <form id="commForm">
+        <div class="grid g2">
+          <div><label>Total amount (BDT) <span class="req">*</span><span class="bn">মোট মূল্য</span></label><input type="number" name="total_amount" min="0" step="0.01" required></div>
+          <div><label>Validity (days) <span class="req">*</span></label><input type="number" name="validity_days" min="1" value="90" required></div>
+        </div>
+        <div style="margin-top:12px"><label>Payment terms</label><textarea name="payment_terms">Milestone-based, 10% advance against bank guarantee</textarea></div>
+        <div style="margin-top:12px">
+          <label>Commercial proposal document <span class="req">*</span><span class="bn">বাণিজ্যিক প্রস্তাব</span></label>
+          <input type="file" name="comm_file" accept=".pdf,.xls,.xlsx" required>
+          <p class="hint">Completed BOQ / price schedule.</p>
+        </div>
+        <div class="row end" style="margin-top:14px"><button type="submit" class="btn btn-primary">Submit commercial</button></div>
+      </form>`;
+  }
+
+  document.getElementById('rfqBody').innerHTML = html;
+  bindForms(r);
+}
+
+function bindForms(r){
+  const ndaForm = document.getElementById('ndaForm');
+  if(ndaForm) ndaForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const f = new FormData(ndaForm);
+    const file = ndaForm.nda_file.files[0];
+    if(!file){ toast('Attach the signed NDA', true); return; }
+    db.ndas.push({
+      id: uid(), rfq_id: r.id, vendor_id: me.id,
+      signatory_name: f.get('signatory_name'), designation: f.get('designation'),
+      signed_at: new Date().toISOString(),
+      file_name: file.name, size_bytes: file.size,
+      document_hash: 'sha256:' + Math.random().toString(16).slice(2,18)
+    });
+    save(); toast('NDA submitted'); render();
+  });
+
+  const techForm = document.getElementById('techForm');
+  if(techForm) techForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const f = new FormData(techForm);
+    const file = techForm.tech_file.files[0];
+    if(!file){ toast('Attach the technical proposal', true); return; }
+    const tR = roundOf(r.id,'technical');
+    db.submissions.push({
+      id: uid(), rfq_id: r.id, vendor_id: me.id, stage:'technical', round_no: tR.round_no,
+      status:'submitted', submitted_at: new Date().toISOString(),
+      payload: {
+        scope_understanding: f.get('scope_understanding'),
+        method_statement: f.get('method_statement'),
+        programme_days: +f.get('programme_days') || null,
+        key_personnel: (f.get('key_personnel')||'').split(',').map(s=>s.trim()).filter(Boolean)
+      },
+      files: [{field:'tech_file', name:file.name, size:file.size}],
+      total_amount: null
+    });
+    save(); toast('Technical submission recorded'); render();
+  });
+
+  const commForm = document.getElementById('commForm');
+  if(commForm) commForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const f = new FormData(commForm);
+    const file = commForm.comm_file.files[0];
+    if(!file){ toast('Attach the commercial proposal', true); return; }
+    const cR = roundOf(r.id,'commercial');
+    db.submissions.push({
+      id: uid(), rfq_id: r.id, vendor_id: me.id, stage:'commercial', round_no: cR.round_no,
+      status:'submitted', submitted_at: new Date().toISOString(),
+      payload: { payment_terms: f.get('payment_terms'), validity_days: +f.get('validity_days') || 90 },
+      files: [{field:'comm_file', name:file.name, size:file.size}],
+      total_amount: +f.get('total_amount') || 0
+    });
+    save(); toast('Commercial submission recorded'); render();
+  });
+}
+
+load();
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Procurement Console — grihostiOS</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --plum:#3B1E3F; --plum-deep:#2C1430; --mauve:#8B5CF6; --green:#22C55E;
+  --green-deep:#15803D; --mint:#E9F7EF; --slate:#374151; --muted:#6B7280;
+  --surface:#F7F9FA; --line:#DDE3E8; --white:#fff;
+  --amber:#B45309; --amber-bg:#FEF3C7; --red:#B91C1C; --red-bg:#FEE2E2;
+  --blue:#1D4ED8; --blue-bg:#DBEAFE;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Hind Siliguri',system-ui,sans-serif;background:var(--surface);color:var(--slate);line-height:1.55;font-size:14px}
+.bn{font-family:'Hind Siliguri',sans-serif}
+
+header{background:var(--plum);color:#fff;padding:0 20px;position:sticky;top:0;z-index:50;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.hdr{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:18px;height:58px}
+.hdr h1{font-size:15px;font-weight:700;letter-spacing:.01em}
+.hdr .tag{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(34,197,94,.18);color:#BFF5D3;padding:3px 9px;border-radius:999px}
+.hdr .spacer{flex:1}
+.hdr .who{font-size:12px;color:#D9C9DD}
+
+nav{background:var(--white);border-bottom:1px solid var(--line);position:sticky;top:58px;z-index:40;overflow-x:auto}
+.tabs{max-width:1400px;margin:0 auto;display:flex;gap:2px;padding:0 20px}
+.tab{background:none;border:none;border-bottom:2.5px solid transparent;padding:12px 14px;font:inherit;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;white-space:nowrap}
+.tab:hover{color:var(--plum)}
+.tab.on{color:var(--plum);border-bottom-color:var(--green)}
+.tab .n{display:inline-block;background:var(--line);color:var(--slate);font-size:10px;font-weight:700;padding:1px 6px;border-radius:999px;margin-left:6px}
+.tab.on .n{background:var(--mint);color:var(--green-deep)}
+
+main{max-width:1400px;margin:0 auto;padding:22px 20px 80px}
+.panel{display:none}
+.panel.on{display:block}
+
+.card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:16px}
+.card>h2{font-size:16px;font-weight:700;color:var(--plum);margin-bottom:4px}
+.card>h2+.sub{font-size:12.5px;color:var(--muted);margin-bottom:16px}
+.card h3{font-size:13.5px;font-weight:700;color:var(--plum);margin:18px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.card h3:first-of-type{margin-top:0}
+
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+label{display:block;font-size:11.5px;font-weight:600;color:var(--slate);margin-bottom:4px}
+label .req{color:var(--red)}
+label .bn{display:block;font-size:10.5px;font-weight:400;color:var(--muted);margin-top:1px}
+input,select,textarea{width:100%;font:inherit;font-size:13px;padding:8px 10px;border:1px solid var(--line);border-radius:7px;background:var(--white);color:var(--slate)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--mauve);box-shadow:0 0 0 3px rgba(139,92,246,.12)}
+textarea{resize:vertical;min-height:70px}
+input[type=file]{padding:6px;font-size:12px}
+input[readonly]{background:#F3F4F6;color:var(--muted)}
+
+.btn{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:13px;font-weight:700;padding:9px 16px;border-radius:8px;border:1px solid transparent;cursor:pointer;text-decoration:none}
+.btn-primary{background:var(--green);color:#0B2016}
+.btn-primary:hover{background:#1DB754}
+.btn-plum{background:var(--plum);color:#fff}
+.btn-plum:hover{background:var(--plum-deep)}
+.btn-ghost{background:var(--white);border-color:var(--line);color:var(--slate)}
+.btn-ghost:hover{border-color:var(--mauve);color:var(--plum)}
+.btn-danger{background:var(--red-bg);color:var(--red);border-color:#FCA5A5}
+.btn-sm{padding:5px 11px;font-size:12px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.row.end{justify-content:flex-end}
+
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#F3F5F7;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+tbody tr:hover{background:#FAFBFC}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+
+.pill{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.pill.gray{background:#E5E7EB;color:#4B5563}
+.pill.green{background:var(--mint);color:var(--green-deep)}
+.pill.amber{background:var(--amber-bg);color:var(--amber)}
+.pill.red{background:var(--red-bg);color:var(--red)}
+.pill.blue{background:var(--blue-bg);color:var(--blue)}
+.pill.plum{background:#F3E8F5;color:var(--plum)}
+
+.note{border-radius:8px;padding:11px 14px;font-size:12.5px;margin:12px 0;border:1px solid}
+.note.info{background:var(--blue-bg);border-color:#BFDBFE;color:#1E3A8A}
+.note.warn{background:var(--amber-bg);border-color:#FCD34D;color:#78350F}
+.note.ok{background:var(--mint);border-color:#A7E8C0;color:var(--green-deep)}
+.note.bad{background:var(--red-bg);border-color:#FCA5A5;color:#7F1D1D}
+.note b{font-weight:700}
+
+.steps{display:flex;gap:0;margin:16px 0 20px;flex-wrap:wrap}
+.step{flex:1;min-width:110px;position:relative;padding:10px 8px 10px 26px;font-size:11.5px;font-weight:600;color:var(--muted);background:#F3F5F7;border-right:2px solid var(--white)}
+.step:first-child{border-radius:8px 0 0 8px;padding-left:12px}
+.step:last-child{border-radius:0 8px 8px 0;border-right:none}
+.step.done{background:var(--mint);color:var(--green-deep)}
+.step.now{background:var(--plum);color:#fff}
+.step .k{display:block;font-size:9.5px;font-weight:800;letter-spacing:.06em;opacity:.75;text-transform:uppercase}
+
+.empty{text-align:center;padding:34px 16px;color:var(--muted);font-size:13px}
+.empty b{display:block;color:var(--slate);font-size:14px;margin-bottom:4px}
+
+.kv{display:grid;grid-template-columns:150px 1fr;gap:6px 14px;font-size:12.5px}
+.kv dt{color:var(--muted);font-weight:600}
+.kv dd{color:var(--slate)}
+
+.bar{height:6px;background:var(--line);border-radius:999px;overflow:hidden;margin-top:4px}
+.bar>i{display:block;height:100%;background:var(--green);border-radius:999px}
+
+details{border:1px solid var(--line);border-radius:8px;padding:0;margin-bottom:10px;background:var(--white)}
+details>summary{padding:11px 14px;cursor:pointer;font-size:13px;font-weight:700;color:var(--plum);list-style:none;display:flex;align-items:center;gap:8px}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"▸";color:var(--mauve);font-size:11px}
+details[open]>summary::before{content:"▾"}
+details>summary:hover{background:#FAFBFC}
+details .body{padding:0 14px 14px;border-top:1px solid var(--line)}
+
+.toast{position:fixed;bottom:22px;right:22px;background:var(--plum);color:#fff;padding:12px 18px;border-radius:9px;font-size:13px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.25);opacity:0;transform:translateY(12px);transition:.25s;pointer-events:none;z-index:200;max-width:340px}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast.err{background:var(--red)}
+
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px}
+.hint{font-size:11px;color:var(--muted);margin-top:3px}
+.lock{background:#F3F4F6;border:1px dashed #C7CDD4;border-radius:8px;padding:14px;text-align:center;color:var(--muted);font-size:12.5px}
+
+/* modal */
+.overlay{position:fixed;inset:0;background:rgba(44,20,48,.55);display:none;align-items:center;justify-content:center;z-index:300;padding:20px}
+.overlay.on{display:flex}
+.modal{background:var(--white);border-radius:14px;width:100%;max-width:560px;max-height:88vh;overflow:auto;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.modal header{background:var(--plum);color:#fff;padding:15px 20px;display:flex;align-items:center;gap:10px;position:static;box-shadow:none}
+.modal header h3{font-size:14.5px;font-weight:700;margin:0;border:none;padding:0;color:#fff;flex:1}
+.modal header .x{background:none;border:none;color:#D9C9DD;font-size:20px;line-height:1;cursor:pointer;padding:0 4px}
+.modal header .x:hover{color:#fff}
+.modal .mbody{padding:18px 20px}
+.modal .mfoot{padding:0 20px 18px;display:flex;gap:10px;justify-content:flex-end}
+.modal .mbody .grid{margin-bottom:0}
+.modal .mbody>div+div{margin-top:12px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr">
+    <h1>Procurement Console</h1>
+    <span class="tag">Internal</span>
+    <span class="spacer"></span>
+    <span class="who" id="whoami">Not signed in</span>
+  </div>
+</header>
+
+<nav>
+  <div class="tabs" id="tabs">
+    <button class="tab on" data-p="vendors">Vendors <span class="n" id="n-vendors">0</span></button>
+    <button class="tab" data-p="rfq">RFQs <span class="n" id="n-rfq">0</span></button>
+    <button class="tab" data-p="submissions">Submissions <span class="n" id="n-subs">0</span></button>
+    <button class="tab" data-p="evaluation">Evaluation</button>
+    <button class="tab" data-p="normalization">Normalization</button>
+    <button class="tab" data-p="award">Award &amp; Contract</button>
+    <button class="tab" data-p="standards">Standards</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ===================== VENDORS ===================== -->
+<section class="panel on" id="p-vendors">
+  <div class="card">
+    <h2>Vendor registration</h2>
+    <p class="sub">Free registration with a Bangladeshi mobile number. No licence or certificate is required. Companies incorporated less than 5 years ago may register under the special condition, with a written justification and approver.</p>
+
+    <form id="vendorForm">
+      <h3>1 · Legal identity</h3>
+      <div class="grid g3">
+        <div><label>Legal name <span class="req">*</span><span class="bn">আইনি নাম</span></label><input name="legal_name" required></div>
+        <div><label>Trade name<span class="bn">বাণিজ্যিক নাম</span></label><input name="trade_name"></div>
+        <div><label>Entity type <span class="req">*</span><span class="bn">প্রতিষ্ঠানের ধরন</span></label>
+          <select name="entity_type" required>
+            <option value="">Select…</option>
+            <option value="sole_proprietor">Sole proprietor</option>
+            <option value="partnership">Partnership</option>
+            <option value="private_ltd">Private Ltd</option>
+            <option value="public_ltd">Public Ltd</option>
+            <option value="llp">LLP</option>
+            <option value="cooperative">Cooperative</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div><label>Incorporation date <span class="req">*</span><span class="bn">নিবন্ধনের তারিখ</span></label><input type="date" name="incorporation_date" required></div>
+        <div><label>TIN<span class="bn">টিআইএন</span></label><input name="tin"></div>
+        <div><label>BIN / VAT reg.<span class="bn">বিআইএন / ভ্যাট</span></label><input name="bin"></div>
+      </div>
+
+      <h3>2 · Contact &amp; address</h3>
+      <div class="grid g3">
+        <div><label>Contact person <span class="req">*</span><span class="bn">যোগাযোগ ব্যক্তি</span></label><input name="contact_person" required></div>
+        <div><label>Designation<span class="bn">পদবি</span></label><input name="contact_designation"></div>
+        <div><label>Mobile (+8801XXXXXXXXX) <span class="req">*</span><span class="bn">মোবাইল নম্বর</span></label><input name="mobile_bd" placeholder="+8801712345678" required></div>
+        <div><label>Email <span class="req">*</span><span class="bn">ইমেইল</span></label><input type="email" name="email" required></div>
+        <div><label>Website<span class="bn">ওয়েবসাইট</span></label><input name="website"></div>
+        <div><label>District <span class="req">*</span><span class="bn">জেলা</span></label><input name="district" required></div>
+        <div><label>Division <span class="req">*</span><span class="bn">বিভাগ</span></label><input name="division" required></div>
+        <div><label>Postcode<span class="bn">পোস্ট কোড</span></label><input name="postcode"></div>
+        <div><label>Address <span class="req">*</span><span class="bn">ঠিকানা</span></label><input name="address_line" required></div>
+      </div>
+
+      <h3>3 · Capability</h3>
+      <div class="grid g3">
+        <div><label>Business categories (comma separated)<span class="bn">কাজের ধরন</span></label><input name="business_category" placeholder="civil, steel, electrical"></div>
+        <div><label>Employee count<span class="bn">কর্মী সংখ্যা</span></label><input type="number" name="employee_count" min="0"></div>
+        <div><label>Annual turnover (BDT)<span class="bn">বার্ষিক টার্নওভার</span></label><input type="number" name="annual_turnover_bdt" min="0" step="0.01"></div>
+        <div><label>Bank name<span class="bn">ব্যাংক</span></label><input name="bank_name"></div>
+        <div><label>Branch<span class="bn">শাখা</span></label><input name="bank_branch"></div>
+        <div><label>Account no.<span class="bn">হিসাব নম্বর</span></label><input name="bank_account_no"></div>
+      </div>
+
+      <h3>4 · Brochure &amp; supporting files</h3>
+      <div class="grid g2">
+        <div>
+          <label>Company brochure<span class="bn">ব্রোশিওর</span></label>
+          <input type="file" id="brochureFile" accept=".pdf,.doc,.docx,.ppt,.pptx,.png,.jpg,.jpeg">
+          <p class="hint">Optional. Any additional licence or certificate may be attached but is not required for registration.</p>
+        </div>
+        <div>
+          <label>Other attachments<span class="bn">অন্যান্য সংযুক্তি</span></label>
+          <input type="file" id="otherFiles" multiple>
+          <p class="hint">Trade licence, ISO certificate, audited financials, work-order history — all optional.</p>
+        </div>
+      </div>
+
+      <div id="youngBox" style="display:none">
+        <div class="note warn">
+          <b>Special condition — company under 5 years.</b> Registration is allowed, but a written justification and an approver are mandatory. The vendor is flagged <span class="pill amber">conditional</span> until reviewed.
+        </div>
+        <div class="grid g2">
+          <div><label>Justification <span class="req">*</span><span class="bn">যুক্তি</span></label><textarea name="young_company_justification" placeholder="Relevant experience, technical capacity, key personnel…"></textarea></div>
+          <div><label>Approved by <span class="req">*</span><span class="bn">অনুমোদনকারী</span></label><input name="young_company_approved_by" placeholder="Name / designation"></div>
+        </div>
+      </div>
+
+      <h3>5 · Declarations</h3>
+      <div class="grid g2">
+        <div>
+          <label style="display:flex;gap:8px;align-items:flex-start;font-weight:500">
+            <input type="checkbox" name="no_conflict_of_interest" style="width:auto;margin-top:2px">
+            <span>No conflict of interest with grihostiOS or its officers.<span class="bn">স্বার্থের সংঘাত নেই</span></span>
+          </label>
+          <label style="display:flex;gap:8px;align-items:flex-start;font-weight:500;margin-top:8px">
+            <input type="checkbox" name="no_bribery_undertaking" style="width:auto;margin-top:2px">
+            <span>Anti-bribery undertaking accepted (ISO 37001).<span class="bn">ঘুষবিরোধী অঙ্গীকার</span></span>
+          </label>
+        </div>
+        <div>
+          <label style="display:flex;gap:8px;align-items:flex-start;font-weight:500">
+            <input type="checkbox" name="litigation_disclosed" style="width:auto;margin-top:2px">
+            <span>Litigation / arbitration disclosed.<span class="bn">মামলা প্রকাশ</span></span>
+          </label>
+          <div style="margin-top:8px"><label>Litigation details<span class="bn">মামলার বিবরণ</span></label><textarea name="litigation_details" style="min-height:52px"></textarea></div>
+        </div>
+      </div>
+
+      <div class="row end" style="margin-top:18px">
+        <button type="button" class="btn btn-ghost" id="vendorReset">Clear</button>
+        <button type="submit" class="btn btn-primary">Register vendor</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="card">
+    <h2>Registered vendors</h2>
+    <p class="sub">Vendor master. Status is set by procurement after review.</p>
+    <div id="vendorTable"></div>
+  </div>
+</section>
+
+<!-- ===================== RFQ ===================== -->
+<section class="panel" id="p-rfq">
+  <div class="card">
+    <h2>Float an RFQ</h2>
+    <p class="sub">Four submission levels: <b>B-0</b> pre-submission alignment, <b>B-1</b> signed NDA on day 1, <b>B-2</b> technical proposal, <b>B-3</b> commercial proposal.</p>
+
+    <form id="rfqForm">
+      <div class="grid g3">
+        <div><label>RFQ no. <span class="req">*</span></label><input name="rfq_no" required placeholder="GH-RFQ-2026-001"></div>
+        <div><label>Title <span class="req">*</span><span class="bn">শিরোনাম</span></label><input name="title" required></div>
+        <div><label>Category<span class="bn">শ্রেণি</span></label><input name="category" placeholder="works, goods, services"></div>
+        <div><label>Budget estimate (BDT)<span class="bn">আনুমানিক বাজেট</span></label><input type="number" name="budget_estimate" step="0.01" min="0"></div>
+        <div><label>Published at <span class="req">*</span></label><input type="datetime-local" name="published_at" required></div>
+        <div><label>B-0 pre-bid meeting<span class="bn">প্রাক-দরপত্র সভা</span></label><input type="datetime-local" name="prebid_meeting_at"></div>
+        <div><label>B-1 NDA deadline <span class="req">*</span><span class="bn">এনডিএ শেষ সময়</span></label><input type="datetime-local" name="nda_deadline" required></div>
+        <div><label>B-2 technical due <span class="req">*</span><span class="bn">কারিগরি জমা</span></label><input type="datetime-local" name="technical_due_at" required></div>
+        <div><label>B-3 commercial due <span class="req">*</span><span class="bn">বাণিজ্যিক জমা</span></label><input type="datetime-local" name="commercial_due_at" required></div>
+      </div>
+      <div style="margin-top:12px"><label>Description / scope summary<span class="bn">বিবরণ</span></label><textarea name="description"></textarea></div>
+
+      <h3>Invite vendors</h3>
+      <div id="inviteList" class="grid g3"></div>
+
+      <div class="row end" style="margin-top:16px">
+        <button type="submit" class="btn btn-primary">Publish RFQ</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="card">
+    <h2>RFQ register</h2>
+    <div id="rfqTable"></div>
+  </div>
+</section>
+
+<!-- ===================== SUBMISSIONS ===================== -->
+<section class="panel" id="p-submissions">
+  <div class="card">
+    <h2>Submission control</h2>
+    <p class="sub">Vendors cannot resubmit once a round is submitted. Round 2 and 3 open only when toggled here.</p>
+    <div id="subControl"></div>
+  </div>
+  <div class="card">
+    <h2>Submission log</h2>
+    <div id="subTable"></div>
+  </div>
+</section>
+
+<!-- ===================== EVALUATION ===================== -->
+<section class="panel" id="p-evaluation">
+  <div class="card">
+    <h2>Evaluation</h2>
+    <p class="sub">Score each responsive submission against the weighted criteria. Combined score = technical × 70% + commercial × 30%.</p>
+    <div class="row" style="margin-bottom:14px">
+      <div style="flex:1;min-width:220px"><label>RFQ</label><select id="evalRfq"></select></div>
+    </div>
+    <div id="evalBody"></div>
+  </div>
+</section>
+
+<!-- ===================== NORMALIZATION ===================== -->
+<section class="panel" id="p-normalization">
+  <div class="card">
+    <h2>Normalization &amp; technical lock</h2>
+    <p class="sub">Two rounds of normalization between the parties, then final locking of technical understanding. Locking may take more than one pass.</p>
+    <div class="row" style="margin-bottom:14px">
+      <div style="flex:1;min-width:220px"><label>RFQ</label><select id="normRfq"></select></div>
+    </div>
+    <div id="normBody"></div>
+  </div>
+</section>
+
+<!-- ===================== AWARD ===================== -->
+<section class="panel" id="p-award">
+  <div class="card">
+    <h2>Award, agreement, work order &amp; bank guarantee</h2>
+    <p class="sub">Award the winning vendor, sign the agreement, issue the work order, then record the bank guarantee. The BG is the instrument the vendor can pledge to a bank for working-capital finance.</p>
+    <div class="row" style="margin-bottom:14px">
+      <div style="flex:1;min-width:220px"><label>RFQ</label><select id="awardRfq"></select></div>
+    </div>
+    <div id="awardBody"></div>
+  </div>
+</section>
+
+<!-- ===================== STANDARDS ===================== -->
+<section class="panel" id="p-standards">
+  <div class="card">
+    <h2>Standards mapping</h2>
+    <p class="sub">How each stage maps to recognised international procurement practice.</p>
+    <div id="standardsBody"></div>
+  </div>
+</section>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <header>
+      <h3 id="mTitle">Dialog</h3>
+      <button class="x" id="mClose" aria-label="Close">&times;</button>
+    </header>
+    <div class="mbody" id="mBody"></div>
+    <div class="mfoot">
+      <button class="btn btn-ghost" id="mCancel">Cancel</button>
+      <button class="btn btn-primary" id="mOk">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   Modal — replaces prompt()/confirm()
+   fields: [{key,label,bn,type,value,required,options,placeholder,min,max,step}]
+   ============================================================ */
+const overlay = document.getElementById('overlay');
+let modalResolve = null;
+
+function modal({title, fields = [], okText = 'Confirm', note = ''}){
+  return new Promise(resolve => {
+    modalResolve = resolve;
+    document.getElementById('mTitle').textContent = title;
+    document.getElementById('mOk').textContent = okText;
+
+    const body = document.getElementById('mBody');
+    body.innerHTML = (note ? `<div class="note info">${note}</div>` : '') +
+      fields.map(f => {
+        const id = 'mf_' + f.key;
+        let ctrl;
+        if(f.type === 'select'){
+          ctrl = `<select id="${id}" data-k="${f.key}">${(f.options||[]).map(o=>{
+            const val = typeof o === 'string' ? o : o.value;
+            const lab = typeof o === 'string' ? o : o.label;
+            return `<option value="${esc(val)}"${String(f.value)===String(val)?' selected':''}>${esc(lab)}</option>`;
+          }).join('')}</select>`;
+        } else if(f.type === 'textarea'){
+          ctrl = `<textarea id="${id}" data-k="${f.key}" placeholder="${esc(f.placeholder||'')}">${esc(f.value||'')}</textarea>`;
+        } else {
+          ctrl = `<input id="${id}" data-k="${f.key}" type="${f.type||'text'}"
+            value="${esc(f.value ?? '')}" placeholder="${esc(f.placeholder||'')}"
+            ${f.min!==undefined?`min="${f.min}"`:''} ${f.max!==undefined?`max="${f.max}"`:''}
+            ${f.step!==undefined?`step="${f.step}"`:''}>`;
+        }
+        return `<div><label for="${id}">${esc(f.label)}${f.required?' <span class="req">*</span>':''}${f.bn?`<span class="bn">${esc(f.bn)}</span>`:''}</label>${ctrl}</div>`;
+      }).join('');
+
+    overlay.classList.add('on');
+    const first = body.querySelector('input,select,textarea');
+    if(first) setTimeout(()=>first.focus(), 60);
+  });
+}
+
+function closeModal(result){
+  overlay.classList.remove('on');
+  const r = modalResolve; modalResolve = null;
+  if(r) r(result);
+}
+
+document.getElementById('mCancel').addEventListener('click', ()=>closeModal(null));
+document.getElementById('mClose').addEventListener('click', ()=>closeModal(null));
+overlay.addEventListener('click', e => { if(e.target === overlay) closeModal(null); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape' && overlay.classList.contains('on')) closeModal(null); });
+
+document.getElementById('mOk').addEventListener('click', ()=>{
+  const body = document.getElementById('mBody');
+  const out = {};
+  let missing = null;
+  body.querySelectorAll('[data-k]').forEach(el=>{
+    const v = el.value.trim();
+    if(el.type !== 'checkbox' && v === '' && el.dataset.req === '1' && !missing) missing = el;
+    out[el.dataset.k] = el.type === 'number' ? (v === '' ? null : +v) : v;
+  });
+  if(missing){ missing.focus(); toast('Fill the required field', true); return; }
+  closeModal(out);
+});
+</script>
+
+<script>
+/* ============================================================
+   Store — localStorage backed
+   ============================================================ */
+const KEY = 'gh_procurement_v1';
+const db = {
+  vendors: [], rfqs: [], invitations: [], ndas: [], rounds: [],
+  submissions: [], evals: [], norms: [], locks: [], awards: [],
+  agreements: [], workOrders: [], bgs: []
+};
+
+function load(){
+  try{
+    const raw = localStorage.getItem(KEY);
+    if(raw) Object.assign(db, JSON.parse(raw));
+  }catch(e){ console.warn('load failed', e); }
+}
+function save(){
+  try{ localStorage.setItem(KEY, JSON.stringify(db)); }
+  catch(e){ toast('Storage full — remove some attachments', true); }
+}
+function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+function esc(s){ return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function bdt(n){ return n==null||n==='' ? '—' : '৳ ' + Number(n).toLocaleString('en-BD',{maximumFractionDigits:2}); }
+function dt(s){ if(!s) return '—'; const d=new Date(s); return isNaN(d)?'—':d.toLocaleString('en-GB',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}); }
+function toast(msg, err){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = 'toast show' + (err?' err':'');
+  clearTimeout(t._h); t._h = setTimeout(()=>t.className='toast', 3200);
+}
+
+/* ============================================================
+   Tabs
+   ============================================================ */
+document.getElementById('tabs').addEventListener('click', e => {
+  const b = e.target.closest('.tab'); if(!b) return;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on', t===b));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on', p.id === 'p-'+b.dataset.p));
+  renderAll();
+});
+
+/* ============================================================
+   Vendors
+   ============================================================ */
+const vForm = document.getElementById('vendorForm');
+const youngBox = document.getElementById('youngBox');
+
+vForm.incorporation_date.addEventListener('change', () => {
+  const v = vForm.incorporation_date.value;
+  if(!v){ youngBox.style.display='none'; return; }
+  const yrs = (Date.now() - new Date(v).getTime()) / 31557600000;
+  youngBox.style.display = yrs < 5 ? 'block' : 'none';
+});
+
+vForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const f = new FormData(vForm);
+  const mobile = (f.get('mobile_bd')||'').replace(/[\s-]/g,'');
+  if(!/^\+8801[3-9]\d{8}$/.test(mobile)){
+    toast('Mobile must be +8801XXXXXXXXX', true); return;
+  }
+  if(db.vendors.some(v => v.mobile_bd === mobile)){
+    toast('This mobile number is already registered', true); return;
+  }
+  const inc = f.get('incorporation_date');
+  const yrs = (Date.now() - new Date(inc).getTime()) / 31557600000;
+  const young = yrs < 5;
+
+  if(young && (!f.get('young_company_justification') || !f.get('young_company_approved_by'))){
+    toast('Young company needs justification and approver', true); return;
+  }
+
+  const files = [];
+  const br = document.getElementById('brochureFile').files[0];
+  if(br) files.push({type:'brochure', name:br.name, size:br.size});
+  for(const o of document.getElementById('otherFiles').files){
+    files.push({type:'other', name:o.name, size:o.size});
+  }
+
+  const seq = String(db.vendors.length + 1).padStart(4,'0');
+  const vendor = {
+    id: uid(),
+    reg_no: `GH-VND-${new Date().getFullYear()}-${seq}`,
+    legal_name: f.get('legal_name'),
+    trade_name: f.get('trade_name'),
+    entity_type: f.get('entity_type'),
+    incorporation_date: inc,
+    years_in_business: +yrs.toFixed(2),
+    is_young_company: young,
+    young_company_justification: f.get('young_company_justification') || null,
+    young_company_approved_by: f.get('young_company_approved_by') || null,
+    tin: f.get('tin'), bin: f.get('bin'),
+    address_line: f.get('address_line'),
+    district: f.get('district'), division: f.get('division'), postcode: f.get('postcode'),
+    contact_person: f.get('contact_person'),
+    contact_designation: f.get('contact_designation'),
+    mobile_bd: mobile,
+    mobile_verified_at: new Date().toISOString(),
+    email: f.get('email'), website: f.get('website'),
+    business_category: (f.get('business_category')||'').split(',').map(s=>s.trim()).filter(Boolean),
+    employee_count: f.get('employee_count') ? +f.get('employee_count') : null,
+    annual_turnover_bdt: f.get('annual_turnover_bdt') ? +f.get('annual_turnover_bdt') : null,
+    bank_name: f.get('bank_name'), bank_branch: f.get('bank_branch'), bank_account_no: f.get('bank_account_no'),
+    status: young ? 'conditional' : 'pending',
+    documents: files,
+    declarations: {
+      no_conflict_of_interest: !!f.get('no_conflict_of_interest'),
+      no_bribery_undertaking: !!f.get('no_bribery_undertaking'),
+      litigation_disclosed: !!f.get('litigation_disclosed'),
+      litigation_details: f.get('litigation_details') || null
+    },
+    created_at: new Date().toISOString()
+  };
+  db.vendors.push(vendor);
+  save(); renderAll();
+  vForm.reset(); youngBox.style.display='none';
+  toast(`Registered ${vendor.reg_no}`);
+});
+
+document.getElementById('vendorReset').addEventListener('click', () => {
+  vForm.reset(); youngBox.style.display='none';
+});
+
+function renderVendors(){
+  document.getElementById('n-vendors').textContent = db.vendors.length;
+  const el = document.getElementById('vendorTable');
+  if(!db.vendors.length){
+    el.innerHTML = '<div class="empty"><b>No vendors yet</b>Register the first vendor above.</div>';
+    return;
+  }
+  el.innerHTML = `<table><thead><tr>
+    <th>Reg no.</th><th>Vendor</th><th>Type</th><th class="num">Years</th>
+    <th>Mobile</th><th>District</th><th>Files</th><th>Status</th><th></th>
+  </tr></thead><tbody>${db.vendors.map(v=>`
+    <tr>
+      <td class="mono">${esc(v.reg_no)}</td>
+      <td><b>${esc(v.legal_name)}</b>${v.trade_name?`<br><span style="color:var(--muted);font-size:11.5px">${esc(v.trade_name)}</span>`:''}</td>
+      <td>${esc(v.entity_type.replace(/_/g,' '))}</td>
+      <td class="num">${v.years_in_business.toFixed(1)}${v.is_young_company?' <span class="pill amber">&lt;5y</span>':''}</td>
+      <td class="mono">${esc(v.mobile_bd)}</td>
+      <td>${esc(v.district)}</td>
+      <td>${v.documents.length}</td>
+      <td><span class="pill ${v.status==='verified'?'green':v.status==='conditional'?'amber':v.status==='blacklisted'?'red':'gray'}">${esc(v.status)}</span></td>
+      <td><button class="btn btn-ghost btn-sm" data-vstatus="${v.id}">Set status</button></td>
+    </tr>`).join('')}</tbody></table>`;
+}
+
+document.getElementById('vendorTable').addEventListener('click', async e => {
+  const b = e.target.closest('[data-vstatus]'); if(!b) return;
+  const v = db.vendors.find(x=>x.id===b.dataset.vstatus); if(!v) return;
+  const r = await modal({
+    title: `Status — ${v.legal_name}`,
+    fields: [{key:'status', label:'Vendor status', type:'select', value:v.status,
+      options:['pending','verified','conditional','suspended','blacklisted']}]
+  });
+  if(!r) return;
+  v.status = r.status; save(); renderAll(); toast('Status updated');
+});
+
+/* ============================================================
+   RFQ
+   ============================================================ */
+const rForm = document.getElementById('rfqForm');
+
+function renderInviteList(){
+  const el = document.getElementById('inviteList');
+  if(!db.vendors.length){
+    el.innerHTML = '<div class="note info">Register vendors first — they appear here for invitation.</div>';
+    return;
+  }
+  el.innerHTML = db.vendors.map(v=>`
+    <label style="display:flex;gap:8px;align-items:flex-start;font-weight:500;border:1px solid var(--line);border-radius:7px;padding:8px 10px">
+      <input type="checkbox" name="invite" value="${v.id}" style="width:auto;margin-top:2px">
+      <span><b>${esc(v.legal_name)}</b><br><span style="font-size:11px;color:var(--muted)">${esc(v.reg_no)} · ${esc(v.district)}</span></span>
+    </label>`).join('');
+}
+
+rForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const f = new FormData(rForm);
+  const no = (f.get('rfq_no')||'').trim();
+  if(db.rfqs.some(r=>r.rfq_no===no)){ toast('RFQ number already exists', true); return; }
+
+  const rfq = {
+    id: uid(),
+    rfq_no: no,
+    title: f.get('title'),
+    description: f.get('description'),
+    category: f.get('category'),
+    budget_estimate: f.get('budget_estimate') ? +f.get('budget_estimate') : null,
+    published_at: f.get('published_at'),
+    prebid_meeting_at: f.get('prebid_meeting_at'),
+    nda_deadline: f.get('nda_deadline'),
+    technical_due_at: f.get('technical_due_at'),
+    commercial_due_at: f.get('commercial_due_at'),
+    status: 'published',
+    created_at: new Date().toISOString()
+  };
+  db.rfqs.push(rfq);
+
+  const invited = f.getAll('invite');
+  invited.forEach(vid => db.invitations.push({id:uid(), rfq_id:rfq.id, vendor_id:vid, invited_at:new Date().toISOString()}));
+
+  // open round 1 for both stages
+  ['technical','commercial'].forEach(stage=>{
+    db.rounds.push({id:uid(), rfq_id:rfq.id, stage, round_no:1, is_open:true, opened_at:new Date().toISOString()});
+  });
+
+  save(); renderAll(); rForm.reset();
+  toast(`Published ${rfq.rfq_no} · ${invited.length} vendor(s) invited`);
+});
+
+function renderRfqs(){
+  document.getElementById('n-rfq').textContent = db.rfqs.length;
+  const el = document.getElementById('rfqTable');
+  if(!db.rfqs.length){
+    el.innerHTML = '<div class="empty"><b>No RFQs yet</b>Float the first RFQ above.</div>';
+    return;
+  }
+  el.innerHTML = `<table><thead><tr>
+    <th>RFQ</th><th>Title</th><th class="num">Budget</th><th>B-1 NDA</th><th>B-2 Tech</th><th>B-3 Comm</th>
+    <th class="num">Invited</th><th>Status</th>
+  </tr></thead><tbody>${db.rfqs.map(r=>{
+    const inv = db.invitations.filter(i=>i.rfq_id===r.id).length;
+    return `<tr>
+      <td class="mono">${esc(r.rfq_no)}</td>
+      <td><b>${esc(r.title)}</b></td>
+      <td class="num">${bdt(r.budget_estimate)}</td>
+      <td>${dt(r.nda_deadline)}</td>
+      <td>${dt(r.technical_due_at)}</td>
+      <td>${dt(r.commercial_due_at)}</td>
+      <td class="num">${inv}</td>
+      <td><span class="pill ${r.status==='awarded'?'green':r.status==='cancelled'?'red':'blue'}">${esc(r.status)}</span></td>
+    </tr>`;
+  }).join('')}</tbody></table>`;
+}
+
+/* ============================================================
+   Submissions
+   ============================================================ */
+function roundOf(rfqId, stage){
+  const rs = db.rounds.filter(r=>r.rfq_id===rfqId && r.stage===stage).sort((a,b)=>b.round_no-a.round_no);
+  return rs[0] || null;
+}
+function hasNda(rfqId, vendorId){
+  return db.ndas.some(n=>n.rfq_id===rfqId && n.vendor_id===vendorId);
+}
+function subOf(rfqId, vendorId, stage){
+  return db.submissions.find(s=>s.rfq_id===rfqId && s.vendor_id===vendorId && s.stage===stage && s.status==='submitted');
+}
+
+function renderSubControl(){
+  const el = document.getElementById('subControl');
+  if(!db.rfqs.length){ el.innerHTML='<div class="empty"><b>No RFQs</b>Float an RFQ first.</div>'; return; }
+
+  el.innerHTML = db.rfqs.map(r=>{
+    const inv = db.invitations.filter(i=>i.rfq_id===r.id);
+    const tR = roundOf(r.id,'technical'), cR = roundOf(r.id,'commercial');
+    return `<details ${db.rfqs.length===1?'open':''}>
+      <summary>${esc(r.rfq_no)} — ${esc(r.title)}</summary>
+      <div class="body">
+        <div class="row" style="margin:10px 0">
+          <span class="pill ${tR?.is_open?'green':'gray'}">Technical round ${tR?.round_no||1} ${tR?.is_open?'OPEN':'closed'}</span>
+          <span class="pill ${cR?.is_open?'green':'gray'}">Commercial round ${cR?.round_no||1} ${cR?.is_open?'OPEN':'closed'}</span>
+          <span class="spacer" style="flex:1"></span>
+          <button class="btn btn-ghost btn-sm" data-toggle="${r.id}|technical">Toggle technical</button>
+          <button class="btn btn-ghost btn-sm" data-toggle="${r.id}|commercial">Toggle commercial</button>
+          <button class="btn btn-plum btn-sm" data-nextround="${r.id}|technical">Open next technical round</button>
+          <button class="btn btn-plum btn-sm" data-nextround="${r.id}|commercial">Open next commercial round</button>
+        </div>
+        <table><thead><tr>
+          <th>Vendor</th><th>B-1 NDA</th><th>B-2 Technical</th><th>B-3 Commercial</th><th>Actions</th>
+        </tr></thead><tbody>${inv.map(i=>{
+          const v = db.vendors.find(x=>x.id===i.vendor_id); if(!v) return '';
+          const nda = hasNda(r.id, v.id);
+          const t = subOf(r.id, v.id, 'technical');
+          const c = subOf(r.id, v.id, 'commercial');
+          return `<tr>
+            <td><b>${esc(v.legal_name)}</b><br><span class="mono" style="color:var(--muted)">${esc(v.reg_no)}</span></td>
+            <td>${nda ? `<span class="pill green">Signed</span><br><span style="font-size:11px;color:var(--muted)">${dt(nda.signed_at)}</span>` : `<span class="pill gray">Pending</span>`}</td>
+            <td>${t ? `<span class="pill green">Submitted</span><br><span style="font-size:11px;color:var(--muted)">R${t.round_no} · ${dt(t.submitted_at)}</span>` : `<span class="pill gray">—</span>`}</td>
+            <td>${c ? `<span class="pill green">Submitted</span><br><span style="font-size:11px;color:var(--muted)">R${c.round_no} · ${bdt(c.total_amount)}</span>` : `<span class="pill gray">—</span>`}</td>
+            <td>
+              ${!nda ? `<button class="btn btn-ghost btn-sm" data-nda="${r.id}|${v.id}">Record NDA</button>` : ''}
+              ${nda && !t ? `<button class="btn btn-ghost btn-sm" data-sub="${r.id}|${v.id}|technical">Technical</button>` : ''}
+              ${t && !c ? `<button class="btn btn-ghost btn-sm" data-sub="${r.id}|${v.id}|commercial">Commercial</button>` : ''}
+            </td>
+          </tr>`;
+        }).join('')}</tbody></table>
+      </div>
+    </details>`;
+  }).join('');
+}
+
+document.getElementById('subControl').addEventListener('click', async e => {
+  const tg = e.target.closest('[data-toggle]');
+  if(tg){
+    const [rfqId, stage] = tg.dataset.toggle.split('|');
+    const r = roundOf(rfqId, stage);
+    if(!r) return;
+    r.is_open = !r.is_open;
+    r.opened_at = r.is_open ? new Date().toISOString() : r.opened_at;
+    r.closed_at = r.is_open ? null : new Date().toISOString();
+    save(); renderAll();
+    toast(`${stage} round ${r.round_no} ${r.is_open?'opened':'closed'}`);
+    return;
+  }
+  const nr = e.target.closest('[data-nextround]');
+  if(nr){
+    const [rfqId, stage] = nr.dataset.nextround.split('|');
+    const cur = roundOf(rfqId, stage);
+    const nextNo = (cur?.round_no || 1) + 1;
+    if(cur) cur.is_open = false;
+    db.rounds.push({id:uid(), rfq_id:rfqId, stage, round_no:nextNo, is_open:true, opened_at:new Date().toISOString()});
+    save(); renderAll();
+    toast(`${stage} round ${nextNo} opened`);
+    return;
+  }
+  const nd = e.target.closest('[data-nda]');
+  if(nd){
+    const [rfqId, vendorId] = nd.dataset.nda.split('|');
+    const v = db.vendors.find(x=>x.id===vendorId);
+    const r = await modal({
+      title: 'Record signed NDA',
+      note: 'B-1 — the signed NDA is submitted on day 1 of the RFQ. This unlocks the technical submission zone.',
+      fields: [
+        {key:'signatory_name', label:'Signatory name', required:true, value:v?.contact_person||''},
+        {key:'designation', label:'Designation', required:true, value:v?.contact_designation||'Authorised Signatory'},
+        {key:'signed_at', label:'Signed at', type:'datetime-local', value:new Date().toISOString().slice(0,16)}
+      ],
+      okText: 'Record NDA'
+    });
+    if(!r) return;
+    db.ndas.push({
+      id: uid(), rfq_id: rfqId, vendor_id: vendorId,
+      signatory_name: r.signatory_name, designation: r.designation,
+      signed_at: new Date(r.signed_at || Date.now()).toISOString(),
+      document_hash: 'sha256:' + Math.random().toString(16).slice(2,18)
+    });
+    save(); renderAll(); toast('NDA recorded');
+    return;
+  }
+  const sb = e.target.closest('[data-sub]');
+  if(sb){
+    const [rfqId, vendorId, stage] = sb.dataset.sub.split('|');
+    openSubmission(rfqId, vendorId, stage);
+  }
+});
+
+async function openSubmission(rfqId, vendorId, stage){
+  const r = roundOf(rfqId, stage);
+  if(!r || !r.is_open){ toast('This round is closed', true); return; }
+  const v = db.vendors.find(x=>x.id===vendorId);
+
+  if(stage === 'technical'){
+    const res = await modal({
+      title: `B-2 Technical submission — ${v.legal_name}`,
+      note: `Round ${r.round_no}. Once submitted this cannot be changed unless procurement opens a new round.`,
+      fields: [
+        {key:'scope_understanding', label:'Scope understanding', type:'textarea', required:true,
+         placeholder:'How you read the scope of works…'},
+        {key:'method_statement', label:'Method statement / approach', type:'textarea', required:true},
+        {key:'programme_days', label:'Programme (days)', type:'number', min:1, value:90, required:true},
+        {key:'key_personnel', label:'Key personnel (comma separated)', placeholder:'Project Manager, Site Engineer…'}
+      ],
+      okText: 'Submit technical'
+    });
+    if(!res) return;
+    db.submissions.push({
+      id: uid(), rfq_id: rfqId, vendor_id: vendorId, stage, round_no: r.round_no,
+      status: 'submitted', submitted_at: new Date().toISOString(),
+      payload: {
+        scope_understanding: res.scope_understanding,
+        method_statement: res.method_statement,
+        programme_days: res.programme_days,
+        key_personnel: (res.key_personnel||'').split(',').map(s=>s.trim()).filter(Boolean)
+      },
+      total_amount: null
+    });
+  } else {
+    const res = await modal({
+      title: `B-3 Commercial submission — ${v.legal_name}`,
+      note: `Round ${r.round_no}. Price is held separately from the technical envelope and is only opened after technical evaluation.`,
+      fields: [
+        {key:'total_amount', label:'Total amount (BDT)', type:'number', min:0, step:0.01, required:true},
+        {key:'validity_days', label:'Validity (days)', type:'number', min:1, value:90, required:true},
+        {key:'payment_terms', label:'Payment terms', type:'textarea',
+         value:'Milestone-based, 10% advance against bank guarantee'}
+      ],
+      okText: 'Submit commercial'
+    });
+    if(!res) return;
+    db.submissions.push({
+      id: uid(), rfq_id: rfqId, vendor_id: vendorId, stage, round_no: r.round_no,
+      status: 'submitted', submitted_at: new Date().toISOString(),
+      payload: { payment_terms: res.payment_terms, validity_days: res.validity_days },
+      total_amount: res.total_amount || 0
+    });
+  }
+  save(); renderAll();
+  toast(`${stage} submission recorded (round ${r.round_no})`);
+}
+
+function renderSubs(){
+  const subs = db.submissions.filter(s=>s.status==='submitted');
+  document.getElementById('n-subs').textContent = subs.length;
+  const el = document.getElementById('subTable');
+  if(!subs.length){
+    el.innerHTML = '<div class="empty"><b>No submissions yet</b>Record an NDA, then submit technical and commercial proposals.</div>';
+    return;
+  }
+  el.innerHTML = `<table><thead><tr>
+    <th>RFQ</th><th>Vendor</th><th>Stage</th><th class="num">Round</th>
+    <th class="num">Amount</th><th>Submitted</th><th>Status</th>
+  </tr></thead><tbody>${subs.map(s=>{
+    const v = db.vendors.find(x=>x.id===s.vendor_id);
+    const r = db.rfqs.find(x=>x.id===s.rfq_id);
+    return `<tr>
+      <td class="mono">${esc(r?.rfq_no||'—')}</td>
+      <td>${esc(v?.legal_name||'—')}</td>
+      <td><span class="pill ${s.stage==='technical'?'blue':'plum'}">${esc(s.stage)}</span></td>
+      <td class="num">${s.round_no}</td>
+      <td class="num">${s.stage==='commercial'?bdt(s.total_amount):'—'}</td>
+      <td>${dt(s.submitted_at)}</td>
+      <td><span class="pill green">locked</span></td>
+    </tr>`;
+  }).join('')}</tbody></table>`;
+}
+
+/* ============================================================
+   Evaluation
+   ============================================================ */
+const CRITERIA = [
+  {code:'T1', name:'Scope understanding', weight:25},
+  {code:'T2', name:'Method statement & quality', weight:25},
+  {code:'T3', name:'Programme & resources', weight:20},
+  {code:'T4', name:'Key personnel', weight:20},
+  {code:'T5', name:'HSE & compliance', weight:10}
+];
+
+function fillRfqSelects(){
+  const opts = db.rfqs.map(r=>`<option value="${r.id}">${esc(r.rfq_no)} — ${esc(r.title)}</option>`).join('');
+  ['evalRfq','normRfq','awardRfq'].forEach(id=>{
+    const s = document.getElementById(id);
+    const cur = s.value;
+    s.innerHTML = opts || '<option value="">No RFQs</option>';
+    if(cur) s.value = cur;
+  });
+}
+
+function renderEval(){
+  const rfqId = document.getElementById('evalRfq').value;
+  const el = document.getElementById('evalBody');
+  if(!rfqId){ el.innerHTML='<div class="empty"><b>No RFQ selected</b></div>'; return; }
+
+  const techSubs = db.submissions.filter(s=>s.rfq_id===rfqId && s.stage==='technical' && s.status==='submitted');
+  const commSubs = db.submissions.filter(s=>s.rfq_id===rfqId && s.stage==='commercial' && s.status==='submitted');
+
+  if(!techSubs.length){ el.innerHTML='<div class="empty"><b>No technical submissions</b>Evaluate once vendors submit.</div>'; return; }
+
+  const minComm = commSubs.length ? Math.min(...commSubs.map(s=>s.total_amount||Infinity)) : null;
+
+  const rows = techSubs.map(t=>{
+    const v = db.vendors.find(x=>x.id===t.vendor_id);
+    const c = commSubs.find(s=>s.vendor_id===t.vendor_id);
+    const scores = CRITERIA.map(cr=>{
+      const e = db.evals.find(x=>x.submission_id===t.id && x.code===cr.code);
+      return e ? e.score : null;
+    });
+    const scored = scores.every(s=>s!==null);
+    const techScore = scored ? scores.reduce((a,s,i)=>a + s*CRITERIA[i].weight/100, 0) : null;
+    const commScore = (c && minComm) ? (minComm / c.total_amount) * 100 : null;
+    const combined = (techScore!==null && commScore!==null) ? techScore*0.7 + commScore*0.3 : null;
+    return {t, v, c, scores, techScore, commScore, combined};
+  });
+
+  const ranked = [...rows].filter(r=>r.combined!==null).sort((a,b)=>b.combined-a.combined);
+  ranked.forEach((r,i)=>r.rank = i+1);
+
+  el.innerHTML = `
+    <div class="note info">Technical score is the weighted sum of criteria. Commercial score = lowest price ÷ this price × 100. Combined = technical × 70% + commercial × 30%.</div>
+    <table><thead><tr>
+      <th>Vendor</th>${CRITERIA.map(c=>`<th class="num" title="${esc(c.name)}">${c.code}<br><span style="font-weight:400;font-size:9.5px">${c.weight}%</span></th>`).join('')}
+      <th class="num">Tech</th><th class="num">Price</th><th class="num">Comm</th><th class="num">Combined</th><th class="num">Rank</th>
+    </tr></thead><tbody>
+    ${rows.map(r=>`<tr>
+      <td><b>${esc(r.v?.legal_name||'—')}</b></td>
+      ${CRITERIA.map((c,i)=>`<td class="num">
+        <input type="number" min="0" max="100" step="1" style="width:62px;padding:4px 6px;text-align:right"
+          value="${r.scores[i] ?? ''}" data-score="${r.t.id}|${c.code}" placeholder="—">
+      </td>`).join('')}
+      <td class="num"><b>${r.techScore!==null?r.techScore.toFixed(1):'—'}</b></td>
+      <td class="num">${r.c?bdt(r.c.total_amount):'—'}</td>
+      <td class="num">${r.commScore!==null?r.commScore.toFixed(1):'—'}</td>
+      <td class="num"><b>${r.combined!==null?r.combined.toFixed(1):'—'}</b></td>
+      <td class="num">${r.rank?`<span class="pill ${r.rank===1?'green':'gray'}">${r.rank}</span>`:'—'}</td>
+    </tr>`).join('')}
+    </tbody></table>
+    <p class="hint" style="margin-top:10px">Scores save automatically. Commercial score needs at least one commercial submission.</p>`;
+}
+
+document.getElementById('evalBody').addEventListener('change', e => {
+  const inp = e.target.closest('[data-score]'); if(!inp) return;
+  const [subId, code] = inp.dataset.score.split('|');
+  const val = inp.value === '' ? null : Math.max(0, Math.min(100, +inp.value));
+  const idx = db.evals.findIndex(x=>x.submission_id===subId && x.code===code);
+  if(val === null){ if(idx>=0) db.evals.splice(idx,1); }
+  else if(idx>=0) db.evals[idx].score = val;
+  else db.evals.push({id:uid(), submission_id:subId, code, score:val});
+  save(); renderEval();
+});
+
+/* ============================================================
+   Normalization
+   ============================================================ */
+function renderNorm(){
+  const rfqId = document.getElementById('normRfq').value;
+  const el = document.getElementById('normBody');
+  if(!rfqId){ el.innerHTML='<div class="empty"><b>No RFQ selected</b></div>'; return; }
+
+  const rfq = db.rfqs.find(r=>r.id===rfqId);
+  const inv = db.invitations.filter(i=>i.rfq_id===rfqId);
+  const norms = db.norms.filter(n=>n.rfq_id===rfqId).sort((a,b)=>a.round_no-b.round_no);
+
+  const steps = [
+    {k:'B-1', t:'NDA', done: inv.length>0 && inv.every(i=>hasNda(rfqId,i.vendor_id))},
+    {k:'B-2', t:'Technical', done: inv.length>0 && inv.every(i=>subOf(rfqId,i.vendor_id,'technical'))},
+    {k:'N1', t:'Normalization 1', done: norms.some(n=>n.round_no===1 && n.status==='closed')},
+    {k:'N2', t:'Normalization 2', done: norms.some(n=>n.round_no===2 && n.status==='closed')},
+    {k:'LOCK', t:'Technical lock', done: db.locks.some(l=>l.rfq_id===rfqId)},
+    {k:'B-3', t:'Final commercial', done: inv.length>0 && inv.every(i=>subOf(rfqId,i.vendor_id,'commercial'))}
+  ];
+  const nowIdx = steps.findIndex(s=>!s.done);
+
+  el.innerHTML = `
+    <div class="steps">${steps.map((s,i)=>`<div class="step ${s.done?'done':i===nowIdx?'now':''}"><span class="k">${s.k}</span>${s.t}</div>`).join('')}</div>
+
+    <h3>Normalization sessions</h3>
+    ${[1,2].map(no=>{
+      const n = norms.find(x=>x.round_no===no);
+      return `<div class="card" style="margin-bottom:10px;padding:14px">
+        <div class="row">
+          <b style="flex:1">Round ${no}</b>
+          <span class="pill ${n?.status==='closed'?'green':n?.status==='in_progress'?'amber':'gray'}">${n?.status||'not scheduled'}</span>
+          ${!n ? `<button class="btn btn-ghost btn-sm" data-norm="${rfqId}|${no}|schedule">Schedule</button>` : ''}
+          ${n && n.status==='scheduled' ? `<button class="btn btn-ghost btn-sm" data-norm="${rfqId}|${no}|start">Start</button>` : ''}
+          ${n && n.status==='in_progress' ? `<button class="btn btn-primary btn-sm" data-norm="${rfqId}|${no}|close">Close</button>` : ''}
+        </div>
+        ${n?.minutes ? `<p style="margin-top:8px;font-size:12.5px;color:var(--muted)">${esc(n.minutes)}</p>` : ''}
+      </div>`;
+    }).join('')}
+
+    <h3>Technical lock</h3>
+    ${inv.map(i=>{
+      const v = db.vendors.find(x=>x.id===i.vendor_id);
+      const lock = db.locks.find(l=>l.rfq_id===rfqId && l.vendor_id===i.vendor_id);
+      return `<div class="row" style="padding:8px 0;border-bottom:1px solid var(--line)">
+        <span style="flex:1"><b>${esc(v?.legal_name||'—')}</b></span>
+        ${lock
+          ? `<span class="pill green">Locked · ${lock.passes_taken} pass(es)</span>`
+          : `<button class="btn btn-ghost btn-sm" data-lock="${rfqId}|${i.vendor_id}">Lock technical scope</button>`}
+      </div>`;
+    }).join('')}
+
+    <div class="note ${steps.every(s=>s.done)?'ok':'warn'}" style="margin-top:16px">
+      ${steps.every(s=>s.done)
+        ? '<b>Ready for award.</b> All gates cleared — proceed to the Award tab.'
+        : '<b>Gates remaining.</b> Complete NDA, technical, both normalization rounds, technical lock, then final commercial before award.'}
+    </div>`;
+}
+
+document.getElementById('normBody').addEventListener('click', async e => {
+  const nb = e.target.closest('[data-norm]');
+  if(nb){
+    const [rfqId, no, action] = nb.dataset.norm.split('|');
+    let n = db.norms.find(x=>x.rfq_id===rfqId && x.round_no===+no);
+    if(action==='schedule'){
+      const r = await modal({
+        title: `Schedule normalization round ${no}`,
+        note: 'Bilateral clarification between the parties. Scope must not change — only understanding is aligned.',
+        fields: [{key:'scheduled_at', label:'Scheduled at', type:'datetime-local',
+                  value:new Date().toISOString().slice(0,16), required:true}],
+        okText: 'Schedule'
+      });
+      if(!r) return;
+      db.norms.push({id:uid(), rfq_id:rfqId, round_no:+no, scheduled_at:r.scheduled_at, status:'scheduled', minutes:''});
+    } else if(action==='start' && n){
+      n.status = 'in_progress'; n.held_at = new Date().toISOString();
+    } else if(action==='close' && n){
+      const r = await modal({
+        title: `Close normalization round ${no}`,
+        fields: [{key:'minutes', label:'Minutes / resolution summary', type:'textarea', required:true, value:n.minutes||''}],
+        okText: 'Close round'
+      });
+      if(!r) return;
+      n.status = 'closed'; n.minutes = r.minutes;
+    }
+    save(); renderNorm(); toast('Normalization updated');
+    return;
+  }
+  const lb = e.target.closest('[data-lock]');
+  if(lb){
+    const [rfqId, vendorId] = lb.dataset.lock.split('|');
+    const v = db.vendors.find(x=>x.id===vendorId);
+    const r = await modal({
+      title: `Technical lock — ${v?.legal_name||''}`,
+      note: 'Final locking of technical understanding: every technical aspect is covered. More than one pass is allowed.',
+      fields: [{key:'passes_taken', label:'Passes taken', type:'number', min:1, value:1, required:true}],
+      okText: 'Lock scope'
+    });
+    if(!r) return;
+    db.locks.push({
+      id: uid(), rfq_id: rfqId, vendor_id: vendorId,
+      passes_taken: Math.max(1, r.passes_taken || 1),
+      scope_hash: 'sha256:' + Math.random().toString(16).slice(2,18),
+      locked_by: 'procurement', locked_at: new Date().toISOString()
+    });
+    save(); renderNorm(); toast('Technical scope locked');
+  }
+});
+
+/* ============================================================
+   Award
+   ============================================================ */
+function renderAward(){
+  const rfqId = document.getElementById('awardRfq').value;
+  const el = document.getElementById('awardBody');
+  if(!rfqId){ el.innerHTML='<div class="empty"><b>No RFQ selected</b></div>'; return; }
+
+  const rfq = db.rfqs.find(r=>r.id===rfqId);
+  const award = db.awards.find(a=>a.rfq_id===rfqId);
+  const agreement = award ? db.agreements.find(a=>a.award_id===award.id) : null;
+  const wo = agreement ? db.workOrders.find(w=>w.agreement_id===agreement.id) : null;
+  const bg = wo ? db.bgs.find(b=>b.work_order_id===wo.id) : null;
+
+  const commSubs = db.submissions.filter(s=>s.rfq_id===rfqId && s.stage==='commercial' && s.status==='submitted');
+  const locks = db.locks.filter(l=>l.rfq_id===rfqId);
+  const normsClosed = db.norms.filter(n=>n.rfq_id===rfqId && n.status==='closed').length;
+  const ready = normsClosed >= 2 && locks.length > 0 && commSubs.length > 0;
+
+  let html = `<div class="note ${ready?'ok':'warn'}">
+    ${ready ? '<b>Eligible for award.</b> Two normalization rounds closed, technical scope locked, commercial submissions received.'
+            : `<b>Not yet eligible.</b> Need 2 closed normalization rounds (${normsClosed}/2), at least one technical lock (${locks.length}), and commercial submissions (${commSubs.length}).`}
+  </div>`;
+
+  if(!award){
+    html += `<h3>Select winner</h3>
+      <div class="row">
+        <div style="flex:1;min-width:240px"><label>Winning vendor</label>
+          <select id="winnerSel">
+            <option value="">Select…</option>
+            ${commSubs.map(s=>{
+              const v = db.vendors.find(x=>x.id===s.vendor_id);
+              return `<option value="${s.vendor_id}">${esc(v?.legal_name||'—')} — ${bdt(s.total_amount)}</option>`;
+            }).join('')}
+          </select>
+        </div>
+        <div style="align-self:flex-end"><button class="btn btn-primary" id="doAward" ${ready?'':'disabled'}>Award</button></div>
+      </div>`;
+  } else {
+    const v = db.vendors.find(x=>x.id===award.vendor_id);
+    html += `<h3>Award</h3>
+      <dl class="kv">
+        <dt>Winner</dt><dd><b>${esc(v?.legal_name||'—')}</b> (${esc(v?.reg_no||'')})</dd>
+        <dt>Award amount</dt><dd>${bdt(award.award_amount)}</dd>
+        <dt>Awarded at</dt><dd>${dt(award.awarded_at)}</dd>
+      </dl>`;
+
+    html += `<h3>Agreement</h3>`;
+    if(!agreement){
+      html += `<button class="btn btn-ghost btn-sm" id="doAgreement">Sign agreement</button>`;
+    } else {
+      html += `<dl class="kv">
+        <dt>Agreement no.</dt><dd class="mono">${esc(agreement.agreement_no)}</dd>
+        <dt>Signed at</dt><dd>${dt(agreement.signed_at)}</dd>
+        <dt>Status</dt><dd><span class="pill green">${esc(agreement.status)}</span></dd>
+      </dl>`;
+    }
+
+    if(agreement){
+      html += `<h3>Work order</h3>`;
+      if(!wo){
+        html += `<button class="btn btn-ghost btn-sm" id="doWO">Issue work order</button>`;
+      } else {
+        html += `<dl class="kv">
+          <dt>WO no.</dt><dd class="mono">${esc(wo.wo_no)}</dd>
+          <dt>Value</dt><dd>${bdt(wo.value)}</dd>
+          <dt>Issued</dt><dd>${dt(wo.issued_at)}</dd>
+          <dt>Completion</dt><dd>${esc(wo.completion_date||'—')}</dd>
+        </dl>`;
+      }
+    }
+
+    if(wo){
+      html += `<h3>Bank guarantee</h3>`;
+      if(!bg){
+        html += `<div class="note info">The BG is issued in the employer's favour and is the instrument the vendor can pledge to a bank as security for working-capital finance.</div>
+          <button class="btn btn-ghost btn-sm" id="doBG">Record bank guarantee</button>`;
+      } else {
+        html += `<dl class="kv">
+          <dt>BG no.</dt><dd class="mono">${esc(bg.bg_no)}</dd>
+          <dt>Type</dt><dd><span class="pill plum">${esc(bg.bg_type)}</span></dd>
+          <dt>Amount</dt><dd>${bdt(bg.amount)}</dd>
+          <dt>Issuing bank</dt><dd>${esc(bg.issuing_bank)}${bg.branch?' · '+esc(bg.branch):''}</dd>
+          <dt>Validity</dt><dd>${esc(bg.valid_from)} → ${esc(bg.valid_to)}</dd>
+        </dl>
+        <div class="note ok"><b>Financeable.</b> Vendor may present this BG to a bank to raise working capital against the work order.</div>`;
+      }
+    }
+  }
+
+  el.innerHTML = html;
+}
+
+document.getElementById('awardBody').addEventListener('click', async e => {
+  const rfqId = document.getElementById('awardRfq').value;
+  const rfq = db.rfqs.find(r=>r.id===rfqId);
+
+  if(e.target.id === 'doAward'){
+    const vid = document.getElementById('winnerSel').value;
+    if(!vid){ toast('Select a vendor', true); return; }
+    const sub = db.submissions.find(s=>s.rfq_id===rfqId && s.vendor_id===vid && s.stage==='commercial');
+    const v = db.vendors.find(x=>x.id===vid);
+    const r = await modal({
+      title: 'Confirm award',
+      note: `Awarding <b>${esc(v?.legal_name||'')}</b> at <b>${bdt(sub?.total_amount)}</b>. This closes the RFQ.`,
+      fields: [{key:'award_letter_ref', label:'Award letter reference', placeholder:'GH-AWD-2026-001'}],
+      okText: 'Award'
+    });
+    if(!r) return;
+    db.awards.push({
+      id: uid(), rfq_id: rfqId, vendor_id: vid,
+      award_amount: sub?.total_amount || 0,
+      award_letter_ref: r.award_letter_ref || null,
+      awarded_at: new Date().toISOString(), awarded_by: 'procurement'
+    });
+    if(rfq) rfq.status = 'awarded';
+    save(); renderAll(); toast('Awarded');
+    return;
+  }
+  if(e.target.id === 'doAgreement'){
+    const award = db.awards.find(a=>a.rfq_id===rfqId); if(!award) return;
+    const r = await modal({
+      title: 'Sign agreement',
+      fields: [
+        {key:'agreement_no', label:'Agreement number', required:true,
+         value:`GH-AGR-${new Date().getFullYear()}-${String(db.agreements.length+1).padStart(3,'0')}`},
+        {key:'effective_date', label:'Effective date', type:'date', value:new Date().toISOString().slice(0,10), required:true}
+      ],
+      okText: 'Sign'
+    });
+    if(!r) return;
+    db.agreements.push({
+      id: uid(), award_id: award.id, agreement_no: r.agreement_no,
+      signed_at: new Date().toISOString(),
+      effective_date: r.effective_date,
+      status: 'signed'
+    });
+    save(); renderAward(); toast('Agreement signed');
+    return;
+  }
+  if(e.target.id === 'doWO'){
+    const award = db.awards.find(a=>a.rfq_id===rfqId);
+    const ag = db.agreements.find(a=>a.award_id===award?.id); if(!ag) return;
+    const r = await modal({
+      title: 'Issue work order',
+      fields: [
+        {key:'wo_no', label:'Work order number', required:true,
+         value:`GH-WO-${new Date().getFullYear()}-${String(db.workOrders.length+1).padStart(3,'0')}`},
+        {key:'value', label:'Value (BDT)', type:'number', min:0, step:0.01, required:true, value:award.award_amount},
+        {key:'completion_date', label:'Completion date', type:'date'},
+        {key:'scope_summary', label:'Scope summary', type:'textarea'}
+      ],
+      okText: 'Issue'
+    });
+    if(!r) return;
+    db.workOrders.push({
+      id: uid(), agreement_id: ag.id, wo_no: r.wo_no,
+      issued_at: new Date().toISOString(),
+      value: r.value || 0, completion_date: r.completion_date || null,
+      scope_summary: r.scope_summary || null
+    });
+    save(); renderAward(); toast('Work order issued');
+    return;
+  }
+  if(e.target.id === 'doBG'){
+    const award = db.awards.find(a=>a.rfq_id===rfqId);
+    const ag = db.agreements.find(a=>a.award_id===award?.id);
+    const wo = db.workOrders.find(w=>w.agreement_id===ag?.id); if(!wo) return;
+    const r = await modal({
+      title: 'Record bank guarantee',
+      note: 'Issued in the employer\'s favour. The vendor may pledge this instrument to a bank as security for working-capital finance.',
+      fields: [
+        {key:'bg_no', label:'BG number', required:true},
+        {key:'bg_type', label:'BG type', type:'select', value:'performance',
+         options:['performance','advance','retention','warranty']},
+        {key:'amount', label:'Amount (BDT)', type:'number', min:0, step:0.01, required:true,
+         value:Math.round(wo.value*0.1)},
+        {key:'issuing_bank', label:'Issuing bank', required:true},
+        {key:'branch', label:'Branch'},
+        {key:'valid_from', label:'Valid from', type:'date', value:new Date().toISOString().slice(0,10), required:true},
+        {key:'valid_to', label:'Valid to', type:'date', required:true}
+      ],
+      okText: 'Record BG'
+    });
+    if(!r) return;
+    db.bgs.push({
+      id: uid(), work_order_id: wo.id, bg_no: r.bg_no, bg_type: r.bg_type,
+      amount: r.amount || 0, issuing_bank: r.issuing_bank, branch: r.branch || null,
+      valid_from: r.valid_from, valid_to: r.valid_to,
+      verified_at: new Date().toISOString(), verified_by: 'procurement'
+    });
+    save(); renderAward(); toast('Bank guarantee recorded');
+  }
+});
+
+/* ============================================================
+   Standards
+   ============================================================ */
+function renderStandards(){
+  const rows = [
+    ['Vendor registration', 'Open, free, mobile-verified', 'MDB eligibility screening; UNGM registration', 'No licence required at entry; young-company exception documented'],
+    ['B-0 Pre-submission alignment', 'Pre-bid meeting', 'World Bank / ADB pre-bid conference', 'Clarifications issued to all bidders equally'],
+    ['B-1 NDA', 'Signed on day 1', 'Standard commercial practice; FIDIC confidentiality', 'Gate to technical zone'],
+    ['B-2 Technical submission', 'Templated, one-shot', 'Two-envelope / two-stage bidding (World Bank, FIDIC)', 'Immutable after submit; round 2 only by backend toggle'],
+    ['B-3 Commercial submission', 'Templated, one-shot', 'Two-envelope system — price opened after technical pass', 'Separated from technical to prevent bias'],
+    ['Evaluation', 'Weighted criteria, multi-evaluator', 'MDB rated criteria; ISO 37001 controls', 'Technical 70% / commercial 30%, lowest-price basis for price score'],
+    ['Normalization ×2', 'Bilateral clarification rounds', 'Clarification / negotiation phase under FIDIC & MDB', 'Two rounds, minuted, no change to scope'],
+    ['Technical lock', 'Final scope agreement', 'FIDIC Cl. 13 variation discipline', 'Multi-pass allowed; scope hash recorded'],
+    ['Final commercial', 'Post-lock price', 'Best and final offer (BAFO)', 'Only after technical lock'],
+    ['Award', 'Letter of award', 'MDB notification of award', 'Single winner per RFQ'],
+    ['Agreement', 'Signed contract', 'FIDIC Short Form / Red Book', 'Precedence of documents recorded'],
+    ['Work order', 'Issued after signing', 'Purchase order / call-off under framework', 'Value, completion date, scope summary'],
+    ['Bank guarantee', 'Performance / advance BG', 'FIDIC Cl. 4.2 performance security', 'Assignable — vendor can pledge for finance'],
+    ['Audit', 'Append-only log', 'ISO 37001 anti-bribery; ISO 9001 traceability', 'Every transition recorded with actor and timestamp']
+  ];
+  document.getElementById('standardsBody').innerHTML = `
+    <table><thead><tr><th>Stage</th><th>grihostiOS control</th><th>International practice</th><th>Implementation note</th></tr></thead>
+    <tbody>${rows.map(r=>`<tr><td><b>${esc(r[0])}</b></td><td>${esc(r[1])}</td><td>${esc(r[2])}</td><td style="color:var(--muted)">${esc(r[3])}</td></tr>`).join('')}</tbody></table>
+    <div class="note info" style="margin-top:16px">
+      <b>Two-envelope principle.</b> Technical and commercial submissions are held separately and the commercial envelope is only opened after the technical evaluation is complete. This is the core control that prevents price from influencing technical judgement.
+    </div>`;
+}
+
+/* ============================================================
+   Render all
+   ============================================================ */
+function renderAll(){
+  renderVendors();
+  renderInviteList();
+  renderRfqs();
+  renderSubControl();
+  renderSubs();
+  fillRfqSelects();
+  renderEval();
+  renderNorm();
+  renderAward();
+  renderStandards();
+}
+
+load();
+renderAll();
+document.getElementById('whoami').textContent = 'Local session · ' + db.vendors.length + ' vendors';
+</script>
+</body>
+</html>
