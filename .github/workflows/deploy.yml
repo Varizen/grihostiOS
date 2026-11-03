@@ -31,6 +31,18 @@ jobs:
           done
           # assets/brand/ is an internal reference set and is not published
           find assets -maxdepth 1 -type f -exec cp {} dist/assets/ \;
+          # subfolder page bundles (e.g. rfq/, procurement/)
+          for d in */; do
+            d="${d%/}"
+            case "$d" in
+              assets|dist|brandcenter|scripts|node_modules|.git|.github|.wrangler) continue ;;
+            esac
+            if compgen -G "$d/*.html" > /dev/null; then
+              mkdir -p "dist/$d"
+              cp "$d"/*.html "dist/$d"/
+              [ -f "$d/README.md" ] && cp "$d/README.md" "dist/$d"/
+            fi
+          done
           echo "Bundle contents:"
           find dist -type f | sort
 
