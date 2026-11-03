@@ -17,6 +17,16 @@ foreach ($f in @("_headers", "_redirects")) {
 # all root-level HTML pages
 Get-ChildItem $src -File -Filter *.html | Copy-Item -Destination $dist
 
+# subfolder page bundles (e.g. rfq/)
+Get-ChildItem $src -Directory |
+    Where-Object { $_.Name -notin @('assets', 'dist', 'brandcenter', 'scripts', '.git', '.github', '.wrangler') } |
+    Where-Object { Get-ChildItem $_.FullName -File -Filter *.html -ErrorAction SilentlyContinue } |
+    ForEach-Object {
+        $target = Join-Path $dist $_.Name
+        New-Item -ItemType Directory $target -Force | Out-Null
+        Get-ChildItem $_.FullName -File | Copy-Item -Destination $target
+    }
+
 New-Item -ItemType Directory (Join-Path $dist "assets") | Out-Null
 Get-ChildItem (Join-Path $src "assets") -File | Copy-Item -Destination (Join-Path $dist "assets")
 

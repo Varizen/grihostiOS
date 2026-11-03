@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposal Submission Template — Architectural Design &amp; Engineering | grihostiOS</title>
+<meta name="description" content="Bilingual (English / Bangla) proposal submission template for a 2-storey Semi-Commercial + Residential Mixed-Use Complex on 1,692 sq ft. English numerals only.">
+<meta name="theme-color" content="#2C1430">
+<meta name="robots" content="noindex">
+<link rel="icon" href="../assets/favicon.png" sizes="512x512">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --plum: #3B1E3F;
+    --plum-deep: #2C1430;
+    --mauve: #8B5CF6;
+    --green: #22C55E;
+    --green-deep: #15803D;
+    --mint: #E9F7EF;
+    --ink: #1F2430;
+    --slate: #374151;
+    --muted: #6B7280;
+    --line: #D2DBE3;
+    --line-soft: #E6EBF0;
+  }
+
+  @page { size: A4; margin: 12mm 12mm 10mm; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    background: #E8EBEF;
+    color: var(--ink);
+    font-size: 9.3pt;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+  }
+  .bn, [lang="bn"] { font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; }
+  ::selection { background: var(--green); color: #06210F; }
+
+  /* ---------- screen toolbar ---------- */
+  .toolbar {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; flex-wrap: wrap;
+    padding: 9px 18px;
+    background: rgba(44, 20, 48, .97);
+    color: #fff;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, .08);
+  }
+  .tb-brand { display: flex; align-items: center; gap: 10px; font-size: 12px; color: #E8DCEB; }
+  .tb-brand img { height: 25px; display: block; }
+  .tb-brand b { color: #fff; font-weight: 700; }
+  .tb-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .hint { font-size: 11px; color: #C6B3CB; display: inline-flex; align-items: center; gap: 7px; }
+  .hint::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+  .tb-btn {
+    font: inherit; font-size: 12px; font-weight: 700;
+    border: 0; border-radius: 999px; padding: 8px 16px; cursor: pointer;
+    transition: background .16s, transform .16s;
+  }
+  .tb-btn.primary { background: var(--green); color: #06210F; }
+  .tb-btn.primary:hover { background: #1DB754; transform: translateY(-1px); }
+  .tb-btn.ghost { background: transparent; color: #E8DCEB; border: 1.4px solid rgba(255, 255, 255, .28); }
+  .tb-btn.ghost:hover { border-color: var(--green); color: var(--green); }
+
+  /* ---------- paper ---------- */
+  .doc { display: grid; gap: 18px; justify-items: center; padding: 20px 10px 56px; }
+  .sheet {
+    width: 210mm; min-height: 297mm;
+    background: #fff;
+    padding: 13mm 14mm 11mm;
+    box-shadow: 0 12px 30px rgba(31, 36, 48, .16);
+    display: flex; flex-direction: column;
+  }
+
+  .sheet-foot {
+    margin-top: auto; padding-top: 2.4mm;
+    border-top: 1px solid var(--line-soft);
+    display: flex; align-items: baseline; justify-content: space-between; gap: 5mm;
+    font-size: 7.2pt; color: #8A97A3;
+  }
+  .sheet-foot b { color: var(--slate); font-weight: 600; }
+  .foot-gap { flex: 1; border-bottom: 1px dotted #B4BEC8; }
+
+  /* ---------- cover ---------- */
+  .cover {
+    background: linear-gradient(135deg, var(--plum) 0%, var(--plum-deep) 56%, #4A2450 100%);
+    color: #fff; border-radius: 2.6mm; padding: 8mm 8mm 6.5mm;
+    position: relative; overflow: hidden;
+  }
+  .cover::after {
+    content: ""; position: absolute; right: -22mm; top: -28mm;
+    width: 70mm; height: 70mm; border-radius: 50%;
+    background: radial-gradient(circle, rgba(139, 92, 246, .48), transparent 68%);
+  }
+  .cover > * { position: relative; z-index: 1; }
+  .cover-logo { height: 28px; display: block; margin-bottom: 6mm; }
+  .cover-kicker {
+    font-size: 7.4pt; font-weight: 700; letter-spacing: .17em;
+    text-transform: uppercase; color: var(--green);
+    display: inline-flex; align-items: center; gap: 2mm;
+  }
+  .cover-kicker::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+  .cover h1 {
+    font-size: 22pt; line-height: 1.12; font-weight: 800;
+    letter-spacing: -.02em; margin-top: 3.2mm;
+  }
+  .cover h1 .accent { color: var(--green); }
+  .cover-bn { font-size: 14.5pt; font-weight: 600; color: #E4D8E7; margin-top: 2.8mm; line-height: 1.5; }
+  .cover-rule { height: 1px; background: rgba(255, 255, 255, .18); margin: 5mm 0 4.2mm; }
+  .cover-sub { font-size: 9.2pt; color: #D5C6D9; line-height: 1.55; }
+  .cover-sub + .cover-sub { margin-top: 1.3mm; }
+  .cover-sub .en-num { color: #fff; font-weight: 600; }
+  .cover-foot {
+    margin-top: 6mm; padding-top: 3.4mm;
+    border-top: 1px solid rgba(255, 255, 255, .16);
+    display: flex; justify-content: space-between; gap: 6mm;
+    font-size: 7.5pt; color: #C3AFC9; letter-spacing: .03em;
+  }
+  .cover-foot b { color: #fff; font-weight: 600; }
+
+  /* ---------- headings ---------- */
+  .sec {
+    display: flex; align-items: center; gap: 2.4mm;
+    font-size: 11.5pt; font-weight: 800; letter-spacing: -.01em; color: var(--plum);
+    border-bottom: 2px solid var(--mint);
+    padding-bottom: 2mm; margin: 6mm 0 0;
+  }
+  .sheet > .sec:first-child { margin-top: 0; }
+  .sec .num {
+    display: inline-grid; place-items: center; flex: none;
+    min-width: 6.4mm; height: 6.4mm; border-radius: 1.5mm;
+    background: var(--green); color: #06210F;
+    font-size: 8.6pt; font-weight: 800;
+  }
+  .sec-bn { font-size: 8.6pt; color: var(--muted); line-height: 1.4; margin: 1.4mm 0 3.6mm; }
+
+  h3 { font-size: 9.6pt; font-weight: 700; color: var(--plum); margin: 4mm 0 1mm; }
+  h3 .bn { display: block; font-weight: 400; font-size: 8pt; color: var(--muted); }
+  .sheet > h3:first-child { margin-top: 0; }
+  p { font-size: 8.6pt; }
+  p > .bn { display: block; color: var(--muted); margin-top: .5mm; }
+  p + p { margin-top: 1.5mm; }
+
+  /* ---------- tables ---------- */
+  table.grid {
+    width: 100%; border-collapse: collapse; table-layout: fixed;
+    font-size: 8.7pt; margin-bottom: 2.4mm;
+  }
+  table.grid th, table.grid td { border: 1px solid var(--line); padding: 1.5mm 1.8mm; vertical-align: top; }
+  table.grid th {
+    background: var(--mint); color: var(--plum);
+    font-size: 8.3pt; font-weight: 700; text-align: left; line-height: 1.26;
+  }
+  table.grid th .bn { display: block; font-weight: 400; font-size: 7.3pt; color: #7E6C83; margin-top: .3mm; }
+  table.grid td .bn { display: block; font-size: 7.5pt; color: var(--muted); }
+  table.grid td.c, table.grid th.c { text-align: center; }
+  table.grid td.r, table.grid th.r { text-align: right; }
+  table.grid tr.total td { background: #F5FAF7; font-weight: 700; color: var(--plum); }
+  table.grid .idx { text-align: center; font-weight: 700; color: var(--green-deep); font-size: 8pt; }
+
+  /* ---------- fields ---------- */
+  .fld {
+    font: inherit; font-size: 8.6pt; color: var(--ink);
+    width: 100%; min-height: 7mm;
+    background: #FCFEFD;
+    border: 1px solid var(--line);
+    border-radius: 1.1mm;
+    padding: 1mm 1.6mm;
+  }
+  .fld:focus { outline: 2px solid rgba(34, 197, 94, .32); border-color: var(--green); background: #fff; }
+  .fld::placeholder { color: #AAB5BF; font-size: 7.9pt; }
+  .fld.c { text-align: center; }
+  .fld.r { text-align: right; }
+  .fld[readonly] { background: #F2F6F4; color: var(--slate); }
+  textarea.fld { min-height: 14mm; resize: vertical; line-height: 1.48; display: block; }
+  input[type="checkbox"] { accent-color: var(--green-deep); width: 3.1mm; height: 3.1mm; vertical-align: -.3mm; }
+
+  .lbl {
+    display: block; font-size: 7.5pt; font-weight: 700; color: var(--plum);
+    line-height: 1.22; margin-bottom: .9mm;
+  }
+  .lbl .bn { display: block; font-weight: 400; font-size: 7.3pt; color: #8A97A3; margin-top: .2mm; }
+  .lbl.inline { display: inline-flex; align-items: center; gap: 1.6mm; font-weight: 600; font-size: 8.1pt; margin: 0; }
+
+  .fgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.2mm 4.2mm; }
+  .fg { min-width: 0; }
+  .fg.wide { grid-column: 1 / -1; }
+
+  /* ---------- lists ---------- */
+  ol.ins { padding-left: 4.4mm; margin-top: .4mm; }
+  ol.ins li { font-size: 8.4pt; margin-bottom: 1.7mm; padding-left: .4mm; }
+  ol.ins li::marker { color: var(--green-deep); font-weight: 700; }
+  ol.ins li .bn { display: block; color: var(--muted); font-size: 7.8pt; line-height: 1.35; margin-top: .2mm; }
+
+  /* ---------- notes ---------- */
+  .note {
+    border-left: 3px solid var(--green);
+    background: var(--mint);
+    border-radius: 0 1.4mm 1.4mm 0;
+    padding: 2.5mm 3.2mm;
+    font-size: 8pt; color: var(--slate);
+  }
+  .note strong { color: var(--plum); }
+  .note .bn { display: block; color: #4B6156; margin-top: .7mm; }
+
+  .warn {
+    border: 1px dashed #C0A9C6; border-radius: 1.4mm;
+    padding: 2.2mm 3mm; font-size: 7.8pt; color: #6B5A70;
+    background: #FCFAFD;
+  }
+  .warn .bn { display: block; margin-top: .5mm; }
+
+  /* ---------- checklist ---------- */
+  .checks { display: grid; grid-template-columns: 1fr 1fr; gap: 1.7mm 4mm; margin-top: .4mm; }
+  .checks.one { grid-template-columns: 1fr; }
+  .chk { display: flex; align-items: flex-start; gap: 1.8mm; font-size: 8.2pt; line-height: 1.3; }
+  .chk input { margin-top: .5mm; flex: none; }
+  .chk .bn { display: block; color: var(--muted); font-size: 7.5pt; }
+
+  /* ---------- signature ---------- */
+  .sig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.8mm; margin-top: 1.6mm; }
+  .sig {
+    border: 1px solid var(--line); border-radius: 1.4mm; padding: 2.6mm;
+    min-height: 26mm; display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .sig .cap {
+    font-size: 7.1pt; color: var(--muted);
+    border-top: 1px solid #A9B5BF; padding-top: 1.2mm; margin-top: 10mm;
+  }
+  .sig .cap .bn { display: block; font-size: 6.9pt; }
+  .stamp {
+    border: 1.4px dashed #B9A3BE; border-radius: 1.4mm;
+    min-height: 24mm; display: grid; place-items: center;
+    font-size: 7.3pt; color: #9C86A1; text-align: center; padding: 2mm;
+  }
+  .stamp .bn { display: block; font-size: 6.9pt; }
+
+  .callsign { font-size: 7pt; color: #93A0AB; letter-spacing: .04em; text-transform: uppercase; text-align: center; }
+
+  /* ---------- contents ---------- */
+  table.toc { width: 100%; border-collapse: collapse; font-size: 8.2pt; }
+  table.toc td { padding: .85mm 1mm; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+  table.toc tr:last-child td { border-bottom: 0; }
+  table.toc .n { width: 7%; font-weight: 700; color: var(--green-deep); }
+  table.toc .t { width: 31%; }
+  table.toc .t .bn { display: block; color: var(--muted); font-size: 7.4pt; line-height: 1.25; }
+  table.toc .p { width: 9%; text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; }
+  table.toc .spacer { width: 6%; border-bottom: 0; }
+
+  /* ---------- print ---------- */
+  @media print {
+    body { background: #fff; }
+    .toolbar { display: none !important; }
+    .doc { display: block; padding: 0; }
+    .sheet {
+      width: auto; min-height: 273mm;
+      padding: 0; box-shadow: none;
+      break-after: page; page-break-after: always;
+    }
+    .sheet:last-child { break-after: auto; page-break-after: auto; }
+    .fld { background: #fff; border-color: #BCC7D0; }
+    .fld[readonly] { background: #F4F7F5; }
+    .cover, table.grid th, .note, .sec .num, .warn, .stamp, tr.total td {
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    }
+  }
+
+  @media screen and (max-width: 840px) {
+    .doc { padding: 12px 8px 44px; }
+    .sheet { width: 100%; min-height: 0; padding: 18px 15px; }
+    .fgrid, .checks, .sig-grid { grid-template-columns: 1fr; }
+    .cover h1 { font-size: 17pt; }
+    .cover-bn { font-size: 11.5pt; }
+    table.grid { font-size: 7.9pt; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar" role="toolbar" aria-label="Document actions">
+  <div class="tb-brand">
+    <img src="../assets/logo-on-dark.png" alt="grihostiOS">
+    <span><b>Proposal Submission Template</b> · GH-ADS-2026-01</span>
+  </div>
+  <div class="tb-actions">
+    <span class="hint">Digits in English only (0–9) · Bangla under English</span>
+    <button class="tb-btn primary" type="button" data-act="print">Print / Save as PDF</button>
+    <button class="tb-btn ghost" type="button" data-act="reset">Clear form</button>
+  </div>
+</div>
+
+<main class="doc">
+
+  <!-- ================= PAGE 1 — COVER ================= -->
+  <article class="sheet" id="page-1">
+
+    <div class="cover">
+      <img class="cover-logo" src="../assets/logo-on-dark.png" alt="grihostiOS">
+      <div class="cover-kicker">Proposal Submission Template</div>
+      <h1>Architectural Design<br>&amp; <span class="accent">Engineering Proposal</span></h1>
+      <p class="cover-bn" lang="bn">স্থাপত্য নকশা ও ইঞ্জিনিয়ারিং — প্রস্তাব জমাদানের টেমপ্লেট</p>
+      <div class="cover-rule"></div>
+      <p class="cover-sub">2-Storey Semi-Commercial + Residential Mixed-Use Complex</p>
+      <p class="cover-sub bn" lang="bn">2-তলা সেমি-কমার্শিয়াল ও আবাসিক মিক্সড-ইউজ কমপ্লেক্স</p>
+      <p class="cover-sub">Land area <span class="en-num">1,692 sq ft</span> &nbsp;·&nbsp; Height <span class="en-num">2 storeys</span> (Ground + First) &nbsp;·&nbsp; Document <span class="en-num">GH-ADS-2026-01</span></p>
+      <div class="cover-foot">
+        <span>Issued by <b>grihostiOS</b> · grihosti.xyz</span>
+        <span>Issue date <b>03-11-2026</b> · Rev. <b>00</b></span>
+        <span><b>12</b> pages</span>
+      </div>
+    </div>
+
+    <h2 class="sec"><span class="num">01</span> Document Control</h2>
+    <p class="sec-bn" lang="bn">নথি নিয়ন্ত্রণ</p>
+
+    <table class="grid">
+      <colgroup>
+        <col style="width:20%"><col style="width:30%"><col style="width:20%"><col style="width:30%">
+      </colgroup>
+      <tbody>
+        <tr>
+          <th>Document No.<span class="bn" lang="bn">নথি নম্বর</span></th>
+          <td><b>GH-ADS-2026-01</b></td>
+          <th>Revision<span class="bn" lang="bn">সংশোধনী</span></th>
+          <td><b>Rev. 00</b></td>
+        </tr>
+        <tr>
+          <th>Issue Date<span class="bn" lang="bn">ইস্যু তারিখ</span></th>
+          <td><b>03-11-2026</b></td>
+          <th>Pages<span class="bn" lang="bn">পৃষ্ঠা সংখ্যা</span></th>
+          <td><b>12</b></td>
+        </tr>
+        <tr>
+          <th>Submission Deadline<span class="bn" lang="bn">জমাদানের শেষ তারিখ</span></th>
+          <td><input class="fld" type="text" placeholder="DD-MM-YYYY, HH:MM"></td>
+          <th>Proposal Validity<span class="bn" lang="bn">প্রস্তাবের বৈধতা</span></th>
+          <td><input class="fld" type="text" placeholder="60 days"></td>
+        </tr>
+        <tr>
+          <th>Submission Method<span class="bn" lang="bn">জমাদানের মাধ্যম</span></th>
+          <td><input class="fld" type="text" placeholder="Email / Portal / Physical"></td>
+          <th>Inviting Authority<span class="bn" lang="bn">প্রস্তাব আহ্বানকারী</span></th>
+          <td><input class="fld" type="text" placeholder="Organisation / Owner"></td>
+        </tr>
+        <tr>
+          <th>Bidder Reference No.<span class="bn" lang="bn">প্রস্তাবদাতার রেফারেন্স</span></th>
+          <td><input class="fld" type="text" inputmode="numeric" placeholder="0"></td>
+          <th>Received By / Date<span class="bn" lang="bn">গ্রহণকারী / তারিখ</span></th>
+          <td class="bn" lang="bn">অফিসিয়াল ব্যবহারের জন্য — পৃষ্ঠা 12</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="sec"><span class="num">02</span> Contents</h2>
+    <p class="sec-bn" lang="bn">সূচিপত্র</p>
+
+    <table class="toc">
+      <colgroup>
+        <col style="width:7%"><col style="width:31%"><col style="width:9%"><col style="width:6%">
+        <col style="width:7%"><col style="width:31%"><col style="width:9%">
+      </colgroup>
+      <tbody>
+        <tr>
+          <td class="n">1</td><td class="t">Bidder Particulars<span class="bn" lang="bn">প্রস্তাবদাতার তথ্য</span></td><td class="p">3</td>
+          <td class="spacer"></td>
+          <td class="n">8</td><td class="t">Work Programme<span class="bn" lang="bn">কর্মপরিকল্পনা</span></td><td class="p">8</td>
+        </tr>
+        <tr>
+          <td class="n">2</td><td class="t">Authorised Contact<span class="bn" lang="bn">অনুমোদিত যোগাযোগ</span></td><td class="p">3</td>
+          <td class="spacer"></td>
+          <td class="n">9</td><td class="t">Declaration<span class="bn" lang="bn">ঘোষণা ও স্বাক্ষর</span></td><td class="p">9</td>
+        </tr>
+        <tr>
+          <td class="n">3</td><td class="t">Key Personnel<span class="bn" lang="bn">প্রধান কর্মী</span></td><td class="p">4</td>
+          <td class="spacer"></td>
+          <td class="n">10</td><td class="t">Attachments<span class="bn" lang="bn">সংযুক্তি চেকলিস্ট</span></td><td class="p">10</td>
+        </tr>
+        <tr>
+          <td class="n">4</td><td class="t">Experience<span class="bn" lang="bn">তুলনীয় অভিজ্ঞতা</span></td><td class="p">5</td>
+          <td class="spacer"></td>
+          <td class="n">11</td><td class="t">Packaging<span class="bn" lang="bn">প্রস্তাব প্যাকেজিং</span></td><td class="p">10</td>
+        </tr>
+        <tr>
+          <td class="n">5</td><td class="t">Deliverables<span class="bn" lang="bn">ডেলিভারেবল</span></td><td class="p">6</td>
+          <td class="spacer"></td>
+          <td class="n">12</td><td class="t">Official Use<span class="bn" lang="bn">অফিসিয়াল ব্যবহার</span></td><td class="p">11</td>
+        </tr>
+        <tr>
+          <td class="n">6</td><td class="t">Technical Approach<span class="bn" lang="bn">কারিগরি দৃষ্টিভঙ্গি</span></td><td class="p">6</td>
+          <td class="spacer"></td>
+          <td class="n">13</td><td class="t">Recommendation<span class="bn" lang="bn">সুপারিশ ও অনুমোদন</span></td><td class="p">12</td>
+        </tr>
+        <tr>
+          <td class="n">7</td><td class="t">Fee Proposal<span class="bn" lang="bn">পেশাগত ফি প্রস্তাব</span></td><td class="p">7</td>
+          <td class="spacer"></td>
+          <td class="n">—</td><td class="t">Instructions<span class="bn" lang="bn">প্রস্তাবদাতার নির্দেশনা</span></td><td class="p">2</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="sheet-foot">
+      <span><b>grihostiOS</b> · GH-ADS-2026-01 · Rev. 00</span>
+      <span class="foot-gap"></span>
+      <span>Page 1 of 12</span>
+    </div>
+  </article>
+
+  <!-- ================= PAGE 2 — INSTRUCTIONS + PROJECT ================= -->
+  <article class="sheet" id="page-2">
+
+    <h2 class="sec"><span class="num">03</span> Instructions to Bidders</h2>
+    <p class="sec-bn" lang="bn">প্রস্তাবদাতাদের জন্য নির্দেশনা</p>
+
+    <ol class="ins">
+      <li>Complete every section in English. Enter all numbers, dates and amounts in English digits (0–9) only.
+        <span class="bn" lang="bn">সব অংশ ইংরেজিতে পূরণ করুন। সব সংখ্যা, তারিখ ও টাকার অঙ্ক শুধু ইংরেজি অঙ্কে (0–9) লিখুন।</span></li>
+      <li>Submit one signed and sealed original together with a single searchable PDF copy of the complete proposal.
+        <span class="bn" lang="bn">একটি স্বাক্ষরিত ও সিলযুক্ত মূল কপি এবং সম্পূর্ণ প্রস্তাবের একটি সার্চযোগ্য PDF কপি জমা দিন।</span></li>
+      <li>State all fees in Bangladeshi Taka (BDT) and show VAT and tax separately. Do not leave any rate cell blank.
+        <span class="bn" lang="bn">সব ফি বাংলাদেশি টাকায় (BDT) উল্লেখ করুন এবং ভ্যাট ও কর আলাদাভাবে দেখান। কোনো রেট ঘর ফাঁকা রাখবেন না।</span></li>
+      <li>Where space is insufficient, attach additional sheets and mark each one with the section number.
+        <span class="bn" lang="bn">জায়গা কম হলে অতিরিক্ত পৃষ্ঠা সংযুক্ত করুন এবং প্রতিটিতে সেকশন নম্বর উল্লেখ করুন।</span></li>
+      <li>Do not alter the structure, numbering, wording or page sequence of this template.
+        <span class="bn" lang="bn">এই টেমপ্লেটের কাঠামো, ক্রমসংখ্যা, ভাষা বা পৃষ্ঠাক্রম পরিবর্তন করবেন না।</span></li>
+      <li>Late, incomplete, unsigned or unsealed submissions may be rejected without further reference.
+        <span class="bn" lang="bn">বিলম্বিত, অসম্পূর্ণ, স্বাক্ষরহীন বা সিলহীন প্রস্তাব কারণ উল্লেখ ছাড়াই বাতিল হতে পারে।</span></li>
+      <li>Request clarifications in writing before the deadline. Verbal clarifications are not binding.
+        <span class="bn" lang="bn">শেষ তারিখের আগে লিখিতভাবে স্পষ্টীকরণ চান। মৌখিক বক্তব্য বাধ্যতামূলক নয়।</span></li>
+      <li>The inviting authority reserves the right to accept or reject any or all proposals without assigning reasons.
+        <span class="bn" lang="bn">আহ্বানকারী কর্তৃপক্ষ কারণ না জানিয়ে যেকোনো বা সব প্রস্তাব গ্রহণ বা বাতিলের অধিকার সংরক্ষণ করে।</span></li>
+      <li>All submitted documents become the property of the inviting authority and will not be returned.
+        <span class="bn" lang="bn">জমাকৃত সব নথি আহ্বানকারী কর্তৃপক্ষের সম্পত্তি হবে এবং ফেরত দেওয়া হবে না।</span></li>
+    </ol>
+
+    <div class="note" style="margin-top:2mm">
+      <strong>Number rule —</strong> Bengali numerals are not accepted anywhere in this form. Digits typed as ০–৯ convert automatically to 0–9.
+      <span class="bn" lang="bn"><strong>সংখ্যা নিয়ম —</strong> এই ফর্মে বাংলা অঙ্ক গ্রহণযোগ্য নয়। ০–৯ লিখলে স্বয়ংক্রিয়ভাবে 0–9-এ রূপান্তরিত হবে।</span>
+    </div>
+
+    <h2 class="sec"><span class="num">04</span> Project Particulars</h2>
+    <p class="sec-bn" lang="bn">প্রকল্পের বিবরণ</p>
+
+    <table class="grid">
+      <colgroup><col style="width:29%"><col style="width:71%"></colgroup>
+      <tbody>
+        <tr>
+          <th>Project Title<span class="bn" lang="bn">প্রকল্পের নাম</span></th>
+          <td><input class="fld" type="text" placeholder="Semi-Commercial + Residential Mixed-Use Complex"></td>
+        </tr>
+        <tr>
+          <th>Project Type<span class="bn" lang="bn">প্রকল্পের ধরন</span></th>
+          <td>Semi-Commercial + Residential (Mixed-Use)<span class="bn" lang="bn">সেমি-কমার্শিয়াল ও আবাসিক</span></td>
+        </tr>
+        <tr>
+          <th>Land Area<span class="bn" lang="bn">জমির আয়তন</span></th>
+          <td><b>1,692 sq ft</b><span class="bn" lang="bn">1,692 বর্গফুট</span></td>
+        </tr>
+        <tr>
+          <th>Building Height<span class="bn" lang="bn">ভবনের উচ্চতা</span></th>
+          <td><b>2 storeys</b> — Ground + First floor<span class="bn" lang="bn">2 তলা — গ্রাউন্ড ও ফার্স্ট ফ্লোর</span></td>
+        </tr>
+        <tr>
+          <th>Site Location<span class="bn" lang="bn">জমির অবস্থান</span></th>
+          <td><input class="fld" type="text" placeholder="Plot / Road / Area / City"></td>
+        </tr>
+        <tr>
+          <th>Scope of this Proposal<span class="bn" lang="bn">এই প্রস্তাবের পরিধি</span></th>
+          <td>Architectural concept, space planning and preliminary engineering coordination
+            <span class="bn" lang="bn">স্থাপত্য কনসেপ্ট, স্পেস প্ল্যানিং ও প্রাথমিক ইঞ্জিনিয়ারিং সমন্বয়</span></td>
+        </tr>
+        <tr>
+          <th>Evaluation Weights<span class="bn" lang="bn">মূল্যায়ন ওজন</span></th>
+          <td>Design 25% · Space Planning 25% · Site Utilisation 15% · Appearance 15% · Technical 10% · Cost 10%
+            <span class="bn" lang="bn">ডিজাইন 25% · স্পেস প্ল্যানিং 25% · জমি ব্যবহার 15% · নান্দনিকতা 15% · কারিগরি 10% · ব্যয় 10%</span></td>
+        </tr>
+        <tr>
+          <th>Evaluation Method<span class="bn" lang="bn">মূল্যায়ন পদ্ধতি</span></th>
+          <td>Completeness check, technical scoring, then oral presentation if required
+            <span class="bn" lang="bn">সম্পূর্ণতা যাচাই, কারিগরি স্কোরিং, প্রয়োজনে মৌখিক উপস্থাপনা</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="warn" style="margin-top:1.6mm">
+      The proportions, room schedule and commercial / residential area ratio may be refined with the selected bidder after award.
+      <span class="bn" lang="bn">নির্বাচনের পর নির্বাচিত প্রস্তাবদাতার সঙ্গে অনুপাত, রুম শিডিউল এবং বাণিজ্যিক / আবাসিক এলাকার অনুপাত চূড়ান্ত করা যাবে।</span>
+    </p>
+
+    <div class="sheet-foot">
+      <span><b>grihostiOS</b> · GH-ADS-2026-01 · Rev. 00</span>
+      <span class="foot-gap"></span>
+      <span>Page 2 of 12</span>
+    </div>
+  </article>
+
+  <!-- ================= PAGE 3 — FIRM PROFILE ================= -->
+  <article class="sheet" id="page-3">
+
+    <h2 class="sec"><span class="num">1</span> Bidder Particulars</h2>
+    <p class="sec-bn" lang="bn">প্রস্তাবদাতার তথ্য</p>
+
+    <h3>1.1 Firm Profile<span class="bn" lang="bn">প্রতিষ্ঠানের পরিচিতি</span></h3>
+
+    <div class="fgrid">
+      <div class="fg">
+        <span class="lbl">Name of Firm / Company<span class="bn" lang="bn">প্রতিষ্ঠান / কোম্পানির নাম</span></span>
+        <input class="fld" type="text" placeholder="Registered name">
+      </div>
+      <div class="fg">
+        <span class="lbl">Legal Status<span class="bn" lang="bn">আইনি ধরন</span></span>
+        <input class="fld" type="text" placeholder="Sole proprietorship / Partnership / Ltd.">
+      </div>
+      <div class="fg">
+        <span class="lbl">Trade Licence No.<span class="bn" lang="bn">ট্রেড লাইসেন্স নম্বর</span></span>
+        <input class="fld" type="text" inputmode="numeric" placeholder="0">
+      </div>
+      <div class="fg">
+        <span class="lbl">TIN / BIN<span class="bn" lang="bn">টিআইএন / বিআইএন</span></span>
+        <input class="fld" type="text" inputmode="numeric" placeholder="0">
+      </div>
+      <div class="fg">
+        <span class="lbl">Year Established<span class="bn" lang="bn">প্রতিষ্ঠার বছর</span></span>
+        <input class="fld" type="text" inputmode="numeric" placeholder="YYYY">
+      </div>
+      <div class="fg">
+        <span class="lbl">Professional Registration<span class="bn" lang="bn">পেশাগত নিবন্ধন</span></span>
+        <input class="fld" type="text" placeholder="IAB / IEB / Other, No.">
+      </div>
+      <div class="fg">
+        <span class="lbl">Number of Design Staff<span class="bn" lang="bn">ডিজাইন কর্মীর সংখ্যা</span></span>
+        <input class="fld" type="text" inputmode="numeric" placeholder="0">
+      </div>
+      <div class="fg">
+        <span class="lbl">Website / Portfolio Link<span class="bn" lang="bn">ওয়েবসাইট / পোর্টফোলিও লিংক</span></span>
+        <input class="fld" type="text" placeholder="https://">
+      </div>
+      <div class="fg wide">
+        <span class="lbl">Registered Office Address<span class="bn" lang="bn">নিবন্ধিত কার্যালয়ের ঠিকানা</span></span>
+        <input class="fld" type="text" placeholder="House, Road, Area, City, Postcode">
+      </div>
+    </div>
+
+    <h2 class="sec"><span class="num">2</span> Authorised Contact</h2>
+    <p class="sec-bn" lang="bn">অনুমোদিত যোগাযোগ</p>
+
+    <div class="fgrid">
+      <div class="fg">
+        <span class="lbl">Contact Person<span class="bn" lang="bn">যোগাযোগ ব্যক্তি</span></span>
+        <input class="fld" type="text" placeholder="Full name">
+      </div>
+      <div class="fg">
+        <span class="lbl">Designation<span class="bn" lang="bn">পদবি</span></span>
+        <input class="fld" type="text" placeholder="Principal Architect / Director">
+      </div>
+      <div class="fg">
+        <span class="lbl">Mobile<span class="bn" lang="bn">মোবাইল</span></span>
+        <input class="fld" type="tel" inputmode="tel" placeholder="+880 1XXXXXXXXX">
+      </div>
+      <div class="fg">
+        <span class="lbl">E-mail<span class="bn" lang="bn">ই-মেইল</span></span>
+        <input class="fld" type="email" placeholder="name@example.com">
+      </div>
+      <div class="fg">
+        <span class="lbl">Alternative Contact<span class="bn" lang="bn">বিকল্প যোগাযোগ</span></span>
+        <input class="fld" type="text" placeholder="Name, mobile, e-mail">
+      </div>
+      <div class="fg">
+        <span class="lbl">Preferred Correspondence<span class="bn" lang="bn">পছন্দের যোগাযোগ মাধ্যম</span></span>
+        <input class="fld" type="text" placeholder="E-mail / Mobile / Post">
+      </div>
+    </div>
+    <div class="sheet-foot">
+      <span><b>grihostiOS</b> · GH-ADS-2026-01 · Rev. 00</span>
+      <span class="foot-gap"></span>
+      <span>Page 3 of 12</span>
+    </div>
+  </article>
+
+  <!-- ================= PAGE 4 — KEY PERSONNEL ================= -->
+  <article class="sheet" id="page-4">
+
+    <h2 class="sec"><span class="num">3</span> Key Personnel</h2>
+    <p class="sec-bn" lang="bn">প্রধান কর্মী</p>
+
+    <p style="margin-bottom:2mm">
+      List the people who will actually work on this project, not only the principals.
+      <span class="bn" lang="bn">শুধু প্রধান ব্যক্তিরা নয় — এই প্রকল্পে যাঁরা সরাসরি কাজ করবেন তাঁদের তালিকা দিন।</span>
+    </p>
+
+    <table class="grid">
+      <colgroup>
+        <col style="width:6%"><col style="width:27%"><col style="width:27%"><col style="width:21%"><col style="width:19%">
+      </colgroup>
+      <thead>
+        <tr>
+          <th class="c">#<span class="bn" lang="bn">ক্রম</span></th>
+          <th>Name<span class="bn" lang="bn">নাম</span></th>
+          <th>Role / Discipline<span class="bn" lang="bn">ভূমিকা / বিভাগ</span></th>
+          <th>Registration No.<span class="bn" lang="bn">নিবন্ধন নম্বর</span></th>
+          <th class="c">Experience (years)<span class="bn" lang="bn">অভিজ্ঞতা (বছর)</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="idx">1</td>
+          <td><input class="fld" type="text" aria-label="Personnel name 1"></td>
+          <td><input class="fld" type="text" aria-label="Personnel role 1"></td>
+          <td><input class="fld" type="text" aria-label="Personnel registration 1"></td>
+          <td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td>
+        </tr>
+        <tr>
+          <td class="idx">2</td>
+          <td><input class="fld" type="text" aria-label="Personnel name 2"></td>
+          <td><input class="fld" type="text" aria-label="Personnel role 2"></td>
+          <td><input class="fld" type="text" aria-label="Personnel registration 2"></td>
+          <td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td>
+        </tr>
+        <tr>
+          <td class="idx">3</td>
+          <td><input class="fld" type="text" aria-label="Personnel name 3"></td>
+          <td><input class="fld" type="text" aria-label="Personnel role 3"></td>
+          <td><input class="fld" type="text" aria-label="Personnel registration 3"></td>
+          <td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td>
+        </tr>
+        <tr>
+          <td class="idx">4</td>
+          <td><input class="fld" type="text" aria-label="Personnel name 4"></td>
+          <td><input class="fld" type="text" aria-label="Personnel role 4"></td>
+          <td><input class="fld" type="text" aria-label="Personnel registration 4"></td>
+          <td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td>
+        </tr>
+        <tr>
+          <td class="idx">5</td>
+          <td><input class="fld" type="text" aria-label="Personnel name 5"></td>
+          <td><input class="fld" type="text" aria-label="Personnel role 5"></td>
+          <td><input class="fld" type="text" aria-label="Personnel registration 5"></td>
+          <td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>3.1 Team Capacity<span class="bn" lang="bn">টিম সক্ষমতা</span></h3>
+
+    <div class="fgrid">
+      <div class="fg">
+        <span class="lbl">Active Projects in Hand<span class="bn" lang="bn">বর্তমানে চলমান প্রকল্প</span></span>
+        <input class="fld" type="text" inputmode="numeric" placeholder="0">
+      </div>
+      <div class="fg">
+        <span class="lbl">Team Assigned to This Project<span class="bn" lang="bn">এই প্রকল্পে নিয়োজিত টিম</span></span>
+        <input class="fld" type="text" inputmode="numeric" placeholder="0">
+      </div>
+      <div class="fg">
+        <span class="lbl">Software / Design Tools<span class="bn" lang="bn">ব্যবহৃত সফটওয়্যার / ডিজাইন টুল</span></span>
+        <input class="fld" type="text" placeholder="AutoCAD, Revit, SketchUp, Lumion, ETABS">
+      </div>
+      <div class="fg">
+        <span class="lbl">BIM Capability<span class="bn" lang="bn">BIM সক্ষমতা</span></span>
+        <input class="fld" type="text" placeholder="Yes / No — software and LOD">
+      </div>
+      <div class="fg wide">
+        <span class="lbl">Other Relevant Capability or Certifications<span class="bn" lang="bn">অন্যান্য প্রাসঙ্গিক সক্ষমতা বা সনদ</span></span>
+        <textarea class="fld" rows="2" placeholder="Green building rating, safety certification, in-house engineering team, joint-venture partners."></textarea>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:2.4mm">
+      <strong>Key-person commitment —</strong> Confirm that the named personnel will remain available for the
+      duration of the design programme.
+      <span class="bn" lang="bn"><strong>প্রধান কর্মীর অঙ্গীকার —</strong> উল্লিখিত কর্মীরা ডিজাইন সময়সূচি চলাকালীন উপলব্ধ থাকবেন বলে নিশ্চিত করুন।</span>
+    </div>
+
+    <div class="sheet-foot">
+      <span><b>grihostiOS</b> · GH-ADS-2026-01 · Rev. 00</span>
+      <span class="foot-gap"></span>
+      <span>Page 4 of 12</span>
+    </div>
+  </article>
+
+  <!-- ================= PAGE 5 — EXPERIENCE + REFERENCES ================= -->
+  <article class="sheet" id="page-5">
+
+    <h2 class="sec"><span class="num">4</span> Comparable Project Experience</h2>
+    <p class="sec-bn" lang="bn">তুলনীয় প্রকল্পের অভিজ্ঞতা</p>
+
+    <p style="margin-bottom:2mm">
+      List projects of similar scale, type or complexity completed in the last 10 years.
+      <span class="bn" lang="bn">গত 10 বছরে সম্পন্ন হওয়া একই ধরনের মাপকাঠি, প্রকৃতি বা জটিলতার প্রকল্প উল্লেখ করুন।</span>
+    </p>
+
+    <table class="grid">
+      <colgroup>
+        <col style="width:6%"><col style="width:29%"><col style="width:19%"><col style="width:19%"><col style="width:11%"><col style="width:16%">
+      </colgroup>
+      <thead>
+        <tr>
+          <th class="c">#<span class="bn" lang="bn">ক্রম</span></th>
+          <th>Project &amp; Location<span class="bn" lang="bn">প্রকল্প ও অবস্থান</span></th>
+          <th>Client<span class="bn" lang="bn">ক্লায়েন্ট</span></th>
+          <th>Scope<span class="bn" lang="bn">পরিধি</span></th>
+          <th class="c">Year<span class="bn" lang="bn">বছর</span></th>
+          <th class="r">Value (BDT)<span class="bn" lang="bn">মূল্য (BDT)</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="idx">1</td>
+          <td><input class="fld" type="text" aria-label="Project 1"></td>
+          <td><input class="fld" type="text" aria-label="Client 1"></td>
+          <td><input class="fld" type="text" aria-label="Scope 1"></td>
+          <td><input class="fld c" type="text" inputmode="numeric" placeholder="YYYY"></td>
+          <td><input class="fld r" type="text" inputmode="numeric" placeholder="0"></td>
+        </tr>
+        <tr>
+          <td class="idx">2</td>
+          <td><input class="fld" type="text" aria-label="Project 2"></td>
+          <td><input class="fld" type="text" aria-label="Client 2"></td>
+          <td><input class="fld" type="text" aria-label="Scope 2"></td>
+          <td><input class="fld c" type="text" inputmode="numeric" placeholder="YYYY"></td>
+          <td><input class="fld r" type="text" inputmode="numeric" placeholder="0"></td>
+        </tr>
+        <tr>
+          <td class="idx">3</td>
+          <td><input class="fld" type="text" aria-label="Project 3"></td>
+          <td><input class="fld" type="text" aria-label="Client 3"></td>
+          <td><input class="fld" type="text" aria-label="Scope 3"></td>
+          <td><input class="fld c" type="text" inputmode="numeric" placeholder="YYYY"></td>
+          <td><input class="fld r" type="text" inputmode="numeric" placeholder="0"></td>
+        </tr>
+        <tr>
+          <td class="idx">4</td>
+          <td><input class="fld" type="text" aria-label="Project 4"></td>
+          <td><input class="fld" type="text" aria-label="Client 4"></td>
+          <td><input class="fld" type="text" aria-label="Scope 4"></td>
+          <td><input class="fld c" type="text" inputmode="numeric" placeholder="YYYY"></td>
+          <td><input class="fld r" type="text" inputmode="numeric" placeholder="0"></td>
+        </tr>
+        <tr>
+          <td class="idx">5</td>
+          <td><input class="fld" type="text" aria-label="Project 5"></td>
+          <td><input class="fld" type="text" aria-label="Client 5"></td>
+          <td><input class="fld" type="text" aria-label="Scope 5"></td>
+          <td><input class="fld c" type="text" inputmode="numeric" placeholder="YYYY"></td>
+          <td><input class="fld r" type="text" inputmode="numeric" placeholder="0"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="fgrid" style="margin-top:1mm">
+      <div class="fg">
+        <span class="lbl">Total Comparable Projects Completed<span class="bn" lang="bn">সম্পন্ন তুলনীয় প্রকল্পের মোট সংখ্যা</span></span>
+        <input class="fld" type="text" inputmode="numeric" placeholder="0">
+      </div>
+      <div class="fg">
+        <span class="lbl">Total Built Area Delivered (sq ft)<span class="bn" lang="bn">প্রদত্ত মোট নির্মিত এলাকা (বর্গফুট)</span></span>
+        <input class="fld" type="text" inputmode="numeric" placeholder="0">
+      </div>
+    </div>
+
+    <h3>4.1 References<span class="bn" lang="bn">রেফারেন্স</span></h3>
+
+    <table class="grid">
+      <colgroup><col style="width:6%"><col style="width:26%"><col style="width:24%"><col style="width:22%"><col style="width:22%"></colgroup>
+      <thead>
+        <tr>
+          <th class="c">#<span class="bn" lang="bn">ক্রম</span></th>
+          <th>Reference Name<span class="bn" lang="bn">রেফারেন্সের নাম</span></th>
+          <th>Organisation<span class="bn" lang="bn">প্রতিষ্ঠান</span></th>
+          <th>Mobile<span class="bn" lang="bn">মোবাইল</span></th>
+          <th>E-mail<span class="bn" lang="bn">ই-মেইল</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="idx">1</td>
+          <td><input class="fld" type="text" aria-label="Reference name 1"></td>
+          <td><input class="fld" type="text" aria-label="Reference organisation 1"></td>
+          <td><input class="fld" type="tel" aria-label="Reference mobile 1"></td>
+          <td><input class="fld" type="email" aria-label="Reference email 1"></td>
+        </tr>
+        <tr>
+          <td class="idx">2</td>
+          <td><input class="fld" type="text" aria-label="Reference name 2"></td>
+          <td><input class="fld" type="text" aria-label="Reference organisation 2"></td>
+          <td><input class="fld" type="tel" aria-label="Reference mobile 2"></td>
+          <td><input class="fld" type="email" aria-label="Reference email 2"></td>
+        </tr>
+        <tr>
+          <td class="idx">3</td>
+          <td><input class="fld" type="text" aria-label="Reference name 3"></td>
+          <td><input class="fld" type="text" aria-label="Reference organisation 3"></td>
+          <td><input class="fld" type="tel" aria-label="Reference mobile 3"></td>
+          <td><input class="fld" type="email" aria-label="Reference email 3"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="warn" style="margin-top:1.6mm">
+      Attach completion certificates or client references for each project listed above. Unsupported claims will not be scored.
+      <span class="bn" lang="bn">উপরের প্রতিটি প্রকল্পের সমাপ্তি সনদ বা ক্লায়েন্ট রেফারেন্স সংযুক্ত করুন। প্রমাণহীন দাবি মূল্যায়ন করা হবে না।</span>
+    </p>
+
+    <div class="sheet-foot">
+      <span><b>grihostiOS</b> · GH-ADS-2026-01 · Rev. 00</span>
+      <span class="foot-gap"></span>
+      <span>Page 5 of 12</span>
+    </div>
+  </article>
+
+  <!-- ================= PAGE 6 — DELIVERABLES + TECHNICAL ================= -->
+  <article class="sheet" id="page-6">
+
+    <h2 class="sec"><span class="num">5</span> Proposal Composition &amp; Deliverables</h2>
+    <p class="sec-bn" lang="bn">প্রস্তাবের উপকরণ ও ডেলিভারেবল</p>
+
+    <p style="margin-bottom:2mm">
+      Mark each item as submitted. A proposal missing a core deliverable will be scored accordingly.
+      <span class="bn" lang="bn">প্রতিটি উপকরণ জমা দিলে টিক দিন। মূল ডেলিভারেবল না থাকলে মূল্যায়নে নম্বর কমবে।</span>
+    </p>
+
+    <table class="grid">
+      <colgroup>
+        <col style="width:6%"><col style="width:43%"><col style="width:19%"><col style="width:13%"><col style="width:19%">
+      </colgroup>
+      <thead>
+        <tr>
+          <th class="c">#<span class="bn" lang="bn">ক্রম</span></th>
+          <th>Deliverable<span class="bn" lang="bn">উপকরণ</span></th>
+          <th>Format / Size<span class="bn" lang="bn">ফরম্যাট / সাইজ</span></th>
+          <th class="c">Submitted<span class="bn" lang="bn">জমা হয়েছে</span></th>
+          <th class="c">Sheets / Pages<span class="bn" lang="bn">সিট / পৃষ্ঠা</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="idx">1</td><td>Concept Design &amp; Design Rationale<span class="bn" lang="bn">কনসেপ্ট ডিজাইন ও যুক্তি</span></td><td>PDF · A3</td><td class="c"><input type="checkbox" aria-label="Submitted 1"></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td></tr>
+        <tr><td class="idx">2</td><td>Site Analysis &amp; Site Planning<span class="bn" lang="bn">সাইট বিশ্লেষণ ও পরিকল্পনা</span></td><td>PDF · A3</td><td class="c"><input type="checkbox" aria-label="Submitted 2"></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td></tr>
+        <tr><td class="idx">3</td><td>Floor Plans — Ground &amp; First<span class="bn" lang="bn">ফ্লোর প্ল্যান — গ্রাউন্ড ও ফার্স্ট</span></td><td>PDF · A3</td><td class="c"><input type="checkbox" aria-label="Submitted 3"></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td></tr>
+        <tr><td class="idx">4</td><td>Elevations — Four Sides<span class="bn" lang="bn">চারদিকের এলিভেশন</span></td><td>PDF · A3</td><td class="c"><input type="checkbox" aria-label="Submitted 4"></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td></tr>
+        <tr><td class="idx">5</td><td>Sections<span class="bn" lang="bn">সেকশন</span></td><td>PDF · A3</td><td class="c"><input type="checkbox" aria-label="Submitted 5"></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td></tr>
+        <tr><td class="idx">6</td><td>3D Visualisation / Renders<span class="bn" lang="bn">3D ভিজুয়ালাইজেশন / রেন্ডার</span></td><td>PDF / JPG</td><td class="c"><input type="checkbox" aria-label="Submitted 6"></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td></tr>
+        <tr><td class="idx">7</td><td>Preliminary Structural Concept<span class="bn" lang="bn">প্রাথমিক স্ট্রাকচারাল কনসেপ্ট</span></td><td>PDF · A4</td><td class="c"><input type="checkbox" aria-label="Submitted 7"></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td></tr>
+        <tr><td class="idx">8</td><td>MEP Planning Concept<span class="bn" lang="bn">MEP পরিকল্পনা কনসেপ্ট</span></td><td>PDF · A4</td><td class="c"><input type="checkbox" aria-label="Submitted 8"></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td></tr>
+        <tr><td class="idx">9</td><td>Area Statement<span class="bn" lang="bn">এলাকা স্টেটমেন্ট</span></td><td>PDF / XLS</td><td class="c"><input type="checkbox" aria-label="Submitted 9"></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td></tr>
+        <tr><td class="idx">10</td><td>Preliminary BOQ / Cost Estimate<span class="bn" lang="bn">প্রাথমিক BOQ / ব্যয় প্রাক্কলন</span></td><td>PDF / XLS</td><td class="c"><input type="checkbox" aria-label="Submitted 10"></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td></tr>
+        <tr><td class="idx">11</td><td>Design Schedule / Programme<span class="bn" lang="bn">ডিজাইন সময়সূচি</span></td><td>PDF / XLS</td><td class="c"><input type="checkbox" aria-label="Submitted 11"></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="sec"><span class="num">6</span> Technical Approach</h2>
+    <p class="sec-bn" lang="bn">কারিগরি দৃষ্টিভঙ্গি</p>
+
+    <div class="fgrid">
+      <div class="fg wide">
+        <span class="lbl">Design Concept Statement<span class="bn" lang="bn">ডিজাইন কনসেপ্ট বিবৃতি</span></span>
+        <textarea class="fld" rows="2" placeholder="Concept idea, its inspiration, and how it responds to the site and the mixed-use programme."></textarea>
+      </div>
+      <div class="fg">
+        <span class="lbl">Site Utilisation &amp; Space Planning<span class="bn" lang="bn">জমি ব্যবহার ও স্পেস প্ল্যানিং</span></span>
+        <textarea class="fld" rows="2" placeholder="Setback, coverage, circulation, ground-floor commercial frontage."></textarea>
+      </div>
+      <div class="fg">
+        <span class="lbl">Commercial / Residential Separation<span class="bn" lang="bn">বাণিজ্যিক ও আবাসিক পৃথকীকরণ</span></span>
+        <textarea class="fld" rows="2" placeholder="Entries, stair cores, privacy and security strategy."></textarea>
+      </div>
+      <div class="fg">
+        <span class="lbl">Daylight, Ventilation &amp; Energy<span class="bn" lang="bn">আলো, বাতাস ও জ্বালানি</span></span>
+        <textarea class="fld" rows="2" placeholder="Orientation, cross-ventilation, shading, passive measures."></textarea>
+      </div>
+      <div class="fg">
+        <span class="lbl">Code Compliance &amp; Buildability<span class="bn" lang="bn">বিল্ডিং কোড ও নির্মাণযোগ্যতা</span></span>
+        <textarea class="fld" rows="2" placeholder="Applicable BNBC clauses, FAR / coverage, approval path, construction method."></textarea>
+      </div>
+    </div>
+
+    <div class="sheet-foot">
+      <span><b>grihostiOS</b> · GH-ADS-2026-01 · Rev. 00</span>
+      <span class="foot-gap"></span>
+      <span>Page 6 of 12</span>
+    </div>
+  </article>
+
+  <!-- ================= PAGE 7 — FEE + PROGRAMME ================= -->
+  <article class="sheet" id="page-7">
+
+    <h2 class="sec"><span class="num">7</span> Fee Proposal</h2>
+    <p class="sec-bn" lang="bn">পেশাগত ফি প্রস্তাব</p>
+
+    <p style="margin-bottom:2mm">
+      Quote in Bangladeshi Taka (BDT). Percentages must total 100%. Show VAT and tax separately.
+      <span class="bn" lang="bn">বাংলাদেশি টাকায় (BDT) উল্লেখ করুন। শতাংশের যোগফল 100% হতে হবে। ভ্যাট ও কর আলাদাভাবে দেখান।</span>
+    </p>
+
+    <table class="grid">
+      <colgroup>
+        <col style="width:6%"><col style="width:35%"><col style="width:29%"><col style="width:13%"><col style="width:17%">
+      </colgroup>
+      <thead>
+        <tr>
+          <th class="c">#<span class="bn" lang="bn">ক্রম</span></th>
+          <th>Stage / Service<span class="bn" lang="bn">পর্যায় / সেবা</span></th>
+          <th>Deliverable Outcome<span class="bn" lang="bn">ফলাফল</span></th>
+          <th class="c">% of Fee<span class="bn" lang="bn">ফি %</span></th>
+          <th class="r">Amount (BDT)<span class="bn" lang="bn">পরিমাণ (BDT)</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="idx">1</td>
+          <td>Concept Design &amp; Site Planning<span class="bn" lang="bn">কনসেপ্ট ডিজাইন ও সাইট প্ল্যানিং</span></td>
+          <td>Concept, site plan, massing<span class="bn" lang="bn">কনসেপ্ট, সাইট প্ল্যান, মাসিং</span></td>
+          <td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td>
+          <td><input class="fld r" type="text" inputmode="numeric" placeholder="0"></td>
+        </tr>
+        <tr>
+          <td class="idx">2</td>
+          <td>Design Development<span class="bn" lang="bn">ডিজাইন ডেভেলপমেন্ট</span></td>
+          <td>Plans, elevations, sections, 3D<span class="bn" lang="bn">প্ল্যান, এলিভেশন, সেকশন, 3D</span></td>
+          <td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td>
+          <td><input class="fld r" type="text" inputmode="numeric" placeholder="0"></td>
+        </tr>
+        <tr>
+          <td class="idx">3</td>
+          <td>Structural &amp; MEP Coordination<span class="bn" lang="bn">স্ট্রাকচারাল ও MEP সমন্বয়</span></td>
+          <td>Coordinated engineering concept<span class="bn" lang="bn">সমন্বিত ইঞ্জিনিয়ারিং কনসেপ্ট</span></td>
+          <td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td>
+          <td><input class="fld r" type="text" inputmode="numeric" placeholder="0"></td>
+        </tr>
+        <tr>
+          <td class="idx">4</td>
+          <td>Working Drawings &amp; Details<span class="bn" lang="bn">ওয়ার্কিং ড্রয়িং ও ডিটেইল</span></td>
+          <td>Construction drawing set<span class="bn" lang="bn">নির্মাণ ড্রয়িং সেট</span></td>
+          <td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td>
+          <td><input class="fld r" type="text" inputmode="numeric" placeholder="0"></td>
+        </tr>
+        <tr>
+          <td class="idx">5</td>
+          <td>Approval Support &amp; Site Supervision<span class="bn" lang="bn">অনুমোদন সহায়তা ও সাইট তত্ত্বাবধান</span></td>
+          <td>Authority liaison and site visits<span class="bn" lang="bn">কর্তৃপক্ষ সমন্বয় ও সাইট পরিদর্শন</span></td>
+          <td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td>
+          <td><input class="fld r" type="text" inputmode="numeric" placeholder="0"></td>
+        </tr>
+        <tr class="total">
+          <td class="idx">—</td>
+          <td colspan="2">Total Professional Fee<span class="bn" lang="bn">মোট পেশাগত ফি</span></td>
+          <td class="c"><b>100%</b></td>
+          <td><input class="fld r" type="text" inputmode="numeric" placeholder="0"></td>
+        </tr>
+        <tr>
+          <td class="idx">—</td>
+          <td colspan="3">VAT / Tax<span class="bn" lang="bn">ভ্যাট / কর</span></td>
+          <td><input class="fld r" type="text" inputmode="numeric" placeholder="0"></td>
+        </tr>
+        <tr>
+          <td class="idx">—</td>
+          <td colspan="3">Reimbursables — printing, travel, approval fees<span class="bn" lang="bn">প্রতিকর — প্রিন্টিং, ভ্রমণ, অনুমোদন ফি</span></td>
+          <td><input class="fld r" type="text" inputmode="numeric" placeholder="0"></td>
+        </tr>
+        <tr class="total">
+          <td class="idx">—</td>
+          <td colspan="3">Grand Total (BDT)<span class="bn" lang="bn">সর্বমোট (BDT)</span></td>
+          <td><input class="fld r" type="text" inputmode="numeric" placeholder="0"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="fgrid">
+      <div class="fg wide">
+        <span class="lbl">Amount in Words<span class="bn" lang="bn">কথায় পরিমাণ</span></span>
+        <input class="fld" type="text" placeholder="Taka ... only">
+      </div>
+      <div class="fg">
+        <span class="lbl">Payment Terms<span class="bn" lang="bn">পরিশোধের শর্ত</span></span>
+        <input class="fld" type="text" placeholder="Stage-wise, within 0 days of invoice">
+      </div>
+      <div class="fg">
+        <span class="lbl">Fee Validity<span class="bn" lang="bn">ফি বৈধতা</span></span>
+        <input class="fld" type="text" placeholder="60 days from deadline">
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:3mm">
+      <strong>Fee basis —</strong> State whether the quoted fee is a lump sum, a percentage of construction cost,
+      or a rate per square foot, and confirm what is excluded.
+      <span class="bn" lang="bn"><strong>ফি-র ভিত্তি —</strong> উল্লিখিত ফি এককালীন, নির্মাণ ব্যয়ের শতাংশ, নাকি বর্গফুট প্রতি হার — তা স্পষ্ট করুন এবং কী কী অন্তর্ভুক্ত নয় তা নিশ্চিত করুন।</span>
+    </div>
+
+    <div class="sheet-foot">
+      <span><b>grihostiOS</b> · GH-ADS-2026-01 · Rev. 00</span>
+      <span class="foot-gap"></span>
+      <span>Page 7 of 12</span>
+    </div>
+  </article>
+
+  <!-- ================= PAGE 8 — WORK PROGRAMME ================= -->
+  <article class="sheet" id="page-8">
+
+    <h2 class="sec"><span class="num">8</span> Work Programme</h2>
+    <p class="sec-bn" lang="bn">কর্মপরিকল্পনা</p>
+
+    <table class="grid">
+      <colgroup>
+        <col style="width:6%"><col style="width:34%"><col style="width:19%"><col style="width:17%"><col style="width:24%">
+      </colgroup>
+      <thead>
+        <tr>
+          <th class="c">#<span class="bn" lang="bn">ক্রম</span></th>
+          <th>Milestone<span class="bn" lang="bn">মাইলস্টোন</span></th>
+          <th class="c">Duration (weeks)<span class="bn" lang="bn">সময়কাল (সপ্তাহ)</span></th>
+          <th class="c">Start (week)<span class="bn" lang="bn">শুরু (সপ্তাহ)</span></th>
+          <th class="c">Delivery Date<span class="bn" lang="bn">প্রদানের তারিখ</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="idx">1</td><td>Concept design submission<span class="bn" lang="bn">কনসেপ্ট ডিজাইন জমা</span></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td><td><input class="fld c" type="text" placeholder="DD-MM-YYYY"></td></tr>
+        <tr><td class="idx">2</td><td>Design development<span class="bn" lang="bn">ডিজাইন ডেভেলপমেন্ট</span></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td><td><input class="fld c" type="text" placeholder="DD-MM-YYYY"></td></tr>
+        <tr><td class="idx">3</td><td>Structural &amp; MEP coordination<span class="bn" lang="bn">স্ট্রাকচারাল ও MEP সমন্বয়</span></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td><td><input class="fld c" type="text" placeholder="DD-MM-YYYY"></td></tr>
+        <tr><td class="idx">4</td><td>Working drawings<span class="bn" lang="bn">ওয়ার্কিং ড্রয়িং</span></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td><td><input class="fld c" type="text" placeholder="DD-MM-YYYY"></td></tr>
+        <tr><td class="idx">5</td><td>Approval support<span class="bn" lang="bn">অনুমোদন সহায়তা</span></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td><td><input class="fld c" type="text" placeholder="DD-MM-YYYY"></td></tr>
+        <tr class="total"><td class="idx">—</td><td>Total programme<span class="bn" lang="bn">মোট সময়সূচি</span></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td><td colspan="2" class="bn" lang="bn">কাজ শুরুর পর সপ্তাহ</td></tr>
+      </tbody>
+    </table>
+
+    <h3>8.1 Programme Assumptions<span class="bn" lang="bn">সময়সূচির অনুমান</span></h3>
+
+    <textarea class="fld" rows="2" placeholder="Client decision turnaround, authority approval time, revision rounds included, key dependencies."></textarea>
+
+    <div class="note" style="margin-top:3mm">
+      <strong>Programme basis —</strong> Durations are counted in calendar weeks from the date of award of work and
+      exclude time taken by the client or an approving authority to respond.
+      <span class="bn" lang="bn"><strong>সময়সূচির ভিত্তি —</strong> সময়কাল কাজ শুরুর তারিখ থেকে ক্যালেন্ডার সপ্তাহে গণনা করা হয়েছে এবং ক্লায়েন্ট বা অনুমোদনকারী কর্তৃপক্ষের উত্তর দেওয়ার সময় বাদ দেওয়া হয়েছে।</span>
+    </div>
+
+    <div class="sheet-foot">
+      <span><b>grihostiOS</b> · GH-ADS-2026-01 · Rev. 00</span>
+      <span class="foot-gap"></span>
+      <span>Page 8 of 12</span>
+    </div>
+  </article>
+
+  <!-- ================= PAGE 9 — DECLARATION + SIGNATURE ================= -->
+  <article class="sheet" id="page-9">
+
+    <h2 class="sec"><span class="num">9</span> Declaration &amp; Signature</h2>
+    <p class="sec-bn" lang="bn">ঘোষণা ও স্বাক্ষর</p>
+
+    <p>
+      We declare that the information given in this proposal is true, complete and accurate; that the attached
+      drawings and documents are our own work; that we hold the professional registrations stated in Section 1;
+      and that we accept the instructions and the evaluation basis set out in this document. We understand that
+      the inviting authority is not bound to accept the lowest or any proposal.
+    </p>
+    <p class="bn" lang="bn" style="color:#6B7280">
+      আমরা ঘোষণা করছি যে এই প্রস্তাবে প্রদত্ত তথ্য সত্য, সম্পূর্ণ ও নির্ভুল; সংযুক্ত ড্রয়িং ও নথি আমাদের নিজস্ব কাজ;
+      সেকশন 1-এ উল্লিখিত পেশাগত নিবন্ধন আমাদের রয়েছে এবং এই নথিতে বর্ণিত নির্দেশনা ও মূল্যায়নের ভিত্তি আমরা গ্রহণ করছি।
+      আমরা অবগত যে আহ্বানকারী কর্তৃপক্ষ সর্বনিম্ন বা যেকোনো প্রস্তাব গ্রহণে বাধ্য নয়।
+    </p>
+
+    <div class="sig-grid">
+      <div class="sig">
+        <div class="cap">Authorised Signatory — Name &amp; Designation<span class="bn" lang="bn">অনুমোদিত স্বাক্ষরকারী — নাম ও পদবি</span></div>
+      </div>
+      <div class="sig">
+        <div class="cap">Signature &amp; Date<span class="bn" lang="bn">স্বাক্ষর ও তারিখ</span></div>
+      </div>
+    </div>
+
+    <div class="fgrid" style="margin-top:2.8mm">
+      <div class="fg">
+        <span class="lbl">Name<span class="bn" lang="bn">নাম</span></span>
+        <input class="fld" type="text">
+      </div>
+      <div class="fg">
+        <span class="lbl">Designation<span class="bn" lang="bn">পদবি</span></span>
+        <input class="fld" type="text">
+      </div>
+      <div class="fg">
+        <span class="lbl">Date<span class="bn" lang="bn">তারিখ</span></span>
+        <input class="fld" type="text" placeholder="DD-MM-YYYY">
+      </div>
+      <div class="fg">
+        <span class="lbl">Place<span class="bn" lang="bn">স্থান</span></span>
+        <input class="fld" type="text">
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3.8mm;margin-top:2.8mm">
+      <div class="stamp">Company Seal<span class="bn" lang="bn">প্রতিষ্ঠানের সিল</span></div>
+      <div class="sig" style="min-height:24mm">
+        <div class="cap">Witness (optional) — Signature<span class="bn" lang="bn">সাক্ষী (ঐচ্ছিক) — স্বাক্ষর</span></div>
+      </div>
+    </div>
+
+    <div class="sheet-foot">
+      <span><b>grihostiOS</b> · GH-ADS-2026-01 · Rev. 00</span>
+      <span class="foot-gap"></span>
+      <span>Page 9 of 12</span>
+    </div>
+  </article>
+
+  <!-- ================= PAGE 10 — ATTACHMENTS + PACKAGING ================= -->
+  <article class="sheet" id="page-10">
+
+    <h2 class="sec"><span class="num">10</span> Attachment Checklist</h2>
+    <p class="sec-bn" lang="bn">সংযুক্তি চেকলিস্ট</p>
+
+    <div class="checks">
+      <label class="chk"><input type="checkbox"> Trade licence copy<span class="bn" lang="bn">ট্রেড লাইসেন্সের কপি</span></label>
+      <label class="chk"><input type="checkbox"> TIN / BIN certificate<span class="bn" lang="bn">টিআইএন / বিআইএন সনদ</span></label>
+      <label class="chk"><input type="checkbox"> Professional registration — IAB / IEB<span class="bn" lang="bn">পেশাগত নিবন্ধন — IAB / IEB</span></label>
+      <label class="chk"><input type="checkbox"> Portfolio — maximum 10 pages<span class="bn" lang="bn">পোর্টফোলিও — সর্বোচ্চ 10 পৃষ্ঠা</span></label>
+      <label class="chk"><input type="checkbox"> Comparable project references<span class="bn" lang="bn">তুলনীয় প্রকল্পের রেফারেন্স</span></label>
+      <label class="chk"><input type="checkbox"> Signed &amp; sealed fee quotation<span class="bn" lang="bn">স্বাক্ষরিত ও সিলযুক্ত ফি কোটেশন</span></label>
+      <label class="chk"><input type="checkbox"> Work programme / schedule<span class="bn" lang="bn">কর্মপরিকল্পনা / সময়সূচি</span></label>
+      <label class="chk"><input type="checkbox"> Sample drawings or 3D sheets<span class="bn" lang="bn">নমুনা ড্রয়িং বা 3D সিট</span></label>
+      <label class="chk"><input type="checkbox"> VAT registration — if applicable<span class="bn" lang="bn">ভ্যাট নিবন্ধন — প্রযোজ্য হলে</span></label>
+      <label class="chk"><input type="checkbox"> Other supporting documents<span class="bn" lang="bn">অন্যান্য সহায়ক নথি</span></label>
+    </div>
+
+    <div class="fgrid" style="margin-top:3mm">
+      <div class="fg wide">
+        <span class="lbl">Other Documents Attached — list here<span class="bn" lang="bn">অন্যান্য সংযুক্ত নথি — এখানে লিখুন</span></span>
+        <textarea class="fld" rows="3" placeholder="1.&#10;2.&#10;3."></textarea>
+      </div>
+    </div>
+
+    <h2 class="sec"><span class="num">11</span> Submission Packaging</h2>
+    <p class="sec-bn" lang="bn">প্রস্তাব প্যাকেজিং</p>
+
+    <div class="fgrid">
+      <div class="fg">
+        <span class="lbl">File Naming Format<span class="bn" lang="bn">ফাইল নামকরণের ধরন</span></span>
+        <input class="fld" type="text" value="GH-ADS-2026-01_FirmName_Rev00.pdf" readonly>
+      </div>
+      <div class="fg">
+        <span class="lbl">Total Submission Size (MB)<span class="bn" lang="bn">মোট জমার আকার (MB)</span></span>
+        <input class="fld" type="text" inputmode="numeric" placeholder="0">
+      </div>
+      <div class="fg">
+        <span class="lbl">Number of Volumes / Files<span class="bn" lang="bn">খণ্ড / ফাইলের সংখ্যা</span></span>
+        <input class="fld" type="text" inputmode="numeric" placeholder="0">
+      </div>
+      <div class="fg">
+        <span class="lbl">Delivery Medium<span class="bn" lang="bn">প্রেরণের মাধ্যম</span></span>
+        <input class="fld" type="text" placeholder="E-mail / Pen drive / Printed set">
+      </div>
+      <div class="fg wide">
+        <span class="lbl">Envelope / E-mail Subject Line<span class="bn" lang="bn">খাম / ই-মেইল বিষয়</span></span>
+        <input class="fld" type="text" placeholder="Proposal — GH-ADS-2026-01 — [Firm Name]">
+      </div>
+    </div>
+
+    <h3>11.1 Pre-Submission Confirmation<span class="bn" lang="bn">জমার পূর্বে নিশ্চিতকরণ</span></h3>
+
+    <div class="checks one">
+      <label class="chk"><input type="checkbox"> Every page is numbered, signed where required, and free of hand-made corrections<span class="bn" lang="bn">প্রতিটি পৃষ্ঠা নম্বরযুক্ত, যেখানে প্রয়োজন সেখানে স্বাক্ষরিত এবং হাতে করা সংশোধনমুক্ত</span></label>
+      <label class="chk"><input type="checkbox"> All numbers and dates use English digits (0–9) only<span class="bn" lang="bn">সব সংখ্যা ও তারিখ শুধু ইংরেজি অঙ্কে (0–9) লেখা হয়েছে</span></label>
+      <label class="chk"><input type="checkbox"> The PDF opens correctly and all drawings are legible at 100% zoom<span class="bn" lang="bn">PDF সঠিকভাবে খোলে এবং 100% জুমে সব ড্রয়িং স্পষ্ট</span></label>
+      <label class="chk"><input type="checkbox"> A duplicate copy is retained by the bidder for its own records<span class="bn" lang="bn">প্রস্তাবদাতা নিজের রেকর্ডের জন্য একটি অনুলিপি সংরক্ষণ করেছেন</span></label>
+    </div>
+
+    <div class="note" style="margin-top:3mm">
+      <strong>Note:</strong> This is a design proposal invitation. Final construction, statutory approval, detailed
+      structural design and other engineering services will be engaged separately as required.
+      <span class="bn" lang="bn"><strong>নোট:</strong> এটি একটি ডিজাইন প্রস্তাব আহ্বান। চূড়ান্ত নির্মাণ, বিধিগত অনুমোদন, বিস্তারিত স্ট্রাকচারাল ডিজাইন ও অন্যান্য ইঞ্জিনিয়ারিং সেবা প্রয়োজন অনুযায়ী পৃথকভাবে নির্ধারিত হবে।</span>
+    </div>
+
+    <div class="sheet-foot">
+      <span><b>grihostiOS</b> · GH-ADS-2026-01 · Rev. 00</span>
+      <span class="foot-gap"></span>
+      <span>Page 10 of 12</span>
+    </div>
+  </article>
+
+  <!-- ================= PAGE 11 — OFFICIAL USE ================= -->
+  <article class="sheet" id="page-11">
+
+    <h2 class="sec"><span class="num">12</span> For Official Use Only</h2>
+    <p class="sec-bn" lang="bn">শুধুমাত্র অফিসিয়াল ব্যবহারের জন্য</p>
+
+    <h3>12.1 Receipt Record<span class="bn" lang="bn">গ্রহণ রেকর্ড</span></h3>
+
+    <div class="fgrid">
+      <div class="fg">
+        <span class="lbl">Received Date &amp; Time<span class="bn" lang="bn">গ্রহণের তারিখ ও সময়</span></span>
+        <input class="fld" type="text" placeholder="DD-MM-YYYY, HH:MM">
+      </div>
+      <div class="fg">
+        <span class="lbl">Received By<span class="bn" lang="bn">গ্রহণকারী</span></span>
+        <input class="fld" type="text">
+      </div>
+      <div class="fg">
+        <span class="lbl">Envelope / File Condition<span class="bn" lang="bn">খাম / ফাইলের অবস্থা</span></span>
+        <input class="fld" type="text" placeholder="Sealed / Opened / Damaged">
+      </div>
+      <div class="fg">
+        <span class="lbl">Copy Received<span class="bn" lang="bn">প্রাপ্ত কপি</span></span>
+        <input class="fld" type="text" placeholder="Original + PDF">
+      </div>
+      <div class="fg wide">
+        <span class="lbl">Completeness Check<span class="bn" lang="bn">সম্পূর্ণতা যাচাই</span></span>
+        <label class="lbl inline" style="margin-top:1.4mm"><input type="checkbox"> All sections completed<span class="bn" lang="bn">সব অংশ পূরণ</span></label>
+        <label class="lbl inline" style="margin-left:6mm"><input type="checkbox"> All attachments present<span class="bn" lang="bn">সব সংযুক্তি আছে</span></label>
+        <label class="lbl inline" style="margin-left:6mm"><input type="checkbox"> Signed &amp; sealed<span class="bn" lang="bn">স্বাক্ষরিত ও সিলযুক্ত</span></label>
+      </div>
+    </div>
+
+    <h3>12.2 Technical Evaluation<span class="bn" lang="bn">কারিগরি মূল্যায়ন</span></h3>
+
+    <table class="grid">
+      <colgroup><col style="width:6%"><col style="width:46%"><col style="width:12%"><col style="width:16%"><col style="width:20%"></colgroup>
+      <thead>
+        <tr>
+          <th class="c">#<span class="bn" lang="bn">ক্রম</span></th>
+          <th>Evaluation Criterion<span class="bn" lang="bn">মূল্যায়নের বিষয়</span></th>
+          <th class="c">Weight<span class="bn" lang="bn">ওজন</span></th>
+          <th class="c">Score (0–100)<span class="bn" lang="bn">নম্বর (0–100)</span></th>
+          <th class="r">Weighted Score<span class="bn" lang="bn">ওয়েটেড নম্বর</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="idx">1</td><td>Design Concept &amp; Creativity<span class="bn" lang="bn">ডিজাইন কনসেপ্ট ও সৃজনশীলতা</span></td><td class="c"><b>25%</b></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td><td><input class="fld r" type="text" inputmode="numeric" placeholder="0"></td></tr>
+        <tr><td class="idx">2</td><td>Space Planning &amp; Functional Efficiency<span class="bn" lang="bn">স্পেস প্ল্যানিং ও কার্যকারিতা</span></td><td class="c"><b>25%</b></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td><td><input class="fld r" type="text" inputmode="numeric" placeholder="0"></td></tr>
+        <tr><td class="idx">3</td><td>Site Utilisation<span class="bn" lang="bn">জমির ব্যবহার</span></td><td class="c"><b>15%</b></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td><td><input class="fld r" type="text" inputmode="numeric" placeholder="0"></td></tr>
+        <tr><td class="idx">4</td><td>Architectural Appearance<span class="bn" lang="bn">স্থাপত্য নান্দনিকতা</span></td><td class="c"><b>15%</b></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td><td><input class="fld r" type="text" inputmode="numeric" placeholder="0"></td></tr>
+        <tr><td class="idx">5</td><td>Technical Feasibility<span class="bn" lang="bn">কারিগরি সম্ভাব্যতা</span></td><td class="c"><b>10%</b></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td><td><input class="fld r" type="text" inputmode="numeric" placeholder="0"></td></tr>
+        <tr><td class="idx">6</td><td>Estimated Cost / Cost Efficiency<span class="bn" lang="bn">প্রাক্কলিত ব্যয় / ব্যয় সক্ষমতা</span></td><td class="c"><b>10%</b></td><td><input class="fld c" type="text" inputmode="numeric" placeholder="0"></td><td><input class="fld r" type="text" inputmode="numeric" placeholder="0"></td></tr>
+        <tr class="total"><td class="idx">—</td><td>Total<span class="bn" lang="bn">মোট</span></td><td class="c"><b>100%</b></td><td class="c">—</td><td><input class="fld r" type="text" inputmode="numeric" placeholder="0"></td></tr>
+      </tbody>
+    </table>
+
+    <div class="sheet-foot">
+      <span><b>grihostiOS</b> · GH-ADS-2026-01 · Rev. 00</span>
+      <span class="foot-gap"></span>
+      <span>Page 11 of 12</span>
+    </div>
+  </article>
+
+  <!-- ================= PAGE 12 — RECOMMENDATION ================= -->
+  <article class="sheet" id="page-12">
+
+    <h2 class="sec"><span class="num">13</span> Recommendation &amp; Approval</h2>
+    <p class="sec-bn" lang="bn">সুপারিশ ও অনুমোদন</p>
+
+    <div class="fgrid">
+      <div class="fg">
+        <span class="lbl">Bidder / Firm Name<span class="bn" lang="bn">প্রস্তাবদাতা / প্রতিষ্ঠানের নাম</span></span>
+        <input class="fld" type="text">
+      </div>
+      <div class="fg">
+        <span class="lbl">Bidder Reference No.<span class="bn" lang="bn">প্রস্তাবদাতার রেফারেন্স</span></span>
+        <input class="fld" type="text" inputmode="numeric" placeholder="0">
+      </div>
+      <div class="fg">
+        <span class="lbl">Total Weighted Score<span class="bn" lang="bn">মোট ওয়েটেড নম্বর</span></span>
+        <input class="fld" type="text" inputmode="numeric" placeholder="0">
+      </div>
+      <div class="fg">
+        <span class="lbl">Rank Among Bidders<span class="bn" lang="bn">প্রস্তাবদাতাদের মধ্যে অবস্থান</span></span>
+        <input class="fld" type="text" inputmode="numeric" placeholder="0">
+      </div>
+    </div>
+
+    <h3>13.1 Decision<span class="bn" lang="bn">সিদ্ধান্ত</span></h3>
+
+    <div class="checks">
+      <label class="chk"><input type="checkbox"> Recommended for award<span class="bn" lang="bn">চুক্তির জন্য সুপারিশকৃত</span></label>
+      <label class="chk"><input type="checkbox"> Shortlisted — clarification required<span class="bn" lang="bn">শর্টলিস্ট — স্পষ্টীকরণ প্রয়োজন</span></label>
+      <label class="chk"><input type="checkbox"> Not recommended<span class="bn" lang="bn">সুপারিশকৃত নয়</span></label>
+      <label class="chk"><input type="checkbox"> Non-responsive / rejected<span class="bn" lang="bn">অগ্রাহ্য / বাতিল</span></label>
+    </div>
+
+    <h3>13.2 Reasons<span class="bn" lang="bn">কারণ</span></h3>
+
+    <textarea class="fld" rows="4" placeholder="Record the basis of the decision with reference to the scored criteria."></textarea>
+
+    <h3>13.3 Conditions of Award<span class="bn" lang="bn">চুক্তির শর্ত</span></h3>
+
+    <textarea class="fld" rows="3" placeholder="Scope confirmation, fee negotiation, programme review, documents to be furnished before signing."></textarea>
+
+    <div class="sig-grid" style="margin-top:3.4mm">
+      <div class="sig"><div class="cap">Evaluator — Name &amp; Signature<span class="bn" lang="bn">মূল্যায়নকারী — নাম ও স্বাক্ষর</span></div></div>
+      <div class="sig"><div class="cap">Approving Authority — Name &amp; Signature<span class="bn" lang="bn">অনুমোদনকারী কর্তৃপক্ষ — নাম ও স্বাক্ষর</span></div></div>
+    </div>
+
+    <div class="fgrid" style="margin-top:2.8mm">
+      <div class="fg">
+        <span class="lbl">Date<span class="bn" lang="bn">তারিখ</span></span>
+        <input class="fld" type="text" placeholder="DD-MM-YYYY">
+      </div>
+      <div class="fg">
+        <span class="lbl">Place<span class="bn" lang="bn">স্থান</span></span>
+        <input class="fld" type="text">
+      </div>
+    </div>
+
+    <p class="callsign" style="margin-top:4mm">End of document · GH-ADS-2026-01 · Rev. 00 · 12 pages</p>
+
+    <div class="sheet-foot">
+      <span><b>grihostiOS</b> · GH-ADS-2026-01 · Rev. 00</span>
+      <span class="foot-gap"></span>
+      <span>Page 12 of 12</span>
+    </div>
+  </article>
+
+</main>
+
+<script>
+(function () {
+  "use strict";
+
+  var BN_MAP = {
+    "\u09E6": "0", "\u09E7": "1", "\u09E8": "2", "\u09E9": "3", "\u09EA": "4",
+    "\u09EB": "5", "\u09EC": "6", "\u09ED": "7", "\u09EE": "8", "\u09EF": "9"
+  };
+  var BN_TEST = /[\u09E6-\u09EF]/;
+  var FIELDS = "input[type='text'], input[type='tel'], input[type='email'], textarea";
+
+  function toEnglishDigits(value) {
+    return value.replace(/[\u09E6-\u09EF]/g, function (d) { return BN_MAP[d]; });
+  }
+
+  document.querySelectorAll(FIELDS).forEach(function (el) {
+    el.addEventListener("input", function () {
+      if (!BN_TEST.test(el.value)) return;
+      var start = el.selectionStart;
+      var end = el.selectionEnd;
+      el.value = toEnglishDigits(el.value);
+      if (start !== null && el.setSelectionRange) {
+        try { el.setSelectionRange(start, end); } catch (err) { /* unsupported */ }
+      }
+    });
+  });
+
+  document.addEventListener("click", function (event) {
+    var btn = event.target.closest("[data-act]");
+    if (!btn) return;
+
+    var act = btn.getAttribute("data-act");
+
+    if (act === "print") {
+      window.print();
+      return;
+    }
+
+    if (act === "reset") {
+      if (!window.confirm("Clear all typed content in this template?")) return;
+      document.querySelectorAll(FIELDS).forEach(function (el) {
+        if (el.hasAttribute("readonly")) return;
+        el.value = "";
+      });
+      document.querySelectorAll("input[type='checkbox']").forEach(function (el) { el.checked = false; });
+    }
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+      event.preventDefault();
+      window.print();
+    }
+  });
+})();
+</script>
+</body>
+</html>
